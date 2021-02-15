@@ -13,7 +13,7 @@ namespace ICT2106.Models.Rules
         }
 
         public Rule getRule(){
-            return this
+            return this;
         }
     }
 }
