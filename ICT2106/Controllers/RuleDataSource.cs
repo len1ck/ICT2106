@@ -12,8 +12,8 @@ namespace ICT2106.Controllers
 {
     public class RuleDataSource
     {
-        private Rule[] Rule;
-        private Rule rule;
+        private int[] RuleID;
+        private string[] RuleName;
         public void createRule(int id, string name){
             //rule.RuleID.set(id);
             //rule.RuleName = name;
