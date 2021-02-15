@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Scool\\GitHub\\ICT2106\\ICT2106\\ICT2106.csproj": {}
+    "C:\\Users\\1902626\\Documents\\web\\ICT2106\\ICT2106\\ICT2106.csproj": {}
   },
   "projects": {
-    "D:\\Scool\\GitHub\\ICT2106\\ICT2106\\ICT2106.csproj": {
+    "C:\\Users\\1902626\\Documents\\web\\ICT2106\\ICT2106\\ICT2106.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Scool\\GitHub\\ICT2106\\ICT2106\\ICT2106.csproj",
+        "projectUniqueName": "C:\\Users\\1902626\\Documents\\web\\ICT2106\\ICT2106\\ICT2106.csproj",
         "projectName": "ICT2106",
-        "projectPath": "D:\\Scool\\GitHub\\ICT2106\\ICT2106\\ICT2106.csproj",
-        "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-        "outputPath": "D:\\Scool\\GitHub\\ICT2106\\ICT2106\\obj\\",
+        "projectPath": "C:\\Users\\1902626\\Documents\\web\\ICT2106\\ICT2106\\ICT2106.csproj",
+        "packagesPath": "C:\\Users\\1902626\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\1902626\\Documents\\web\\ICT2106\\ICT2106\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\1902626\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -55,7 +57,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
