@@ -15,12 +15,13 @@ namespace ICT2106.Controllers
         private Rule[] Rule;
         private Rule rule;
         public void createRule(int id, string name){
-            rule.RuleID.set(id);
-            rule.RuleName = name;
+            //rule.RuleID.set(id);
+            //rule.RuleName = name;
 
         }
         public int getRuleID(){
-            return rule.RuleID
+            return 1;
+            //return rule.RuleID;
         }
     }
 }
