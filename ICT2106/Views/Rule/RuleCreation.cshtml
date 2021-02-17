@@ -14,9 +14,10 @@
     @foreach (var rule in (IEnumerable<IRule>)ViewData["RuleData"])  
         {  
             <li class="list-group-item">@rule.RuleID @rule.RuleName
-                <!-- <button type="button" style="float: right;" class="btn btn-danger ml-1">Delete</button> -->
-                <button type="button" style="float: right;" class="btn btn-labeled btn-danger">
+                <button type="button" style="float: right;" class="btn btn-labeled btn-danger ">
                 <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
+                <button type="button" style="float: right;" class="btn btn-labeled btn-info mr-1">
+                <span class="btn-label">Edit</span></button>
             </li>
         }
 </ul>
