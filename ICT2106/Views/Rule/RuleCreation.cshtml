@@ -1,7 +1,8 @@
 @using ICT2106.Models.Rules
-@model IEnumerable<ICT2106.Models.Rules.IRule>  
+@model ICT2106.Models.Rules.IRule
 @{
     ViewData["Title"] = "RuleCreation";
+    var viewDataRule = ViewData["RuleData"] as IList<IRule>;
 }
 <!-- <h1>@ViewData["Title"]</h1> -->
     <h1>Rules</h1>
@@ -11,10 +12,11 @@
     <br/>
     <br/>
 <ul class="list-group">
-    @foreach (var rule in (IEnumerable<IRule>)ViewData["RuleData"])  
-        {  
-            <li class="list-group-item">@rule.RuleID @rule.RuleName
-                <button type="button" style="float: right;" class="btn btn-labeled btn-danger ">
+    @for (var i = 0; i < viewDataRule.Count; i++) 
+        {
+            <li class="list-group-item">@viewDataRule[i].RuleID @viewDataRule[i].RuleName
+                <!-- <button type="button" style="float: right;" class="btn btn-danger ml-1">Delete</button> -->
+                <button type="button" style="float: right;" class="btn btn-labeled btn-danger">
                 <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
                 <button type="button" style="float: right;" class="btn btn-labeled btn-info mr-1">
                 <span class="btn-label">Edit</span></button>
@@ -29,16 +31,21 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <div class="modal-body">
-        @using (Html.BeginForm("RuleAdd", "Rule", FormMethod.Post))
+        @using (Html.BeginForm("RuleAdd", "Rule",FormMethod.Post))
         {
-            
-        }
+        <div class="modal-body">
+            <label>Rule Name:</label><br/>
+            @Html.TextBoxFor(x => x.RuleName)
+            <br/>
+            <label>Rule ID:</label><br/>
+            @Html.TextBoxFor(x => x.RuleID)
+            <br/>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input  type="submit" value="Submit" class="btn btn-default"/>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
+        }
     </div>
 
   </div>
