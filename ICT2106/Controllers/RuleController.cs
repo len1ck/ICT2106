@@ -23,8 +23,8 @@ namespace ICT2106.Controllers
         public IActionResult RuleCreation()
         {
 
-            List<IRule> rulelist = new List<IRule>();
-            IRule newrule = new IRule();
+            List<Rule> rulelist = new List<Rule>();
+            Rule newrule = new Rule();
             newrule.SetRuleID(1);
             newrule.SetRuleName("Rule1");
             rulelist.Add(newrule);

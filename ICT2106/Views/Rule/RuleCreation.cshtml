@@ -1,27 +1,17 @@
+@using ICT2106
 @using ICT2106.Models.Rules
-@model IEnumerable<ICT2106.Models.Rules.RuleCreation>  
+@* @model IEnumerable<ICT2106.Models.Rules.RuleCreation>   *@
 @{
     ViewData["Title"] = "RuleCreation";
 }
 <h1>@ViewData["Title"]</h1>
     <h1>Rules</h1>
-    @foreach (var rule in (IEnumerable<Models.Rule>)ViewData["RuleData"])  
-        {  
-            <tr>  
-                <td>@rule.GetRuleID()</td>  
-                <td>@rule.GetRuleName()</td>  
-            </tr>  
-        }
-    }
-}
-<p>Use this page to detail your site's Rules.</p>
 <ul class="list-group">
-  <li class="list-group-item">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in asdasfds geaw gegagadgdsg</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac
-      <button type="button" style="float: right;" class="btn btn-danger ml-1">Delete</button>
-      <button type="button" style="float: right;" class="btn btn-primary ml-1">Add</button>
-  </li>
-  <li class="list-group-item">Vestibulum at eros</li>
+    @foreach (var rule in (IEnumerable<Rule>)ViewData["RuleData"])  
+        {  
+            <li class="list-group-item">@rule.GetRuleID() @rule.GetRuleName()
+                <button type="button" style="float: right;" class="btn btn-danger ml-1">Delete</button>
+                <button type="button" style="float: right;" class="btn btn-primary ml-1">Add</button>
+            </li>
+        }
 </ul>
