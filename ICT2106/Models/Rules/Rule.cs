@@ -4,27 +4,20 @@ namespace ICT2106.Models.Rules
 {
     public class Rule
     {
-        private int RuleID;
+        private int ruleID;
 
-        private string RuleName;
+        private string ruleName;
 
-        public string GetRuleName()
+        public string RuleName
         {
-            return RuleName;
+            get{ return ruleName; }
+            set{ ruleName = value; }
         }
 
-        public int GetRuleID()
+        public int RuleID
         {
-            return RuleID;
-        }
-
-        public void SetRuleName(string value)
-        {
-            RuleName = value;
-        }
-
-        public void SetRuleID(int id){
-            RuleID = id;
+            get{ return ruleID; }
+            set{ ruleID = value; }
         }
     }
 }

@@ -15,6 +15,18 @@ namespace ICT2106.Controllers
     public class RuleController : Controller
     {
         private readonly ILogger<RuleController> _logger;
+
+        private List<IRule> rulelist = new List<IRule>(){
+                new IRule{
+                    RuleID = 1,
+                    RuleName = "Rule1"
+                },
+                new IRule{
+                    RuleID = 2,
+                    RuleName = "Rule3"
+                }
+
+            };
         public RuleController(ILogger<RuleController> logger)
         {
             _logger = logger;
@@ -22,11 +34,17 @@ namespace ICT2106.Controllers
 
         public IActionResult RuleCreation()
         {
+            ViewData["RuleData"] = rulelist;  
 
-            List<Rule> rulelist = new List<Rule>();
-            Rule newrule = new Rule();
-            newrule.SetRuleID(1);
-            newrule.SetRuleName("Rule1");
+            return View();
+        }
+        public IActionResult RuleAdd(IRule model)
+        {
+
+            List<IRule> rulelist = new List<IRule>();
+            IRule newrule = new IRule();
+            newrule.RuleID = 1;
+            newrule.RuleName = "Rule1";
             rulelist.Add(newrule);
             ViewData["RuleData"] = rulelist;  
 

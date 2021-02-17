@@ -6,20 +6,14 @@ namespace ICT2106.Models.Rules
     {      
         private Rule rule = new Rule();
 
-        public String GetRuleName(){
-            return rule.GetRuleName();
+        public String RuleName{
+            get{ return rule.RuleName; }
+            set{ rule.RuleName = value; }
         }
 
-        public int GetRuleID(){
-            return rule.GetRuleID();
-        }
-
-        public void SetRuleName(string name){
-            rule.SetRuleName(name);
-        }
-
-        public void SetRuleID(int id){
-            rule.SetRuleID(id);
+        public int RuleID{
+            get{ return rule.RuleID; }
+            set{ rule.RuleID = value; }
         }
     }
 }
