@@ -1,17 +1,6 @@
-@using ICT2106.Models.Rules
-@model IEnumerable<ICT2106.Models.Rules.RuleCreation>  
 @{
     ViewData["Title"] = "RuleCreation";
 }
 <h1>@ViewData["Title"]</h1>
-    <h1>Rules</h1>
-    @foreach (var rule in (IEnumerable<Models.Rule>)ViewData["RuleData"])  
-        {  
-            <tr>  
-                <td>@rule.GetRuleID()</td>  
-                <td>@rule.GetRuleName()</td>  
-            </tr>  
-        }
-    }
-}
+
 <p>Use this page to detail your site's Rules.</p>

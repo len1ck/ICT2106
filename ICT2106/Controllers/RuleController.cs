@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Text;
-using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ICT2106.Models.Rules;
 using ICT2106.Models;
 
 namespace ICT2106.Controllers
@@ -15,6 +12,7 @@ namespace ICT2106.Controllers
     public class RuleController : Controller
     {
         private readonly ILogger<RuleController> _logger;
+
         public RuleController(ILogger<RuleController> logger)
         {
             _logger = logger;
@@ -22,14 +20,6 @@ namespace ICT2106.Controllers
 
         public IActionResult RuleCreation()
         {
-
-            List<IRule> rulelist = new List<IRule>();
-            IRule newrule = new IRule();
-            newrule.SetRuleID(1);
-            newrule.SetRuleName("Rule1");
-            rulelist.Add(newrule);
-            ViewData["RuleData"] = rulelist;  
-
             return View();
         }
 
