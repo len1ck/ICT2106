@@ -11,18 +11,28 @@
     <br/>
     <br/>
     <br/>
-<ul class="list-group">
-    @for (var i = 0; i < viewDataRule.Count; i++) 
+        <ul class="list-group">
+        @using (Html.BeginForm("RuleDelete", "Rule",FormMethod.Post))
         {
-            <li class="list-group-item">@viewDataRule[i].RuleID @viewDataRule[i].RuleName
-                <!-- <button type="button" style="float: right;" class="btn btn-danger ml-1">Delete</button> -->
-                <button type="button" style="float: right;" class="btn btn-labeled btn-danger">
-                <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
-                <button type="button" style="float: right;" class="btn btn-labeled btn-info mr-1">
-                <span class="btn-label">Edit</span></button>
-            </li>
+            @Html.HiddenFor(xx => xx.RuleName, new {Value = "asdas"})<br/>
+            @Html.HiddenFor(xx => xx.RuleID, new {Value = @viewDataRule[0].RuleID})<br/>
+            <input type="submit" value="delete" style="float: right;" class="btn btn-labeled btn-danger fas fa-trash-alt"/>
         }
-</ul>
+        @for (var i = 0; i < viewDataRule.Count; i++) 
+        {
+            @using (Html.BeginForm("RuleDelete", "Rule",FormMethod.Post))
+            {
+                <li class="list-group-item">@viewDataRule[i].RuleID @viewDataRule[i].RuleName
+                    @Html.HiddenFor(i => i.RuleName, new {Value = "@viewDataRule[i].RuleName"})<br/>
+                    @Html.HiddenFor(i => i.RuleID, new {Value = "@viewDataRule[i].RuleID"})<br/>
+                    <button  type="submit" style="float: right;" class="btn btn-labeled btn-danger">
+                    <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
+                    <button type="button" style="float: right;" class="btn btn-labeled btn-info mr-1">
+                    <span class="btn-label">Edit</span></button>
+                </li>
+            }
+        }
+        </ul>
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 

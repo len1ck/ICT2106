@@ -42,10 +42,18 @@ namespace ICT2106.Controllers
         public IActionResult RuleAdd(IRule x)
         {
             rulelist.Add(x);
+             Console.WriteLine(x.RuleName);
             ViewData["RuleData"] = rulelist;
             return View("RuleCreation");
         }
 
+        public IActionResult RuleDelete(IRule m)
+        {
+            //rulelist.Remove(m);
+            Console.WriteLine(m.RuleName);
+            ViewData["RuleData"] = rulelist;
+            return View("RuleCreation");
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
