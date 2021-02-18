@@ -1,6 +1,6 @@
 using System;
 
-namespace ICT2106.Models.Rules
+namespace ICT2106.Models.RuleTableModule
 {
     public class Rule
     {

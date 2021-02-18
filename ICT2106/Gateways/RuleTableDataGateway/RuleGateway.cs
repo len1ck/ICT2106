@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ICT2106.Models;
-using ICT2106.Models.Rules;
+using ICT2106.Models.RuleTableModule;
 
 namespace ICT2106.Controllers
 {

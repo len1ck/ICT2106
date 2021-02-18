@@ -1,0 +1,52 @@
+@using ICT2106.Models.RuleTableModule
+@model ICT2106.Models.RuleTableModule.IRule
+@{
+    ViewData["Title"] = "RuleCreation";
+    var viewDataRule = ViewData["RuleData"] as IList<IRule>;
+}
+<!-- <h1>@ViewData["Title"]</h1> -->
+    <h1>Rules</h1>
+    <br/>
+    <button type="button" style="float: right;" class="btn btn-primary ml-1" data-toggle="modal" data-target="#myModal">Add</button>
+    <br/>
+    <ul class="list-group">
+    @for (var i = 0; i < viewDataRule.Count; i++) 
+    {       
+            <li class="list-group-item">@viewDataRule[i].RuleID @viewDataRule[i].RuleName
+              <form method="post" asp-action="RuleDelete" asp-controller="Rule">
+                <input id="RuleNameDel" type="hidden" asp-for="@Model.RuleName" class="btn btn-default border" value="@viewDataRule[i].RuleName"/>
+                <input id="RuleIDDel" type="hidden" asp-for="@Model.RuleID" class="btn btn-default border" value="@viewDataRule[i].RuleID"/>
+                <button  type="submit" style="float: right;" class="btn btn-labeled btn-danger">
+                <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
+                <button type="button" style="float: right;" class="btn btn-labeled btn-info mr-1">
+                <span class="btn-label">Edit</span></button>
+              </form>
+            </li>
+    }
+    </ul>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form method="post" asp-action="RuleAdd" asp-controller="Rule">
+        <div class="modal-body">
+            <label>Rule Name:</label><br/>
+            <input id="RuleNameIn" type="text" asp-for="@Model.RuleName" class="btn btn-default border"/>
+            <br/>
+            <label>Rule ID:</label><br/>
+            <input id="RuleIdIn" type="text" asp-for="@Model.RuleID" class="btn btn-default border"/>
+            <br/>
+      </div>
+      <div class="modal-footer">
+        <input  type="submit" value="Submit" class="btn btn-default"/>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+        </form>
+    </div>
+
+  </div>
+</div>

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text;
 using System.Web;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ICT2106.Models.Rules;
+using ICT2106.Models.RuleTableModule;
+using ICT2106.Models.ConditionTableModule;
 using ICT2106.Models;
 
 namespace ICT2106.Controllers
@@ -18,23 +18,13 @@ namespace ICT2106.Controllers
     {
         private readonly ILogger<RuleController> _logger;
 
-        private IList<IRule> rulelist = new List<IRule>(){
-                new IRule{
-                    RuleID = 1,
-                    RuleName = "Rule1"
-                },
-                new IRule{
-                    RuleID = 2,
-                    RuleName = "Rule3"
-                }
-
-            };
+        private IList<IRule> rulelist = new List<IRule>();
         public RuleController(ILogger<RuleController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult RuleCreation()
+        public IActionResult Rules()
         {
             ViewData["RuleData"] = rulelist;
             return View();
@@ -44,19 +34,14 @@ namespace ICT2106.Controllers
         {
             rulelist.Add(x);
             ViewData["RuleData"] = rulelist;
-            return View("RuleCreation");
+            return View("Rules");
         }
 
-        [HttpPost]
-        public IActionResult RuleDelete(FormCollection form)
+        public IActionResult RuleDelete(IRule m)
         {
-            //rulelist.Remove(m);
-            IRule newrule = new IRule();
-            newrule.RuleName = form["RuleName"].ToString();
-            //newrule.RuleID = int.Parse(form["RuleID"]);
-            rulelist.Add(newrule);
+            rulelist.Remove(m);
             ViewData["RuleData"] = rulelist;
-            return View("RuleCreation");
+            return View("Rules");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
