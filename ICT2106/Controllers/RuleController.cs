@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text;
 using System.Web;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ICT2106.Models.Rules;
@@ -42,15 +43,18 @@ namespace ICT2106.Controllers
         public IActionResult RuleAdd(IRule x)
         {
             rulelist.Add(x);
-             Console.WriteLine(x.RuleName);
             ViewData["RuleData"] = rulelist;
             return View("RuleCreation");
         }
 
-        public IActionResult RuleDelete(IRule m)
+        [HttpPost]
+        public IActionResult RuleDelete(FormCollection form)
         {
             //rulelist.Remove(m);
-            Console.WriteLine(m.RuleName);
+            IRule newrule = new IRule();
+            newrule.RuleName = form["RuleName"].ToString();
+            //newrule.RuleID = int.Parse(form["RuleID"]);
+            rulelist.Add(newrule);
             ViewData["RuleData"] = rulelist;
             return View("RuleCreation");
         }

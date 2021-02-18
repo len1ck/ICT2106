@@ -9,28 +9,31 @@
     <br/>
     <button type="button" style="float: right;" class="btn btn-primary ml-1" data-toggle="modal" data-target="#myModal">Add</button>
     <br/>
-    <br/>
-    <br/>
+    @using (Html.BeginForm("RuleDelete", "Rule",FormMethod.Post))
+      {
+            @Html.TextBoxFor(model => model.RuleName, htmlAttributes: new { @Value="asdasd"})
+            @Html.TextBoxFor(model => model.RuleID, new { @id = "hfID", @style = "display:none"})
+            <input id="delete_entry" type="submit" value="delete" style="float: right;" class="btn btn-labeled btn-danger"/>
+
+            <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js">
+                $(function () {
+                    $("#delete_entry").click(function () {
+
+                        $("#hfID").val(123);
+                        console.log($("#hfName").val())
+                    });
+                });
+            </script>
+      }
         <ul class="list-group">
-        @using (Html.BeginForm("RuleDelete", "Rule",FormMethod.Post))
-        {
-            @Html.HiddenFor(xx => xx.RuleName, new {Value = "asdas"})<br/>
-            @Html.HiddenFor(xx => xx.RuleID, new {Value = @viewDataRule[0].RuleID})<br/>
-            <input type="submit" value="delete" style="float: right;" class="btn btn-labeled btn-danger fas fa-trash-alt"/>
-        }
         @for (var i = 0; i < viewDataRule.Count; i++) 
         {
-            @using (Html.BeginForm("RuleDelete", "Rule",FormMethod.Post))
-            {
                 <li class="list-group-item">@viewDataRule[i].RuleID @viewDataRule[i].RuleName
-                    @Html.HiddenFor(i => i.RuleName, new {Value = "@viewDataRule[i].RuleName"})<br/>
-                    @Html.HiddenFor(i => i.RuleID, new {Value = "@viewDataRule[i].RuleID"})<br/>
                     <button  type="submit" style="float: right;" class="btn btn-labeled btn-danger">
                     <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
                     <button type="button" style="float: right;" class="btn btn-labeled btn-info mr-1">
                     <span class="btn-label">Edit</span></button>
                 </li>
-            }
         }
         </ul>
 <div id="myModal" class="modal fade" role="dialog">
