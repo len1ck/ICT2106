@@ -59,3 +59,20 @@ namespace ICT2106.Controllers
         }
     }
 }
+
+/*
+Temp data, passes data from one controller to another 
+public ActionResult Index()
+        {
+          TempData["data1"] = "I am from different action";
+          return RedirectToAction("Read");
+         
+        }
+
+        public string Read()
+        {
+            string str;
+            str = TempData["data1"].ToString();
+            return str;
+        }
+*/
