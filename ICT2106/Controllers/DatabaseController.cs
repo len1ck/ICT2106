@@ -23,7 +23,7 @@ namespace ICT2106.Controllers
         //get rules to display
         public void GetRules(){
             RuleGateway rg = new RuleGateway();
-            List<IRule> data = rg.DBTest();
+            List<IRule> data = rg.GetAllRules();
 
         }
         

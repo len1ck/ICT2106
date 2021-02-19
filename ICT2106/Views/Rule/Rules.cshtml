@@ -14,7 +14,6 @@
     {       
             <li class="list-group-item">@viewDataRule[i].RuleID @viewDataRule[i].RuleName
               <form method="post" asp-action="RuleDelete" asp-controller="Rule">
-                <input id="RuleNameDel" type="hidden" asp-for="@Model.RuleName" class="btn btn-default border" value="@viewDataRule[i].RuleName"/>
                 <input id="RuleIDDel" type="hidden" asp-for="@Model.RuleID" class="btn btn-default border" value="@viewDataRule[i].RuleID"/>
                 <button  type="submit" style="float: right;" class="btn btn-labeled btn-danger">
                 <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>

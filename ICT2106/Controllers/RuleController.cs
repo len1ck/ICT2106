@@ -22,6 +22,7 @@ namespace ICT2106.Controllers
         private IList<IRule> rulelist = new List<IRule>();
         private IList<ICondition> conditionlist = new List<ICondition>();
         private IList<ActionModel> actionlist = new List<ActionModel>();
+        private RuleGateway rg = new RuleGateway();
         public RuleController(ILogger<RuleController> logger)
         {
             _logger = logger;
@@ -29,25 +30,28 @@ namespace ICT2106.Controllers
 
         public IActionResult Rules()
         {
-            RuleGateway rg = new RuleGateway();
-            List<IRule> data = rg.DBTest();
-            ViewData["RuleData"] = data;
+            rulelist = rg.GetAllRules();
+            ViewData["RuleData"] = rulelist;
             return View();
         }
         
         public IActionResult RuleAdd(IRule x)
         {
-            rulelist.Add(x);
+            rg.RuleAdd(x);
+            rulelist = rg.GetAllRules();
             ViewData["RuleData"] = rulelist;
             return View("Rules");
         }
 
         public IActionResult RuleDelete(IRule m)
         {
-            rulelist.Remove(m);
+            Console.WriteLine(m.RuleID);
+            rg.DeleteRule(m);
+            rulelist = rg.GetAllRules();
             ViewData["RuleData"] = rulelist;
             return View("Rules");
         }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
