@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ICT2106.Models.RuleTableModule;
 using ICT2106.Models.ConditionTableModule;
+using ICT2106.Models.ActionTableModule;
 using ICT2106.Models;
 
 namespace ICT2106.Controllers
