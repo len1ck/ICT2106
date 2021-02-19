@@ -20,6 +20,8 @@ namespace ICT2106.Controllers
         private readonly ILogger<RuleController> _logger;
 
         private IList<IRule> rulelist = new List<IRule>();
+        private IList<ICondition> conditionlist = new List<ICondition>();
+        private IList<ActionModel> actionlist = new List<ActionModel>();
         public RuleController(ILogger<RuleController> logger)
         {
             _logger = logger;
