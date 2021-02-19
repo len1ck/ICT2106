@@ -29,7 +29,9 @@ namespace ICT2106.Controllers
 
         public IActionResult Rules()
         {
-            ViewData["RuleData"] = rulelist;
+            RuleGateway rg = new RuleGateway();
+            List<IRule> data = rg.DBTest();
+            ViewData["RuleData"] = data;
             return View();
         }
         
