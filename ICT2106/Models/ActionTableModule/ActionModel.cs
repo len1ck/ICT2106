@@ -23,8 +23,6 @@ namespace ICT2106.Models.ActionTableModule
             (String)"Smart Blind"
         };
 
-        public ActionModel() {}
-
         public String getCategoryItem(int i)
         {
             if(i >= 0 && i <5)
