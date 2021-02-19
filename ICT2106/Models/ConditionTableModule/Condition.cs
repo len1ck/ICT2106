@@ -1,10 +1,15 @@
 using System;
 using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 namespace ICT2106.Models.ConditionTableModule
 {
     public class Condition
     {
+        private String c_Cat;
+
+        private String c_Name;
+
         private int conditionID;
 
         private int ruleID;
@@ -30,11 +35,17 @@ namespace ICT2106.Models.ConditionTableModule
             if(i >= 0 && i <2)
             {
                 return (String)Category[i];
-            }
+            } 
             else
             {
                 throw new IndexOutOfRangeException();
             }
+        }
+
+        public String CCat
+        {
+            get { return c_Cat; }
+            set { c_Cat = value; }
         }
 
         public ArrayList CPropValue
@@ -55,6 +66,12 @@ namespace ICT2106.Models.ConditionTableModule
             set{ conditionID = value; }
         }
 
+         public String CName
+        {
+            get{ return c_Name; }
+            set{ c_Name = value; }
+        }
+
         public int RuleID
         {
             get{ return ruleID; }
@@ -67,6 +84,12 @@ namespace ICT2106.Models.ConditionTableModule
             set{ deviceID = value; }
         }
 
+        public String DName
+        {
+            get { return deviceName; }
+            set { deviceName = value; }
+        }
+        
         public string Status
         {
             get{ return status; }
