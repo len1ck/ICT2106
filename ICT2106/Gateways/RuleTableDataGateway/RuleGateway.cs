@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ICT2106.Models;
 using ICT2106.Models.RuleTableModule;
+using System.Data;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 namespace ICT2106.Controllers
 {
@@ -15,4 +18,7 @@ namespace ICT2106.Controllers
         private RuleDataSource dataSource;
         
     }
+    
+
+
 }
