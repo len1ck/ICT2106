@@ -21,7 +21,7 @@ namespace ICT2106.Controllers
         //https://dev.mysql.com/doc/connector-net/en/connector-net-tutorials-sql-command.html
         public static void DBTest()
         {
-            string connStr = "server=localhost;user=root;database=ict2106;port=3306;password=";
+            string connStr = "server=t2-6.cthtaqebwmpy.us-east-1.rds.amazonaws.com;user=root;database=rule;port=3306;password=qwerty123";
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
