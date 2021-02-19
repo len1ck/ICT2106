@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 
 namespace ICT2106.Models.ConditionTableModule
 {
