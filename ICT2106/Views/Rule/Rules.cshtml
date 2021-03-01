@@ -37,7 +37,7 @@
             <input id="RuleNameIn" type="text" asp-for="@Model.RuleName" class="btn btn-default border"/>
             <br/>
             <br/>
-            <div id="condition" class=" btn btn-default border rounded" type="button">Add Condition</div>
+            <div id="condition"  asp-action="ConditionAdder" asp-controller="Condition" class=" btn btn-default border rounded" type="button">Add Condition</div>
             <br/>
             <br/>
             <div id="action" class=" btn btn-default border rounded" type="button" >Add Action</div>
