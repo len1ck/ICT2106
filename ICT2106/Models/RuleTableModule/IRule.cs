@@ -2,19 +2,10 @@ using System;
 
 namespace ICT2106.Models.RuleTableModule
 {
-    public class IRule
+    public interface IRule
     {
-        private RuleControl rulecontrol = new RuleControl();
+        String RuleName {get; set;}
 
-        public String RuleName{
-            get{ return rulecontrol.RuleName; }
-            set{ rulecontrol.RuleName = value; }
-        }
-
-        public int RuleID{
-            get{ return rulecontrol.RuleID; }
-            set{ rulecontrol.RuleID = value; }
-        }
-
+        int RuleID{get; set;}
     }
 }

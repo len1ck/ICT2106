@@ -27,7 +27,7 @@ namespace ICT2106.Controllers
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    IRule NewRule = new IRule();
+                    IRule NewRule = new RuleControl();
                     NewRule.RuleID = Int32.Parse(rdr[0].ToString());
                     NewRule.RuleName = rdr[1].ToString();
                     RuleList.Add(NewRule);
@@ -54,7 +54,7 @@ namespace ICT2106.Controllers
 
                 while (rdr.Read())
                 {
-                    IRule NewRule = new IRule();
+                    IRule NewRule = new RuleControl();
                     NewRule.RuleID = Int32.Parse(rdr[0].ToString());
                     NewRule.RuleName = rdr[1].ToString();
                     RuleList.Add(NewRule);
@@ -82,7 +82,7 @@ namespace ICT2106.Controllers
 
                 while (rdr.Read())
                 {
-                    IRule NewRule = new IRule();
+                    IRule NewRule = new RuleControl();
                     NewRule.RuleID = Int32.Parse(rdr[0].ToString());
                     NewRule.RuleName = rdr[1].ToString();
                     RuleList.Add(NewRule);

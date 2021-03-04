@@ -2,7 +2,7 @@ using System;
 
 namespace ICT2106.Models.RuleTableModule
 {
-    public class RuleControl
+    public class RuleControl: IRule
     {      
         private Rule rule = new Rule();
 
