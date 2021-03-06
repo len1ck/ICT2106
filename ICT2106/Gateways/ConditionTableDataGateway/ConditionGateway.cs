@@ -46,11 +46,11 @@ namespace ICT2106.Controllers
             }
         }   
 
-        public List<ICondition> DeleteRule(ICondition rule){
+        public List<ICondition> DeleteCondition(ICondition rule){
             try
             {
                 conn.Open();
-                string sql = "DELETE FROM rule.condition WHERE CondID = "+(rule.RuleID).ToString();
+                string sql = "DELETE FROM rule.condition WHERE CondID = "+(rule.ConditionID).ToString();
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -76,7 +76,7 @@ namespace ICT2106.Controllers
             }
         } 
 
-        public List<ICondition> RuleAdd(ICondition rule){
+        public List<ICondition> createCond(ICondition rule){
             try
             {
                 conn.Open();
