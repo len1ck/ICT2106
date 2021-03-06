@@ -2,7 +2,7 @@ using System;
 
 namespace ICT2106.Models.ConditionTableModule
 {
-    public class ConditionControl
+    public class ConditionControl: ICondition
     {      
         private Condition condition = new Condition();
 

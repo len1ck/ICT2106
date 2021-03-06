@@ -10,6 +10,6 @@ namespace ICT2106.Models.ACR
     public class ACR
     {
         public IRule rule = new RuleControl();
-        public ICondition condition = new ICondition();
+        public ICondition condition = new ConditionControl();
     }
 }
