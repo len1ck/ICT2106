@@ -9,7 +9,7 @@
     <h1>Edit Condition</h1>
     <br/>
     <br/>
-   <form method="post" asp-action="RuleAdd" asp-controller="Rule">
+   <!-- <form method="post" asp-action="RuleAdd" asp-controller="Rule">
         <div class="modal-body">
             <label>Condition Name:</label><br/>
             <input id="RuleNameIn" type="text" asp-for="@ConditionData.Status" class="btn btn-default border"/>
@@ -18,9 +18,31 @@
             <input id="RuleIdIn" type="text" asp-for="@ConditionData.ConditionID" class="btn btn-default border"/>
             <br/>
       </div>
-      <div class="modal-footer">
-        <input  type="submit" value="Submit" class="btn btn-default"/>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </form> 
+     
+    </form>  -->
 
+   <form method="post" asp-action="Cond">
+        <div class="form-group">
+            <label for="Cname">Condition Name:</label>
+            <input type="text" class="form-control" id="Cname" placeholder="Edit Condition Name...">
+        </div>
+
+        <div class="form-group">
+            <label for="Catname">Category:</label>
+            <input type="text" class="form-control" id="Catname"  value="dsad:" >
+        </div>
+
+        <div class="form-group">
+            <label for="Dname">Device Name:</label>
+            <select class="form-control" id="Dname" >
+                <option>Bulb</option>
+                <option>Lamp</option>
+            </select>
+        </div>
+
+  
+
+        <div class="form_group">
+            <input type="submit" class="btn btn-primary btn-sm" name="conditionSubmit" value="Edit Condition">
+        </div>
+    </form>
