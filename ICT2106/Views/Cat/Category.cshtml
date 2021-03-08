@@ -1,0 +1,27 @@
+
+@using ICT2106.Models.DevcatTableModule
+@using ICT2106.Models.DevcondTableModule
+@model (ICT2106.Models.DevcatTableModule.IDevcat , ICT2106.Models.DevcondTableModule.IDevcond)
+@{
+    ViewData["Title"] = "Category";
+    var CatData = ViewData["CatData"] as IList<IDevcat>;
+    var DeviceData = ViewData["DeviceData"] as IList<IDevcond>;
+}
+<section id="sel_ConCat">
+    <h1>Select Condition Category:</h1>
+            <label for="cat_sel">Select Category:</label>
+            <select class="form-control" id="cat_sel">
+            @for (var i = 0; i < CatData.Count; i++) 
+            {
+                <option>@CatData[i].CatName</option>
+            }
+            </select>
+
+            <label for="cat_sel">Select Device:</label>
+            <select class="form-control" id="cat_sel">
+            @for (var i = 0; i < DeviceData.Count; i++) 
+            {
+                <option>@DeviceData[i].DevCondition</option>
+            }
+            </select>
+</section>
