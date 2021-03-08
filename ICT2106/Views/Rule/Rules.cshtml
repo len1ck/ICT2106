@@ -13,6 +13,7 @@
     @for (var i = 0; i < viewDataRule.Count; i++) 
     {       
             <li class="list-group-item">@viewDataRule[i].RuleID @viewDataRule[i].RuleName
+              <!-- Now the form works this way as seen below, the string input from the controller is through the name="deleteRule" the name has to match the one in the controller -->
               <form method="post"  method="get" action="/Rule/RuleDelete">
                 <input id="RuleIDDel" type="hidden" name="deleteRule" class="btn btn-default border" value="@viewDataRule[i].RuleID"/>
                 <button  type="submit" style="float: right;" class="btn btn-labeled btn-danger">

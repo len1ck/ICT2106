@@ -18,6 +18,7 @@ namespace ICT2106.Controllers
         private static string connStr = "server=t2-6.cthtaqebwmpy.us-east-1.rds.amazonaws.com;user=root;database=rule;port=3306;password=qwerty123";
         private List<IRule> RuleList = new List<IRule>();
         private MySqlConnection conn = new MySqlConnection(connStr);
+        
         public List<IRule> GetAllRules(){
             try
             {

@@ -28,14 +28,18 @@ namespace ICT2106.Controllers
         {
             _logger = logger;
         }
-
+        /*
+        Still using a list of rules
+        */
         public IActionResult Rules()
         {
             rulelist = rg.GetAllRules();
             ViewData["RuleData"] = rulelist;
             return View();
         }
-        
+        /*
+        Now just taking a string input then pass it to gateway
+        */
         public IActionResult RuleAdd(String addRule)
         {
             rg.RuleAdd(addRule);
@@ -43,7 +47,9 @@ namespace ICT2106.Controllers
             ViewData["RuleData"] = rulelist;
             return View("Rules");
         }
-
+        /*
+        Now just taking a string input then pass it to gateway
+        */
         public IActionResult RuleDelete(String deleteRule)
         {
             rg.DeleteRule(deleteRule);
