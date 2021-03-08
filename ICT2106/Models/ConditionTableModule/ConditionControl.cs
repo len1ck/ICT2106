@@ -24,10 +24,16 @@ namespace ICT2106.Models.ConditionTableModule
             set{ condition.DeviceID = value; }
         }
 
-        public string Status
+        public int DetailID
         {
-            get{ return condition.Status; }
-            set{ condition.Status = value; }
+            get{ return condition.DetailID; }
+            set{ condition.DetailID = value; }
+        }
+
+           public string CName
+        {
+            get{ return condition.CName; }
+            set{ condition.CName = value; }
         }
     }
 }

@@ -23,7 +23,7 @@ namespace ICT2106.Controllers
 
         private Condition c = new Condition{
             ConditionID = 1,
-            Status = "Dummy",
+            // Status = "Dummy",
         };
         public static ArrayList selectCat(String cat)
         {
@@ -64,7 +64,7 @@ namespace ICT2106.Controllers
             temp_cond.CCat = cond.CCat;
             temp_cond.DeviceID = 1;
             temp_cond.DName = cond.DName;
-            temp_cond.Status = (string)options[0];
+            //temp_cond.Status = (string)options[0];
             temp_cond.CPropValue = options;
             return temp_cond;
         }

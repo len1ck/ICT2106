@@ -29,9 +29,10 @@ namespace ICT2106.Controllers
                 {
                     ICondition NewCondition = new ConditionControl();
                     NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.RuleID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.DeviceID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.Status = rdr[1].ToString();
+                    NewCondition.RuleID = Int32.Parse(rdr[1].ToString());
+                    NewCondition.DeviceID = Int32.Parse(rdr[2].ToString());
+                    NewCondition.DetailID = Int32.Parse(rdr[3].ToString());
+                    NewCondition.CName = rdr[4].ToString();
                     ConditionList.Add(NewCondition);
                 }
                 rdr.Close();
@@ -46,63 +47,63 @@ namespace ICT2106.Controllers
             }
         }   
 
-        public List<ICondition> DeleteCondition(ICondition rule){
-            try
-            {
-                conn.Open();
-                string sql = "DELETE FROM rule.condition WHERE CondID = "+(rule.ConditionID).ToString();
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
+        // public List<ICondition> DeleteCondition(ICondition rule){
+        //     try
+        //     {
+        //         conn.Open();
+        //         string sql = "DELETE FROM rule.condition WHERE CondID = "+(rule.ConditionID).ToString();
+        //         MySqlCommand cmd = new MySqlCommand(sql, conn);
+        //         MySqlDataReader rdr = cmd.ExecuteReader();
 
-                while (rdr.Read())
-                {
-                    ICondition NewCondition = new ConditionControl();
-                    NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.RuleID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.DeviceID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.Status = rdr[1].ToString();
-                    ConditionList.Add(NewCondition);
-                }
-                rdr.Close();
-                conn.Close();
-                return ConditionList;
-            }
+        //         while (rdr.Read())
+        //         {
+        //             ICondition NewCondition = new ConditionControl();
+        //             NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
+        //             NewCondition.RuleID = Int32.Parse(rdr[0].ToString());
+        //             NewCondition.DeviceID = Int32.Parse(rdr[0].ToString());
+        //             NewCondition.Status = rdr[1].ToString();
+        //             ConditionList.Add(NewCondition);
+        //         }
+        //         rdr.Close();
+        //         conn.Close();
+        //         return ConditionList;
+        //     }
             
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                conn.Close();
-                return ConditionList;
-            }
-        } 
+        //     catch (Exception ex)
+        //     {
+        //         Console.WriteLine(ex.ToString());
+        //         conn.Close();
+        //         return ConditionList;
+        //     }
+        // } 
 
-        public List<ICondition> createCond(ICondition rule){
-            try
-            {
-                conn.Open();
-                string sql = "INSERT INTO rule.condition (Detail) VALUES('"+(rule.Status).ToString()+"')";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
+        // public List<ICondition> createCond(ICondition rule){
+        //     try
+        //     {
+        //         conn.Open();
+        //         string sql = "INSERT INTO rule.condition (Detail) VALUES('"+(rule.Status).ToString()+"')";
+        //         MySqlCommand cmd = new MySqlCommand(sql, conn);
+        //         MySqlDataReader rdr = cmd.ExecuteReader();
 
-                while (rdr.Read())
-                {
-                    ICondition NewCondition = new ConditionControl();
-                    NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.RuleID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.DeviceID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.Status = rdr[1].ToString();
-                    ConditionList.Add(NewCondition);
-                }
-                rdr.Close();
-                conn.Close();
-                return ConditionList;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                conn.Close();
-                return ConditionList;
-            }
-        }   
+        //         while (rdr.Read())
+        //         {
+        //             ICondition NewCondition = new ConditionControl();
+        //             NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
+        //             NewCondition.RuleID = Int32.Parse(rdr[0].ToString());
+        //             NewCondition.DeviceID = Int32.Parse(rdr[0].ToString());
+        //             NewCondition.Status = rdr[1].ToString();
+        //             ConditionList.Add(NewCondition);
+        //         }
+        //         rdr.Close();
+        //         conn.Close();
+        //         return ConditionList;
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         Console.WriteLine(ex.ToString());
+        //         conn.Close();
+        //         return ConditionList;
+        //     }
+        // }   
     }
 }

@@ -18,7 +18,7 @@ namespace ICT2106.Models.ConditionTableModule
 
         private string deviceName;
 
-        private string status;
+        private int detailID;
 
         private ArrayList c_Properties;
 
@@ -90,10 +90,10 @@ namespace ICT2106.Models.ConditionTableModule
             set { deviceName = value; }
         }
         
-        public string Status
+        public int DetailID
         {
-            get{ return status; }
-            set{ status = value; }
+            get{ return detailID; }
+            set{ detailID = value; }
         }
     }
 }

@@ -27,10 +27,15 @@ namespace ICT2106.Models.ConditionTableModule
               get;set;
         }
 
-        public string Status
+        public int DetailID
         {
             // get{ return concontrol.Status; }
             // set{ concontrol.Status = value; }
+              get;set;
+        }
+
+          public string CName
+        {
               get;set;
         }
     }
