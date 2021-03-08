@@ -20,6 +20,8 @@ namespace ICT2106.Models.ConditionTableModule
 
         private int detailID;
 
+        private int devID;
+
         private ArrayList c_Properties;
 
         private ArrayList c_PropertiesValue;
@@ -95,5 +97,6 @@ namespace ICT2106.Models.ConditionTableModule
             get{ return detailID; }
             set{ detailID = value; }
         }
+
     }
 }

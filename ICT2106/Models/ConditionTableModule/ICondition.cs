@@ -34,9 +34,13 @@ namespace ICT2106.Models.ConditionTableModule
               get;set;
         }
 
-          public string CName
+          public String CName
         {
               get;set;
+        }
+        public String DName
+        {
+          get;set;
         }
     }
 }

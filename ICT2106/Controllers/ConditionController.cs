@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ICT2106.Models.RuleTableModule;
 using ICT2106.Models.ConditionTableModule;
+using ICT2106.Models.ActionTableModule;
 using ICT2106.Models;
 
 namespace ICT2106.Controllers
@@ -18,6 +19,18 @@ namespace ICT2106.Controllers
     public class ConditionController : Controller
     {
         private readonly ILogger<ConditionController> _logger;
+
+        private IList<IRule> rulelist = new List<IRule>();
+        private IList<ICondition> conditionlist = new List<ICondition>();
+        private IList<ActionModel> actionlist = new List<ActionModel>();
+        private ConditionGateway rg = new ConditionGateway();
+
+        private AddConditionGateway ag = new AddConditionGateway();
+        public ConditionController(ILogger<ConditionController> logger)
+        {
+            _logger = logger;
+        }
+
 
         private static Condition temp_cond = new Condition();
 
@@ -57,7 +70,7 @@ namespace ICT2106.Controllers
             };
             return al;
         }
-        private Condition createCond(Condition cond, ArrayList options)
+        private Condition createCond1(Condition cond, ArrayList options)
         {
             temp_cond.ConditionID = 1;
             temp_cond.CName = cond.CName;
@@ -69,17 +82,26 @@ namespace ICT2106.Controllers
             return temp_cond;
         }
 
+        [HttpPost]
+           public IActionResult createCond(String CName)
+        {
+            ag.createCond(CName);
+            conditionlist = rg.GetAllCondition();
+            ViewData["ConditionData"] = conditionlist;
+            return RedirectToAction("Cond", "Condition");
+        }
+
         [HttpGet]        
         public Condition getCond(Condition conds, ArrayList options)
         {
-            Condition temp_cond = createCond(conds, options);
+            Condition temp_cond = createCond1(conds, options);
             return temp_cond;
         }
 
-        public ConditionController(ILogger<ConditionController> logger)
-        {
-            _logger = logger;
-        }
+        // public ConditionController(ILogger<ConditionController> logger)
+        // {
+        //     _logger = logger;
+        // }
 
         public IActionResult EditCondition()
         {

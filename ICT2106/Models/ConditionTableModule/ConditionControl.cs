@@ -35,5 +35,11 @@ namespace ICT2106.Models.ConditionTableModule
             get{ return condition.CName; }
             set{ condition.CName = value; }
         }
+
+             public string DName
+        {
+            get{ return condition.DName; }
+            set{ condition.DName = value; }
+        }
     }
 }

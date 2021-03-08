@@ -25,22 +25,22 @@
 
 @if (@Model.CCat != null)
 {
-    <form method="post" asp-action="Cond">
+    <form method="post" action="/Condition/createCond">
         <div class="form-group">
             <label for="Cname">Condition Name:</label>
-            <input type="text" class="form-control" id="Cname" asp-for="@Model.CName" placeholder="Enter Condition Name...">
+            <input type="text" class="form-control" id="Cname" name="CName" asp-for="@Model.CName" placeholder="Enter Condition Name...">
         </div>
 
         <div class="form-group">
             <label for="Catname">Category:</label>
-            <input type="text" class="form-control" id="Catname" asp-for="@Model.CCat" value="@Model.CCat" readonly>
+            <input type="text" class="form-control" id="Catname" name="Catname"asp-for="@Model.CCat" value="@Model.CCat" readonly>
         </div>
 
         <div class="form-group">
             <label for="Dname">Device Name:</label>
-            <select class="form-control" id="Dname" asp-for="@Model.DName">
-                <option>Bulb</option>
-                <option>Lamp</option>
+            <select class="form-control" id="Dname" name = "Dname"asp-for="@Model.DName">
+                <option value="1">Bulb</option>
+                <option value="2">Lamp</option>
             </select>
         </div>
 
