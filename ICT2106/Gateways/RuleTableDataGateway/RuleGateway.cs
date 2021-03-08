@@ -44,11 +44,11 @@ namespace ICT2106.Controllers
             }
         }   
 
-        public List<IRule> DeleteRule(IRule rule){
+        public List<IRule> DeleteRule(String ruleID){
             try
             {
                 conn.Open();
-                string sql = "DELETE FROM rule WHERE RuleID = "+(rule.RuleID).ToString();
+                string sql = "DELETE FROM rule WHERE RuleID = "+ruleID;
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -72,11 +72,11 @@ namespace ICT2106.Controllers
             }
         } 
 
-        public List<IRule> RuleAdd(IRule rule){
+        public List<IRule> RuleAdd(String ruleName){
             try
             {
                 conn.Open();
-                string sql = "INSERT INTO rule (RuleName) VALUES('"+(rule.RuleName).ToString()+"')";
+                string sql = "INSERT INTO rule (RuleName) VALUES('"+(ruleName).ToString()+"')";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 

@@ -13,13 +13,13 @@
     @for (var i = 0; i < viewDataRule.Count; i++) 
     {       
             <li class="list-group-item">@viewDataRule[i].RuleID @viewDataRule[i].RuleName
-              <form method="post" asp-action="RuleDelete" asp-controller="Rule">
-                <input id="RuleIDDel" type="hidden" asp-for="@Model.RuleID" class="btn btn-default border" value="@viewDataRule[i].RuleID"/>
+              <form method="post"  method="get" action="/Rule/RuleDelete">
+                <input id="RuleIDDel" type="hidden" name="deleteRule" class="btn btn-default border" value="@viewDataRule[i].RuleID"/>
                 <button  type="submit" style="float: right;" class="btn btn-labeled btn-danger">
                 <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
+              </form>
                 <button type="button" style="float: right;" class="btn btn-labeled btn-info mr-1">
                 <span class="btn-label">Edit</span></button>
-              </form>
             </li>
     }
     </ul>
@@ -31,10 +31,10 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form method="post" asp-action="RuleAdd" asp-controller="Rule">
+      <form method="post" method="get" action="/Rule/RuleAdd">
         <div class="modal-body">
             <label>Rule Name:</label><br/>
-            <input id="RuleNameIn" type="text" asp-for="@Model.RuleName" class="btn btn-default border"/>
+            <input id="RuleNameIn" type="text" name="addRule" class="btn btn-default border"/>
             <br/>
             <br/>
             <div id="condition"  asp-action="ConditionAdder" asp-controller="Condition" class=" btn btn-default border rounded" type="button">Add Condition</div>
