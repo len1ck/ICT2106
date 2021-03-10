@@ -33,6 +33,7 @@ namespace ICT2106.Controllers
                     NewCondition.DeviceID = Int32.Parse(rdr[2].ToString());
                     NewCondition.DetailID = Int32.Parse(rdr[3].ToString());
                     NewCondition.CName = rdr[4].ToString();
+                    NewCondition.DName = rdr[5].ToString();
                     ConditionList.Add(NewCondition);
                 }
                 rdr.Close();
