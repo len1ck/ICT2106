@@ -33,7 +33,7 @@ namespace ICT2106.Controllers
                     ICondition NewCondition = new ConditionControl();
                     NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
                     NewCondition.RuleID = Int32.Parse(rdr[1].ToString());
-                    NewCondition.DeviceID = Int32.Parse(rdr[2].ToString());
+                    NewCondition.DevID = Int32.Parse(rdr[2].ToString());
                     NewCondition.DetailID = Int32.Parse(rdr[3].ToString());
                     NewCondition.CName = rdr[4].ToString();
                     NewCondition.DName = rdr[5].ToString();

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using ICT2106.Models.RuleTableModule;
 using ICT2106.Models.ConditionTableModule;
 using ICT2106.Models.ActionTableModule;
+using ICT2106.Models.DevcatTableModule;
 using ICT2106.Models;
 
 namespace ICT2106.Controllers
@@ -23,6 +24,8 @@ namespace ICT2106.Controllers
         private IList<IRule> rulelist = new List<IRule>();
         private IList<ICondition> conditionlist = new List<ICondition>();
         private IList<ActionModel> actionlist = new List<ActionModel>();
+
+        private IList<IDevcat> devcatlist = new List<IDevcat>();
         private ConditionGateway rg = new ConditionGateway();
 
         private AddConditionGateway ag = new AddConditionGateway();
@@ -77,7 +80,7 @@ namespace ICT2106.Controllers
             temp_cond.ConditionID = 1;
             temp_cond.CName = cond.CName;
             temp_cond.CCat = cond.CCat;
-            temp_cond.DeviceID = 1;
+            temp_cond.DevID = 1;
             temp_cond.DName = cond.DName;
             //temp_cond.Status = (string)options[0];
             temp_cond.CPropValue = options;

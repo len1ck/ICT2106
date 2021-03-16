@@ -18,10 +18,10 @@ namespace ICT2106.Models.ConditionTableModule
             set{ condition.RuleID = value; }
         }
 
-        public int DeviceID
+        public int DevID
         {
-            get{ return condition.DeviceID; }
-            set{ condition.DeviceID = value; }
+            get{ return condition.DevID; }
+            set{ condition.DevID = value; }
         }
 
         public int DetailID

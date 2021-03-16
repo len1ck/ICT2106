@@ -80,10 +80,10 @@ namespace ICT2106.Models.ConditionTableModule
             set{ ruleID = value; }
         }
 
-        public int DeviceID
+        public int DevID
         {
-            get{ return deviceID; }
-            set{ deviceID = value; }
+            get{ return devID; }
+            set{ devID = value; }
         }
 
         public String DName

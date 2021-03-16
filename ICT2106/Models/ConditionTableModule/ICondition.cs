@@ -20,7 +20,7 @@ namespace ICT2106.Models.ConditionTableModule
               get;set;
         }
 
-        public int DeviceID
+        public int DevID
         {
             // get{ return concontrol.DeviceID; }
             // set{ concontrol.DeviceID = value; }
