@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ICT2106.Models.DevcatTableModule;
 using ICT2106.Models.DevcondTableModule;
+using ICT2106.Models.MotionDetailsModule;
+using ICT2106.Models.TimerDetailsModule;
 using ICT2106.Models;
 
 namespace ICT2106.Controllers
@@ -22,6 +24,11 @@ namespace ICT2106.Controllers
         private IList<IDevcond> devlist = new List<IDevcond>();
         private devcatGateway dc = new devcatGateway();
         private devcondGateway d = new devcondGateway();
+
+        private IList<IMotionDetails> mdlist = new List<IMotionDetails>();
+        private motionDetailsGateway md = new motionDetailsGateway();
+        private IList<ITimerDetails> tdlist = new List<ITimerDetails>();
+        private timerDetailsGateway td = new timerDetailsGateway();
         public CatController(ILogger<CatController> logger)
         {
             _logger = logger;
@@ -36,5 +43,14 @@ namespace ICT2106.Controllers
             return View();
         }
 
+        public IActionResult MotionAdd(String HP, String PP){
+            mdlist= md.MotionAdd(HP,PP);
+            return View("Category");
+        }
+
+        public IActionResult TimeAdd(String tm){
+            tdlist= td.TimeAdd(tm);
+            return View("Category");
+        }
     }
 }
