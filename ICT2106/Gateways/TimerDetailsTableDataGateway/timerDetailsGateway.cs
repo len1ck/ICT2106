@@ -30,7 +30,7 @@ namespace ICT2106.Controllers
                 {
                     ITimerDetails times = new TimerDetailsControl();
                     times.TimerDetailID = Int32.Parse(rdr[0].ToString());
-                    times.DevCondIDz = Int32.Parse(rdr[1].ToString());
+                    times.DevCondID = Int32.Parse(rdr[1].ToString());
                     times.Time = rdr[2].ToString();
                     timez.Add(times);
                 }

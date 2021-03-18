@@ -31,7 +31,7 @@ namespace ICT2106.Controllers
                 {
                     IMotionDetails motion = new MotionDetailsControl();
                     motion.MotionDetailID = Int32.Parse(rdr[0].ToString());
-                    motion.DevCondIDz = Int32.Parse(rdr[1].ToString());
+                    motion.DevCondID = Int32.Parse(rdr[1].ToString());
                     motion.HumanPresence = rdr[2].ToString();
                     motion.PetPresence = rdr[3].ToString();
                     motions.Add(motion);

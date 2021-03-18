@@ -18,9 +18,9 @@ namespace ICT2106.Models.MotionDetailsModule
             get{ return md.MotionDetailID; }
             set{ md.MotionDetailID = value; }
         }
-        public int DevCondIDz{
-            get{ return md.DevCondIDz; }
-            set{ md.DevCondIDz = value; }
+        public int DevCondID{
+            get{ return md.DevCondID; }
+            set{ md.DevCondID = value; }
         }
     }
 }

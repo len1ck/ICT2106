@@ -14,9 +14,9 @@ namespace ICT2106.Models.DevcondTableModule
             get{ return devcondz.DevType; }
             set{ devcondz.DevType = value; }
         }
-        public int DevCatID{
-            get{ return devcondz.DevCatID; }
-            set{ devcondz.DevCatID = value; }
+        public int CatID{
+            get{ return devcondz.CatID; }
+            set{ devcondz.CatID = value; }
         }
          public int DevID{
             get{ return devcondz.DevID; }

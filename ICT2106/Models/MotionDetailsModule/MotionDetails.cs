@@ -22,7 +22,7 @@ namespace ICT2106.Models.MotionDetailsModule
             get{ return humanPresence; }
             set{ humanPresence = value; }
         }
-        public int DevCondIDz
+        public int DevCondID
         {
             get{ return devCondID; }
             set{ devCondID = value; }

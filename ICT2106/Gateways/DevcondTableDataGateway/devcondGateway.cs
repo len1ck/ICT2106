@@ -29,7 +29,7 @@ namespace ICT2106.Controllers
                 IDevcond cond = new DevcondControl();
                 cond.DevConID = Int32.Parse(rdr[0].ToString());
                 cond.DevID = Int32.Parse(rdr[1].ToString());
-                cond.DevCatID = Int32.Parse(rdr[2].ToString());
+                cond.CatID = Int32.Parse(rdr[2].ToString());
                 cond.DevCondition = rdr[3].ToString();
                 cond.DevType = rdr[4].ToString();
                 devList.Add(cond);
