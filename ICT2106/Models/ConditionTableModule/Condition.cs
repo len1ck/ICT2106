@@ -6,25 +6,32 @@ namespace ICT2106.Models.ConditionTableModule
 {
     public class Condition
     {
+        //rule
+        private int ruleID;
+
+        //condition
         private String c_Cat;
 
         private String c_Name;
 
         private int conditionID;
 
-        private int ruleID;
+        private string condStatus;
 
-        private int deviceID;
-
+        //device
         private string deviceName;
 
-        private int detailID;
-
         private int devID;
+
+        //devcon
+        private int devcon;
+
+        private int devcat;
 
         private ArrayList c_Properties;
 
         private ArrayList c_PropertiesValue;
+
 
         private static ArrayList Category = new ArrayList()
         {
@@ -62,6 +69,12 @@ namespace ICT2106.Models.ConditionTableModule
             set { c_Properties = value; }
         }
 
+        public int RuleID
+        {
+            get{ return ruleID; }
+            set{ ruleID = value; }
+        }
+
         public int ConditionID
         {
             get{ return conditionID; }
@@ -74,11 +87,12 @@ namespace ICT2106.Models.ConditionTableModule
             set{ c_Name = value; }
         }
 
-        public int RuleID
+        public String CondStatus
         {
-            get{ return ruleID; }
-            set{ ruleID = value; }
+            get {return condStatus;}
+            set {condStatus = value;}
         }
+        
 
         public int DevID
         {
@@ -92,10 +106,16 @@ namespace ICT2106.Models.ConditionTableModule
             set { deviceName = value; }
         }
         
-        public int DetailID
+        public int Devcon 
         {
-            get{ return detailID; }
-            set{ detailID = value; }
+            get {return devcon;}
+            set {devcon = value;}
+        }
+
+           public int Devcat 
+        {
+            get {return devcat;}
+            set {devcat = value;}
         }
 
     }

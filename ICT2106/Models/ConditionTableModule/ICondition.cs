@@ -27,12 +27,6 @@ namespace ICT2106.Models.ConditionTableModule
               get;set;
         }
 
-        public int DetailID
-        {
-            // get{ return concontrol.Status; }
-            // set{ concontrol.Status = value; }
-              get;set;
-        }
 
           public String CName
         {
@@ -45,6 +39,16 @@ namespace ICT2106.Models.ConditionTableModule
         public String CCat
         {
           get;set;
+        }
+
+        public int Devcon 
+        {
+          get;set;
+        }
+
+        public int Devcat
+        {
+          get; set;
         }
     }
 }

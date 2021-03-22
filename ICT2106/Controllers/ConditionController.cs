@@ -28,7 +28,7 @@ namespace ICT2106.Controllers
         private IList<IDevcat> devcatlist = new List<IDevcat>();
         private ConditionGateway rg = new ConditionGateway();
 
-        private AddConditionGateway ag = new AddConditionGateway();
+        // private AddConditionGateway ag = new ConditionGateway();
 
         private int CatID;
         public ConditionController(ILogger<ConditionController> logger)
@@ -88,9 +88,9 @@ namespace ICT2106.Controllers
         }
 
         [HttpPost]
-           public IActionResult createCond(String CName,String CCat)
+           public IActionResult createCond(String CName,String Catname)
         {
-            if(CCat == "Motion")
+            if(Catname == "Motion")
             {
                 CatID = 1;
             }
@@ -98,7 +98,7 @@ namespace ICT2106.Controllers
             {
                 CatID = 2;
             }
-            ag.createCond(CName,CatID);
+            rg.createCond(CName,CatID);
             conditionlist = rg.GetAllCondition();
             ViewData["ConditionData"] = conditionlist;
             return RedirectToAction("Cond", "Condition");
