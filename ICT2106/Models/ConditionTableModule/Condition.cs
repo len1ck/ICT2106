@@ -14,17 +14,18 @@ namespace ICT2106.Models.ConditionTableModule
 
         private int ruleID;
 
-        private int deviceID;
 
         private string deviceName;
 
-        private int detailID;
 
         private int devID;
+
+        private string condStatus;
 
         private ArrayList c_Properties;
 
         private ArrayList c_PropertiesValue;
+    
 
         private static ArrayList Category = new ArrayList()
         {
@@ -92,10 +93,11 @@ namespace ICT2106.Models.ConditionTableModule
             set { deviceName = value; }
         }
         
-        public int DetailID
+
+        public String CondStatus
         {
-            get{ return detailID; }
-            set{ detailID = value; }
+            get {return condStatus;}
+            set {condStatus = value;}
         }
 
     }

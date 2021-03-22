@@ -24,12 +24,6 @@ namespace ICT2106.Models.ConditionTableModule
             set{ condition.DevID = value; }
         }
 
-        public int DetailID
-        {
-            get{ return condition.DetailID; }
-            set{ condition.DetailID = value; }
-        }
-
            public string CName
         {
             get{ return condition.CName; }
