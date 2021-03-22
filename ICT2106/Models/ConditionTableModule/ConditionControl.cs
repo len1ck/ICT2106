@@ -41,5 +41,17 @@ namespace ICT2106.Models.ConditionTableModule
             get{ return condition.CCat; }
             set{ condition.CCat = value; }
         }
+
+         public int Devcon
+        {
+            get{ return condition.Devcon; }
+            set{ condition.Devcon = value; }
+        }
+
+             public int Devcat
+        {
+            get{ return condition.Devcat; }
+            set{ condition.Devcat = value; }
+        }
     }
 }

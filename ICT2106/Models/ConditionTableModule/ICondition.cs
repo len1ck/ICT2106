@@ -40,5 +40,15 @@ namespace ICT2106.Models.ConditionTableModule
         {
           get;set;
         }
+
+        public int Devcon 
+        {
+          get;set;
+        }
+
+        public int Devcat
+        {
+          get; set;
+        }
     }
 }
