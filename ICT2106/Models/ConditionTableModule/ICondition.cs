@@ -50,5 +50,6 @@ namespace ICT2106.Models.ConditionTableModule
         {
           get; set;
         }
+
     }
 }
