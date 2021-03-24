@@ -33,6 +33,7 @@ namespace ICT2106.Controllers
                     NewCondition.DevID = Int32.Parse(rdr[2].ToString());
                     NewCondition.CName = rdr[4].ToString();
                     NewCondition.DName = rdr[5].ToString();
+                    NewCondition.Devcat=Int32.Parse(rdr[6].ToString());
                     ConditionList.Add(NewCondition);
                 }
                 rdr.Close();

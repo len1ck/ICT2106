@@ -103,7 +103,12 @@ namespace ICT2106.Controllers
             ViewData["ConditionData"] = conditionlist;
             return RedirectToAction("Cond", "Condition");
         }
-
+            public IActionResult getCondiiton()
+        {
+            conditionlist = rg.GetAllCondition();
+            ViewData["Condition"] = conditionlist;
+            return View();
+        }
         [HttpGet]        
         public Condition getCond(Condition conds, ArrayList options)
         {
@@ -121,6 +126,14 @@ namespace ICT2106.Controllers
             ViewData["ConditionData"] = c;
             return View();
         }
+
+         public IActionResult AllCondition()
+        {
+            conditionlist = rg.GetAllCondition();
+            ViewData["Condition"] = conditionlist;
+            return View();
+        }
+
 
         public IActionResult Cond()
         {
