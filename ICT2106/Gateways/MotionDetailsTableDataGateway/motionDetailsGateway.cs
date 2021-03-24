@@ -19,11 +19,11 @@ namespace ICT2106.Controllers
         private List<IMotionDetails> motions = new List<IMotionDetails>();
         private MySqlConnection conn = new MySqlConnection(connStr);
 
-         public List<IMotionDetails> MotionAdd(String HP, String PP){
+         public List<IMotionDetails> MotionAdd(String dev,String HP, String PP, String did){
             try
             {
                 conn.Open();
-                string sql = $"INSERT INTO motionDetails (DevCondID, HumanPresence, PetPresence) VALUES({1},'{HP}','{PP}')";
+                string sql = $"INSERT INTO motionDetails (DevCondID, HumanPresence, PetPresence,CondID) VALUES({dev},'{HP}','{PP}',{did})";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -34,6 +34,7 @@ namespace ICT2106.Controllers
                     motion.DevCondID = Int32.Parse(rdr[1].ToString());
                     motion.HumanPresence = rdr[2].ToString();
                     motion.PetPresence = rdr[3].ToString();
+                    motion.CondID = Int32.Parse(rdr[1].ToString());
                     motions.Add(motion);
                 }
                 rdr.Close();

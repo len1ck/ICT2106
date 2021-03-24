@@ -7,6 +7,8 @@ namespace ICT2106.Models.MotionDetailsModule
 
         String HumanPresence {get; set;}
 
+        int CondID {get;set;}
+
         int DevCondID {get; set;}
 
         int MotionDetailID {get; set;}

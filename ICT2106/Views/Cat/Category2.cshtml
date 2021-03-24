@@ -1,0 +1,112 @@
+@* <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(document).ready(function () {
+            $("#refresh").change(function () {
+                if ($("#catz").val() == "Motion") {
+                    $("#Motion").show();
+                    $("#Timer").hide();
+                } else {
+                    $("#Motion").hide();
+                    $("#Timer").show();
+                } 
+            });
+        });
+    });
+</script> *@
+@using ICT2106.Models.DevcatTableModule
+@using ICT2106.Models.DevcondTableModule
+@using ICT2106.Models.ConditionTableModule
+@model (ICT2106.Models.ConditionTableModule.Condition,ICT2106.Models.DevcatTableModule.IDevcat , ICT2106.Models.DevcondTableModule.IDevcond)
+@{
+    ViewData["Title"] = "Category";
+    var CatData = ViewData["CatData"] as IList<IDevcat>;
+    var DeviceData = ViewData["DeviceData"] as IList<IDevcond>;
+        var ConditionData = ViewData["ConditionData"] as Condition;
+}
+<section id="sel_ConCat">
+    @* <form method="post" method="get" action="/Condition/addNewCond"> *@
+    <h1>Condition Details:</h1>
+    @* //Testing Category select *@
+        <form method="post" method="get" action="/Cat/SelDev">
+            <label for="cat_sel">Select Category:</label>
+            <select class="form-control" name="category" onchange="this.form.submit()">
+            @* <option selected>@CatData[0].CatName<input type="hidden" name="category" value="@CatData[0].CatID"/></option> *@
+            @* <option id="catz">@CatData[1].CatName<input type="hidden" name="category" value="@CatData[1].CatID"/></option> *@
+            @for (var i = 0; i < CatData.Count; i++) 
+            {
+                <option value="@CatData[i].CatID">@CatData[i].CatName
+                    @*<input type="hidden" name="category" value="@CatData[i].CatID" placeholder="@CatData[i].CatName"/>*@
+                </option>
+                
+                
+                @*<option  name="dev" value="@CatData[i].CatID">@CatData[i].CatName</option>*@
+            }
+            </select>
+            <button type="submit" class="btn btn-primary btn-sm" id="refresh" >Refresh Details</button>
+        </form>
+            @* @for (var i = 0; i < CatData.Count; i++) 
+            {
+                <option selected>@CatData[i].CatName
+                <input type="hidden" name="category" value="@CatData[i].CatID" placeholder="@CatData[i].CatName"/>
+                </option>
+            } *@
+            @* <button type="submit" class="btn btn-primary btn-sm" onclick="$('#Motion').show();">Refresh Devices</button> *@
+     
+     @* <label for="cat_sel">Select Device:</label>
+            <select class="form-control" id="cat_sel">
+            @for (var i = 0; i < DeviceData.Count; i++) 
+            {<option  name="dev" value="@DeviceData[i].DevConID">@DeviceData[i].DevCondition</option>
+                @* <option>@DeviceData[i].DevCondition<input type="hidden" name="dev" input-value="@DeviceData[i].DevConID"></option> }
+            </select> *@
+
+
+@* Motion Details Form *@
+@* <div id="Motion" style="display:none;">  *@
+    <form method="post" method="get" action="/Cat/addNewCond">
+    @* <form method="post" action="/Cat/MotionAdd"> *@
+            <div class="form-group">
+            <label for="Cname">Condition Name:</label>
+            <input type="text" class="form-control" name="CName" placeholder="Enter Condition Name...">
+            </div>
+            <div class="form-group">
+            <label>Category:</label>
+            <input type="text" class="form-control" name="cat" value="@CatData[0].CatID" readonly>
+            <label for="cat_sel">Select Device:</label>
+            <select class="form-control" id="cat_sel">
+                <option>@DeviceData[1].DevCondition<input type="hidden" name="dev" value="@DeviceData[1].DevConID"/><input type="hidden" name="did" value="@DeviceData[1].DevID"></option>
+            </select>
+            <label for="HP">Human Presence:</label>
+            <input type="text" class="form-control" id="HP" name="HP"  placeholder="Enter Yes or No">
+            <label for="PP">Pet Presence:</label>
+            <input type="text" class="form-control" id="PP" name="PP"  placeholder="Enter Yes or No">
+            </div>
+            <button  type="submit" class="btn btn-primary btn-sm">Submit</button>
+    </form>
+@* </div> *@
+
+
+@* Timer Details Form *@
+<div id="Timer" style="display:none;">
+<form method="post" method="get" action="/Cat/addNewCond">
+    @* <form method="post" action="/Cat/InsertTimerDetails"> *@
+            <div class="form-group">
+            <label for="Cname">Condition Name:</label>
+            <input type="text" class="form-control" name="CName" placeholder="Enter Condition Name...">
+            </div>
+            <div class="form-group">
+            <label>Category:</label>
+            <input type="text" class="form-control" name="cat" value="@CatData[1].CatID" readonly>
+            <label for="cat_sel">Select Device:</label>
+            <select class="form-control" id="cat_sel">
+                <option>@DeviceData[1].DevCondition<input type="hidden" name="dev" value="@DeviceData[1].DevConID"/><input type="hidden" name="did" value="@DeviceData[1].DevID"></option>
+            </select>
+            <label for="tm">Time:</label>
+            <input type="text" class="form-control" id="tm" name="tm"  placeholder="Set Timing">
+            </div>
+            @* <button  type="submit" class="btn btn-primary btn-sm">Save Details</button> *@
+            <br>
+            <button  type="submit" class="btn btn-primary btn-sm">Save Condition</button>
+    </form>
+ </div>   
+</section>

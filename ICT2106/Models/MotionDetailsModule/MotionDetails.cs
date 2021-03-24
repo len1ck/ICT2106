@@ -12,6 +12,14 @@ namespace ICT2106.Models.MotionDetailsModule
 
         private string petPresence;
 
+        private int conditionID;
+
+        public int CondID
+        {
+            get{ return conditionID; }
+            set{ conditionID = value; }
+        }
+
         public string PetPresence
         {
             get{ return petPresence; }

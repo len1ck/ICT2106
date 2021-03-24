@@ -19,6 +19,11 @@ namespace ICT2106.Models.TimerDetailsModule
             get{ return td.DevCondID; }
             set{ td.DevCondID = value; }
         }
+
+        public int CondID{
+            get{ return td.CondID; }
+            set{ td.CondID = value; }
+        }
     }
 
 }
