@@ -14,6 +14,7 @@ using ICT2106.Models.ConditionTableModule;
 using ICT2106.Models.ActionTableModule;
 using ICT2106.Models.DevcatTableModule;
 using ICT2106.Models;
+using ICT2106.Models.DevcondTableModule;
 
 namespace ICT2106.Controllers
 {
@@ -28,6 +29,12 @@ namespace ICT2106.Controllers
         private IList<IDevcat> devcatlist = new List<IDevcat>();
         private ConditionGateway rg = new ConditionGateway();
 
+
+        private IList<IDevcat> catlist = new List<IDevcat>();
+        private IList<IDevcond> devlist = new List<IDevcond>();
+
+        private devcatGateway dc = new devcatGateway();
+        private devcondGateway d = new devcondGateway();
         // private AddConditionGateway ag = new ConditionGateway();
 
         private int CatID;
@@ -126,6 +133,10 @@ namespace ICT2106.Controllers
         {
             conditionlist = rg.GetSpecificCondition(editCondition);
             ViewData["Condition"] = conditionlist;
+            catlist = dc.GetAllCat();
+            ViewData["CatData"] = catlist;
+            devlist = d.GetAllDev();
+            ViewData["DeviceData"] = devlist;
             return View();
         }
 
