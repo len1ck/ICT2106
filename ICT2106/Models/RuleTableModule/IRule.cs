@@ -7,5 +7,7 @@ namespace ICT2106.Models.RuleTableModule
         String RuleName {get; set;}
 
         int RuleID{get; set;}
+
+        ICondition Condition{get; set;}
     }
 }

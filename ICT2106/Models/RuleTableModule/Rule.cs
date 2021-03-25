@@ -1,4 +1,6 @@
 using System;
+using ICT2106.Models.ConditionTableModule;
+using ICT2106.Models.ActionTableModule;
 
 namespace ICT2106.Models.RuleTableModule
 {
@@ -7,6 +9,10 @@ namespace ICT2106.Models.RuleTableModule
         private int ruleID;
 
         private string ruleName;
+
+        private ICondition condition = new ConditionControl(); 
+
+        //Action here
 
         public string RuleName
         {
@@ -19,5 +25,12 @@ namespace ICT2106.Models.RuleTableModule
             get{ return ruleID; }
             set{ ruleID = value; }
         }
+
+        public ICondition ICondition
+        {
+            get{return condition;}
+            set{condition = value;}
+        }
+        //Add action stuff here
     }
 }

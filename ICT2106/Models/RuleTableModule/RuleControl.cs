@@ -15,5 +15,12 @@ namespace ICT2106.Models.RuleTableModule
             get{ return rule.RuleID; }
             set{ rule.RuleID = value; }
         }
+
+        public ICondition Conditon
+        {
+            get{return rule.Condition;}
+            set{rule.Condition = value;}
+        }
+        //Add action stuff here
     }
 }

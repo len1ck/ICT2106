@@ -38,10 +38,20 @@
             <input id="RuleNameIn" type="text" name="addRule" class="btn btn-default border"/>
             <br/>
             <br/>
-            <div id="condition"  asp-action="ConditionAdder" asp-controller="Condition" class=" btn btn-default border rounded" type="button">Add Condition</div>
+            <div id="condition" data-toggle="collapse" href="#collapseCondition" class="btn btn-default border rounded" type="button">Add Condition</div>
+            <div class="collapse" id="collapseCondition">
+              <div class="card card-body">
+               Put Condition stuff here
+              </div>
+            </div>
             <br/>
             <br/>
-            <div id="action" class=" btn btn-default border rounded" type="button" >Add Action</div>
+            <div id="action" class=" btn btn-default border rounded" data-toggle="collapse" href="#collapseAction"  type="button" >Add Action</div>
+            <div class="collapse" id="collapseAction">
+              <div class="card card-body">
+               Put Action stuff here
+              </div>
+            </div>
       </div>
       <div class="modal-footer">
         <button  type="submit" class="btn btn-default">Submit</button>
