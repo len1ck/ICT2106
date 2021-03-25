@@ -68,22 +68,25 @@ namespace ICT2106.Controllers
             ViewData["CatData"] = catlist;
             devlist = d.SelDev(category);
             ViewData["DeviceData"] = devlist;
+            ViewData["CatID"] = category;
             return View("Category2");
         }
 
-        public IActionResult MotionAdd(String did, String dev, String HP, String PP){
-            mdlist= md.MotionAdd(did,dev,HP,PP);
-            return View("Category");
-        }
+        // public IActionResult MotionAdd(String did, String dev, String HP, String PP){
+        //     mdlist= md.MotionAdd(did,dev,HP,PP);
+        //     return View("Category");
+        // }
 
         
 
-        public IActionResult InsertTimerDetails(String dev,String tm,String did){
-            tdlist= td.InsertTimerDetails(dev,tm,did);
-            return View("Category");
-        }
-        public IActionResult addNewCond(String did, String CName,String cat, String dev){
-            conditionlist= rg.addNewCond(did,CName,cat, dev);
+        // public IActionResult InsertTimerDetails(String dev,String tm,String did){
+        //     tdlist= td.InsertTimerDetails(dev,tm,did);
+        //     return View("Category");
+        // }
+        public IActionResult addNewCond(String did, String CName,String catz, String dev,String HP, String PP){
+            conditionlist= rg.addNewCond(did,CName,catz, dev);
+            conditionlist = rg.GetAllCondition();
+            mdlist= md.MotionAdd(did,dev,HP,PP);
             ViewData["ConditionData"] = conditionlist;
             return View("Category");
         }

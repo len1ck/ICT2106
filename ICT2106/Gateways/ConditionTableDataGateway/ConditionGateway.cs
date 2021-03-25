@@ -113,6 +113,7 @@ namespace ICT2106.Controllers
         public List<ICondition> addNewCond(String DID, String CName,String CatID, String DcID ){
             try
             {
+                System.Console.WriteLine(DID + " "+CName+" "+CatID+" "+DcID);
                 conn.Open();
                // string sql = "INSERT INTO rule.condition (RuleID,DevID,DetailID,CondName,DevCondID,CatID) VALUES('"+1+1+1+(CName).ToString()+1+1+"')";
                 string sql = $"INSERT INTO rule.condition (RuleID,DevID,DetailID,CondName,DevCondID,CatID) VALUES({1}, {DID}, {1}, '{CName}',{DcID},{CatID});";
