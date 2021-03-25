@@ -4,27 +4,21 @@
 @{
     ViewData["Title"] = "RuleCreation";
     var ConditionData = ViewData["ConditionData"] as Condition;
+    var viewDataCondition = ViewData["Condition"] as IList<ICondition>;
 }
 <!-- <h1>@ViewData["Title"]</h1> -->
     <h1>Edit Condition</h1>
     <br/>
     <br/>
-   <!-- <form method="post" asp-action="RuleAdd" asp-controller="Rule">
-        <div class="modal-body">
-            <label>Condition Name:</label><br/>
-            <input id="RuleNameIn" type="text" asp-for="@ConditionData" class="btn btn-default border"/>
-            <br/>
-            <label>Condition ID:</label><br/>
-            <input id="RuleIdIn" type="text" asp-for="@ConditionData.ConditionID" class="btn btn-default border"/>
-            <br/>
-      </div>
-     
-    </form>  -->
 
+    
+
+  @for (var i = 0; i < viewDataCondition.Count; i++) 
+		  {
    <form method="post" asp-action="Cond">
         <div class="form-group">
             <label for="Cname">Condition Name:</label>
-            <input type="text" class="form-control" id="Cname" placeholder="Edit Condition Name...">
+            <input type="text" class="form-control" id="Cname" value="@viewDataCondition[i].CName">
         </div>
 
         <div class="form-group">
@@ -46,3 +40,5 @@
             <input type="submit" class="btn btn-primary btn-sm" name="conditionSubmit" value="Edit Condition">
         </div>
     </form>
+          }
+          

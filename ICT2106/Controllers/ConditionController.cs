@@ -121,9 +121,11 @@ namespace ICT2106.Controllers
         //     _logger = logger;
         // }
 
-        public IActionResult EditCondition()
+        [HttpPost]   
+        public IActionResult EditCondition(string editCondition)
         {
-            ViewData["ConditionData"] = c;
+            conditionlist = rg.GetSpecificCondition(editCondition);
+            ViewData["Condition"] = conditionlist;
             return View();
         }
 
@@ -134,6 +136,13 @@ namespace ICT2106.Controllers
             return View();
         }
 
+           public IActionResult DeleteCondition(string deleteCondition)
+        {
+            conditionlist = rg.DeleteCondition(deleteCondition);
+            conditionlist = rg.GetAllCondition();
+            ViewData["Condition"] = conditionlist;
+            return View("AllCondition");
+        }
 
         public IActionResult Cond()
         {

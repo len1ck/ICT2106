@@ -48,11 +48,41 @@ namespace ICT2106.Controllers
             }
         }   
 
-        public List<ICondition> DeleteCondition(ICondition rule){
+         public List<ICondition> GetSpecificCondition(string ConditionID){
             try
             {
                 conn.Open();
-                string sql = "DELETE FROM rule.condition WHERE CondID = "+(rule.ConditionID).ToString();
+                string sql = "SELECT * FROM rule.condition WHERE CondID = " + ConditionID;
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    ICondition NewCondition = new ConditionControl();
+                    NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
+                    NewCondition.RuleID = Int32.Parse(rdr[1].ToString());
+                    NewCondition.DevID = Int32.Parse(rdr[2].ToString());
+                    NewCondition.CName = rdr[4].ToString();
+                    NewCondition.DName = rdr[5].ToString();
+                    NewCondition.Devcat=Int32.Parse(rdr[6].ToString());
+                    ConditionList.Add(NewCondition);
+                }
+                rdr.Close();
+                conn.Close();
+                return ConditionList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                conn.Close();
+                return ConditionList;
+            }
+        }   
+
+        public List<ICondition> DeleteCondition(string deleteCondition){
+            try
+            {
+                conn.Open();
+                string sql = "DELETE FROM rule.condition WHERE CondID = " + deleteCondition;
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 

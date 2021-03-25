@@ -17,13 +17,16 @@
             <td>DevID</td>
             <td>DevCondID</td>
             <td>CatID</td>
-			<td></td>
-            <td></td>
+            <td>Edit</td>
+            <td>Delete</td>
 		   </tr>
+
+       
 		  @for (var i = 0; i < viewDataCondition.Count; i++) 
 		  {
+              
 		         <tr>
-				  <td>@viewDataCondition[i].ConditionID</td>
+				  <td  id="ConditionID" name="ConditionID">@viewDataCondition[i].ConditionID</td>
   
 		          <td> @viewDataCondition[i].CName</td>
 
@@ -34,10 +37,19 @@
                    <td>@viewDataCondition[i].DName</td>
                  
                   <td>@viewDataCondition[i].Devcat</td>
+                
+                  <form method="post" action="/Condition/EditCondition">
+                <input id="ConditionIDEdit" type="hidden" name="editCondition" class="btn btn-default border" value="@viewDataCondition[i].ConditionID"/>
+                <td><input type="submit" class="btn btn-primary btn-sm" value="Edit"></td>
+              </form>
 
-                  <td><a href="/Condition/EditCondition" class="Button">Edit</a></td>
 
-                 <td><button>Delete</button></td>
+                <form method="post"  method="get" action="/Condition/DeleteCondition">
+                <input id="ConditionIDDel" type="hidden" name="deleteCondition" class="btn btn-default border" value="@viewDataCondition[i].ConditionID"/>
+                <td><button  type="submit"  class="btn btn-labeled btn-danger">
+                    <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button></td>
+              </form>
 				  </tr>
+      
 		  }
 		   </table>
