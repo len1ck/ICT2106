@@ -26,7 +26,7 @@ namespace ICT2106.Models.RuleTableModule
             set{ ruleID = value; }
         }
 
-        public ICondition ICondition
+        public ICondition Condition
         {
             get{return condition;}
             set{condition = value;}
