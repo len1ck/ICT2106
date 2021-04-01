@@ -42,7 +42,7 @@ namespace ICT2106.Controllers
                     times.TimerDetailID = Int32.Parse(rdr[0].ToString());
                     times.DevCondID = Int32.Parse(rdr[1].ToString());
                     times.Time = rdr[2].ToString();
-                    times.CondID = Int32.Parse(rdr[1].ToString());
+                    times.CondID = Int32.Parse(rdr[3].ToString());
                     timez.Add(times);
                 }
                 rdr.Close();

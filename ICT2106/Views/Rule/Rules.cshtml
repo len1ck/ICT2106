@@ -173,16 +173,20 @@ $(function () {
                                 </div>
                                 <div class="form-group">
                                 <label>Category:</label>
-                                <input type="text" class="form-control" name="cat" value="2" readonly>
+                                <input id="iasdd" type="text" class="form-control" name="TCID" value="2" readonly>
                                 <label for="cat_sel3">Select Device:</label>
-                                <select class="form-control" id="dev" name="dev" onchange="this">
+                                @* This part the TDCID is empty *@
+                                <input id="idev" type="hidden" class="form-control" name="TDCID">
+                                <select class="form-control" id="dev">
                                 <option>--Please choose a device--</option>
+                                if(@CondData != null){
                                 @for (var i = 0; i < CondData.Count; i++) 
-                                {
+                                {   
                                   if(@CondData[i].CatID == 2){
-                                    <option id="dev" name="dev"value="@CondData[i].DevConID"> @CondData[i].DevCondition</option>
+                                    <option value="@CondData[i].DevConID">@CondData[i].DevCondition </option>  
                                   }
                                 } 
+                                }
                                 </select>
                                 <label for="tm">Time:</label>
                                 <input type="text" class="form-control" id="tm" name="tm"  placeholder="Set Timing">

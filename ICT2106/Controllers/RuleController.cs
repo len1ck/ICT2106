@@ -67,7 +67,7 @@ namespace ICT2106.Controllers
         /*
         Now just taking a string input then pass it to gateway
         */
-        public IActionResult RuleAdd(String addRule,String MCName,String MCID,String MDCID,String HP, String PP, String TCName)
+        public IActionResult RuleAdd(String addRule,String MCName,String MCID,String MDCID,String HP, String PP, String TCName, String TCID,String TDCID,String tm)
         {
             int DevID = 0;
             int ruleID = rg.RuleAdd(addRule);
@@ -79,31 +79,18 @@ namespace ICT2106.Controllers
                     else if(MDCID =="2"){
                         DevID = 3;
                     }
-                    else if(MDCID =="3"){
-                        DevID = 1;
-                    }
-                    else if(MDCID =="4"){
-                        DevID = 2;
-                    }
                     conditionlist= cg.addNewCond(ruleID,DevID,MCName,MCID,MDCID);
                     mdlist= md.InsertMotionDetails(MDCID,HP,PP);
             }
-            else if(MCID == "2"){
-                    if (MDCID == "1")
-                    {
-                        DevID = 2;
-                    }
-                    else if(MDCID =="2"){
-                        DevID = 3;
-                    }
-                    else if(MDCID =="3"){
+            else if(TCID == "2"){
+                    if (TDCID =="3"){
                         DevID = 1;
                     }
-                    else if(MDCID =="4"){
+                    else if(TDCID =="4"){
                         DevID = 2;
                     }
-                    conditionlist= cg.addNewCond(ruleID,DevID,MCName,MCID,MDCID);
-                    mdlist= md.InsertMotionDetails(MDCID,HP,PP);
+                    conditionlist= cg.addNewCond(ruleID,DevID,TCName,TCID,TDCID);
+                    tdlist= td.InsertTimerDetails(TDCID,tm);
             }
             rulelist = rg.GetAllRules();
             conditionlist = cg.GetAllCondition();

@@ -44,7 +44,7 @@ namespace ICT2106.Controllers
                     motion.DevCondID = Int32.Parse(rdr[1].ToString());
                     motion.HumanPresence = rdr[2].ToString();
                     motion.PetPresence = rdr[3].ToString();
-                    motion.CondID = Int32.Parse(rdr[1].ToString());
+                    motion.CondID = Int32.Parse(rdr[4].ToString());
                     motions.Add(motion);
                 }
                 rdr.Close();
