@@ -9,6 +9,14 @@ namespace ICT2106.Models.TimerDetailsModule
         private int devCondID;
 
         private string timing;
+        
+        private int conditionID;
+
+        public int CondID    
+        {
+            get{ return conditionID; }
+            set{ conditionID = value; }
+        }
 
         public string Time
         {
@@ -16,7 +24,7 @@ namespace ICT2106.Models.TimerDetailsModule
             set{ timing = value; }
         }
 
-        public int DevCondIDz
+        public int DevCondID
         {
             get{ return devCondID; }
             set{ devCondID = value; }

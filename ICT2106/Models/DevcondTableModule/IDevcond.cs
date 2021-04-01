@@ -6,7 +6,7 @@ namespace ICT2106.Models.DevcondTableModule
     {
         String DevCondition {get; set;}
         String DevType {get; set;}
-        int DevCatID{get; set;}
+        int CatID{get; set;}
         int DevID{get; set;}
         int DevConID{get; set;}
     }

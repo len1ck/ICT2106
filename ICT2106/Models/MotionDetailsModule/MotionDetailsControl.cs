@@ -6,6 +6,11 @@ namespace ICT2106.Models.MotionDetailsModule
         
         private MotionDetails md = new MotionDetails();
 
+        public int CondID{
+            get{ return md.CondID; }
+            set{ md.CondID = value; }
+        }
+
         public String PetPresence{
             get{ return md.PetPresence; }
             set{ md.PetPresence = value; }
@@ -18,9 +23,9 @@ namespace ICT2106.Models.MotionDetailsModule
             get{ return md.MotionDetailID; }
             set{ md.MotionDetailID = value; }
         }
-        public int DevCondIDz{
-            get{ return md.DevCondIDz; }
-            set{ md.DevCondIDz = value; }
+        public int DevCondID{
+            get{ return md.DevCondID; }
+            set{ md.DevCondID = value; }
         }
     }
 }

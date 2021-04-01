@@ -93,7 +93,7 @@ namespace ICT2106.Controllers
             temp_cond.CPropValue = options;
             return temp_cond;
         }
-
+        /*
         [HttpPost]
            public IActionResult createCond(String CName,String Catname)
         {
@@ -110,6 +110,7 @@ namespace ICT2106.Controllers
             ViewData["ConditionData"] = conditionlist;
             return RedirectToAction("Cond", "Condition");
         }
+        */
             public IActionResult getCondiiton()
         {
             conditionlist = rg.GetAllCondition();

@@ -21,7 +21,7 @@ namespace ICT2106.Controllers
     public List<IDevcond> GetAllDev(){
         try{
             conn.Open();
-            string sql = "SELECT * FROM devcond";
+            string sql = "SELECT * FROM devcond ";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             MySqlDataReader rdr = cmd.ExecuteReader();
             while (rdr.Read())
@@ -29,9 +29,37 @@ namespace ICT2106.Controllers
                 IDevcond cond = new DevcondControl();
                 cond.DevConID = Int32.Parse(rdr[0].ToString());
                 cond.DevID = Int32.Parse(rdr[1].ToString());
-                cond.DevCatID = Int32.Parse(rdr[2].ToString());
-                cond.DevCondition = rdr[3].ToString();
-                cond.DevType = rdr[4].ToString();
+                cond.CatID = Int32.Parse(rdr[2].ToString());
+                cond.DevType = rdr[3].ToString();
+                cond.DevCondition = rdr[4].ToString();
+                devList.Add(cond);
+            }
+            rdr.Close();
+            conn.Close();
+            return devList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                conn.Close();
+                return devList;
+            }
+        }
+    //Refresh Devices
+    public List<IDevcond> SelDev(String cat){
+        try{
+            conn.Open();
+            string sql = "SELECT * FROM devcond  WHERE CatID = "+cat;
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                IDevcond cond = new DevcondControl();
+                cond.DevConID = Int32.Parse(rdr[0].ToString());
+                cond.DevID = Int32.Parse(rdr[1].ToString());
+                cond.CatID = Int32.Parse(rdr[2].ToString());
+                cond.DevType = rdr[3].ToString();
+                cond.DevCondition = rdr[4].ToString();
                 devList.Add(cond);
             }
             rdr.Close();

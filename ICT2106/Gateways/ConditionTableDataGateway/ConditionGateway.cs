@@ -31,9 +31,9 @@ namespace ICT2106.Controllers
                     NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
                     NewCondition.RuleID = Int32.Parse(rdr[1].ToString());
                     NewCondition.DevID = Int32.Parse(rdr[2].ToString());
-                    NewCondition.CName = rdr[4].ToString();
-                    NewCondition.DName = rdr[5].ToString();
-                    NewCondition.Devcat=Int32.Parse(rdr[6].ToString());
+                    NewCondition.CName = rdr[3].ToString();
+                    NewCondition.DName = rdr[4].ToString();
+                    NewCondition.Devcat=Int32.Parse(rdr[5].ToString());
                     ConditionList.Add(NewCondition);
                 }
                 rdr.Close();
@@ -110,12 +110,12 @@ namespace ICT2106.Controllers
         } 
 
         
-        public List<ICondition> createCond(String CName,int CatID){
+       public List<ICondition> addNewCond(int RID, int DID, String CName,String CatID, String DcID ){
             try
             {
+                System.Console.WriteLine(DID + " "+CName+" "+CatID+" "+DcID);
                 conn.Open();
-               // string sql = "INSERT INTO rule.condition (RuleID,DevID,DetailID,CondName,DevCondID,CatID) VALUES('"+1+1+1+(CName).ToString()+1+1+"')";
-                string sql = $"INSERT INTO rule.condition (RuleID,DevID,DetailID,CondName,DevCondID,CatID) VALUES({1}, {1}, {1}, '{CName}',{1},{CatID});";
+                string sql = $"INSERT INTO rule.condition (RuleID,DevID,CondName,DevCondID,CatID) VALUES({RID}, {DID},'{CName}',{DcID},{CatID});";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -125,8 +125,9 @@ namespace ICT2106.Controllers
                     NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
                     NewCondition.RuleID = Int32.Parse(rdr[1].ToString());
                     NewCondition.DevID = Int32.Parse(rdr[2].ToString());
-                    NewCondition.CName = rdr[4].ToString();
-                    NewCondition.DName = rdr[5].ToString();
+                    NewCondition.CName = rdr[3].ToString();
+                    NewCondition.DName = rdr[4].ToString();
+                    NewCondition.CCat = rdr[5].ToString();
                     ConditionList.Add(NewCondition);
                 }
                 rdr.Close();
@@ -139,6 +140,6 @@ namespace ICT2106.Controllers
                 conn.Close();
                 return ConditionList;
             }
-        } 
-        }   
-    }
+        }
+    }   
+}

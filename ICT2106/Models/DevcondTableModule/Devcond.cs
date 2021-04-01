@@ -6,7 +6,7 @@ namespace ICT2106.Models.DevcondTableModule
     {
         private int devconID;
         private int devID;
-        private int devcatID;
+        private int catID;
         private string devType;
         private string devCondition;
 
@@ -20,10 +20,10 @@ namespace ICT2106.Models.DevcondTableModule
             get{ return devType; }
             set{ devType = value; }
         }
-        public int DevCatID
+        public int CatID
         {
-            get{ return devcatID; }
-            set{ devcatID = value; }
+            get{ return catID; }
+            set{ catID = value; }
         }
         public int DevID
         {

@@ -73,30 +73,36 @@ namespace ICT2106.Controllers
             }
         } 
 
-        public List<IRule> RuleAdd(String ruleName){
+        public int RuleAdd(String ruleName){
             try
             {
                 conn.Open();
+
                 string sql = "INSERT INTO rule (RuleName) VALUES('"+(ruleName).ToString()+"')";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
+                rdr.Read();
+                rdr.Close();
+
+                sql = "SELECT MAX(RuleID) FROM rule.rule";
+                cmd = new MySqlCommand(sql, conn);
+                rdr = cmd.ExecuteReader();
+                int rid = 0;
                 while (rdr.Read())
                 {
-                    IRule NewRule = new RuleControl();
-                    NewRule.RuleID = Int32.Parse(rdr[0].ToString());
-                    NewRule.RuleName = rdr[1].ToString();
-                    RuleList.Add(NewRule);
+                    rid = Int32.Parse(rdr[0].ToString());
                 }
                 rdr.Close();
+
                 conn.Close();
-                return RuleList;
+                return rid;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 conn.Close();
-                return RuleList;
+                return 0;
             }
         }   
     }
