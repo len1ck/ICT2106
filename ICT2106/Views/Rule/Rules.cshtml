@@ -4,7 +4,17 @@
     ViewData["Title"] = "RuleCreation";
     var viewDataRule = ViewData["RuleData"] as IList<IRule>;
 }
-<!-- <h1>@ViewData["Title"]</h1> -->
+    <script>
+      function editmode(rid){
+        $(rid).hide();
+        $(rid+"Form").show();
+      }
+
+      function viewmode(rid){
+        $(rid+"Form").hide();
+        $(rid).show();
+      }
+    </script>
     <h1>Rules</h1>
     <br/>
     <button type="button" style="float: right;" class="btn btn-primary ml-1" data-toggle="modal" data-target="#myModal">Add</button>
@@ -12,16 +22,62 @@
     <ul class="list-group">
     @for (var i = 0; i < viewDataRule.Count; i++) 
     {       
-            <li class="list-group-item">@viewDataRule[i].RuleID @viewDataRule[i].RuleName
+            <li id="Rule@(i)" class="list-group-item">
+            <td><b><u>Rule ID:</u></b> @viewDataRule[i].RuleID</td> 
+            <br/>  
+            <td><b><u>Rule Name:</u></b> @viewDataRule[i].RuleName</td>
+
+            <br/>
+            <div id="condition" data-toggle="collapse" href='#collapseCondition@(i)' class="btn btn-default border rounded" type="button">View Condition</div>
+            <div class="collapse" id='collapseCondition@(i)'>
+              <div class="card card-body">
+                  <td  id="ConditionID" name="ConditionID"><b><u>Condition ID:</u></b> @viewDataRule[i].Condition.ConditionID</td><br/>
+  
+		              <td><b><u>Condition Name:</u></b> @viewDataRule[i].Condition.CName</td><br/>
+   
+                  <td><b><u>Device ID:</u></b> @viewDataRule[i].Condition.DevID</td><br/>
+
+                  <td><b><u>Device Name:</u></b> @viewDataRule[i].Condition.DName</td><br/>
+                 
+                  <td><b><u>Device Category:</u></b> @viewDataRule[i].Condition.Devcat</td>
+              </div>
+            </div>
               <!-- Now the form works this way as seen below, the string input from the controller is through the name="deleteRule" the name has to match the one in the controller -->
               <form method="post"  method="get" action="/Rule/RuleDelete">
                 <input id="RuleIDDel" type="hidden" name="deleteRule" class="btn btn-default border" value="@viewDataRule[i].RuleID"/>
                 <button  type="submit" style="float: right;" class="btn btn-labeled btn-danger">
                 <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
               </form>
-                <button type="button" style="float: right;" class="btn btn-labeled btn-info mr-1">
+                <button type="button" onclick="editmode('#Rule@(i)')" style="float: right;" class="btn btn-labeled btn-info mr-1">
                 <span class="btn-label">Edit</span></button>
             </li>
+      <div id="Rule@(i)Form" class="border" style="display:none; padding:30px;">
+      <form method="post" method="get" action="/Rule/RuleAdd">
+            <input id="RuleID" type="hidden" name="RuleID" class="btn btn-default border" value="@viewDataRule[i].RuleName"/>
+            <label>Rule Name:</label><br/>
+            <input id="RuleName" type="text" name="ruleName" class="btn btn-default border" value="@viewDataRule[i].RuleName"/>
+            <br/>
+            <br/>
+            <div id="condition" data-toggle="collapse" href="#collapseCondition" class="btn btn-default border rounded" type="button">Edit Condition</div>
+            <div class="collapse" id="collapseCondition">
+              <div class="card card-body">  
+                <!--Condition Stuff here-->
+              </div>
+            </div>
+            <br/>
+            <br/>
+            <div id="action" class=" btn btn-default border rounded" data-toggle="collapse" href="#collapseAction"  type="button" >Add Action</div><br/> 
+            <div class="collapse" id="collapseAction">
+              <div class="card card-body">
+               Put Action stuff here
+              </div>
+            </div>
+            <br/>
+            <br/>
+            <button  type="submit" class="btn btn-default">Submit</button><br/> 
+            <button type="button" class="btn btn-default" onclick="viewmode('#Rule@(i)')">Close</button>
+      </form>
+      </div>
     }
     </ul>
 <div id="myModal" class="modal fade" role="dialog">
@@ -40,8 +96,8 @@
             <br/>
             <div id="condition" data-toggle="collapse" href="#collapseCondition" class="btn btn-default border rounded" type="button">Add Condition</div>
             <div class="collapse" id="collapseCondition">
-              <div class="card card-body">
-               Put Condition stuff here
+              <div class="card card-body">  
+                <!--Condition Stuff here-->
               </div>
             </div>
             <br/>
@@ -57,7 +113,7 @@
         <button  type="submit" class="btn btn-default">Submit</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-        </form>
+      </form>
     </div>
 
   </div>

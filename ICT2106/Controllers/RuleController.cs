@@ -23,6 +23,7 @@ namespace ICT2106.Controllers
         private IList<ICondition> conditionlist = new List<ICondition>();
         private IList<ActionModel> actionlist = new List<ActionModel>();
         private RuleGateway rg = new RuleGateway();
+        private ConditionGateway cg = new ConditionGateway();
 
         public RuleController(ILogger<RuleController> logger)
         {
@@ -34,6 +35,14 @@ namespace ICT2106.Controllers
         public IActionResult Rules()
         {
             rulelist = rg.GetAllRules();
+            conditionlist = cg.GetAllCondition();
+            foreach(IRule rule in rulelist){
+                foreach(ICondition condition in conditionlist){
+                    if(rule.RuleID == condition.RuleID){
+                        rule.Condition = condition;
+                    }
+                }
+            }
             ViewData["RuleData"] = rulelist;
             return View();
         }
@@ -56,12 +65,6 @@ namespace ICT2106.Controllers
             rulelist = rg.GetAllRules();
             ViewData["RuleData"] = rulelist;
             return View("Rules");
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
