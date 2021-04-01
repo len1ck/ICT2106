@@ -67,26 +67,44 @@ namespace ICT2106.Controllers
         /*
         Now just taking a string input then pass it to gateway
         */
-        public IActionResult RuleAdd(String addRule,String MCName,String MCID,String MDCID,String HP, String PP)
+        public IActionResult RuleAdd(String addRule,String MCName,String MCID,String MDCID,String HP, String PP, String TCName)
         {
             int DevID = 0;
             int ruleID = rg.RuleAdd(addRule);
-            if (MDCID == "1")
-            {
-                DevID = 2;
+            if(MCID == "1"){
+                    if (MDCID == "1")
+                    {
+                        DevID = 2;
+                    }
+                    else if(MDCID =="2"){
+                        DevID = 3;
+                    }
+                    else if(MDCID =="3"){
+                        DevID = 1;
+                    }
+                    else if(MDCID =="4"){
+                        DevID = 2;
+                    }
+                    conditionlist= cg.addNewCond(ruleID,DevID,MCName,MCID,MDCID);
+                    mdlist= md.InsertMotionDetails(MDCID,HP,PP);
             }
-            else if(MDCID =="2"){
-                DevID = 3;
+            else if(MCID == "2"){
+                    if (MDCID == "1")
+                    {
+                        DevID = 2;
+                    }
+                    else if(MDCID =="2"){
+                        DevID = 3;
+                    }
+                    else if(MDCID =="3"){
+                        DevID = 1;
+                    }
+                    else if(MDCID =="4"){
+                        DevID = 2;
+                    }
+                    conditionlist= cg.addNewCond(ruleID,DevID,MCName,MCID,MDCID);
+                    mdlist= md.InsertMotionDetails(MDCID,HP,PP);
             }
-            else if(MDCID =="3"){
-                DevID = 1;
-            }
-            else if(MDCID =="4"){
-                DevID = 2;
-            }
-            conditionlist= cg.addNewCond(ruleID,DevID,MCName,MCID,MDCID);
-            mdlist= md.InsertMotionDetails(MDCID,HP,PP);
-
             rulelist = rg.GetAllRules();
             conditionlist = cg.GetAllCondition();
             catlist = dcat.GetAllCat();
