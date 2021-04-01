@@ -67,11 +67,11 @@ namespace ICT2106.Controllers
         /*
         Now just taking a string input then pass it to gateway
         */
-        public IActionResult RuleAdd(String addRule,String MCName,String MCID,String MDCID,String HP, String PP, String TCName, String TCID,String TDCID,String tm)
+        public IActionResult RuleAdd(String addRule,String MCName,String CID,String MDCID,String HP, String PP, String TCName,String TDCID,String tm)
         {
             int DevID = 0;
             int ruleID = rg.RuleAdd(addRule);
-            if(MCID == "1"){
+            if(CID == "1"){
                     if (MDCID == "1")
                     {
                         DevID = 2;
@@ -79,17 +79,17 @@ namespace ICT2106.Controllers
                     else if(MDCID =="2"){
                         DevID = 3;
                     }
-                    conditionlist= cg.addNewCond(ruleID,DevID,MCName,MCID,MDCID);
+                    conditionlist= cg.addNewCond(ruleID,DevID,MCName,CID,MDCID);
                     mdlist= md.InsertMotionDetails(MDCID,HP,PP);
             }
-            else if(TCID == "2"){
+            else if(CID == "2"){
                     if (TDCID =="3"){
                         DevID = 1;
                     }
                     else if(TDCID =="4"){
                         DevID = 2;
                     }
-                    conditionlist= cg.addNewCond(ruleID,DevID,TCName,TCID,TDCID);
+                    conditionlist= cg.addNewCond(ruleID,DevID,TCName,CID,TDCID);
                     tdlist= td.InsertTimerDetails(TDCID,tm);
             }
             rulelist = rg.GetAllRules();
