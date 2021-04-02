@@ -56,7 +56,46 @@ namespace ICT2106.Controllers
                 return timez;
             }
         } 
-        public List<ITimerDetails> GetTimer(){
+
+        public void EditTimerDetails(String CondID, String TDCID,String tm){
+            try
+            {
+                conn.Open();
+                string sql = "UPDATE timerDetails SET DevCondID = "+TDCID+" , Time = '"+tm+"' WHERE CondID = "+CondID;
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                rdr.Read();
+                rdr.Close();
+                conn.Close();
+            }
+            
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                conn.Close();
+            }
+        } 
+
+        public void DeleteMotion(string conditionID){
+            try
+            {
+                conn.Open();
+                string sql = "DELETE FROM rule.timerDetails WHERE CondID = " + conditionID;
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                rdr.Read();
+                rdr.Close();
+                conn.Close();
+            }
+            
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                conn.Close();
+            }
+        } 
+
+        public List<ITimerDetails> GetAllTimer(){
             try
             {
                 conn.Open();

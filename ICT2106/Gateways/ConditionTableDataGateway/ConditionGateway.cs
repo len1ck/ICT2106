@@ -32,7 +32,7 @@ namespace ICT2106.Controllers
                     NewCondition.RuleID = Int32.Parse(rdr[1].ToString());
                     NewCondition.DevID = Int32.Parse(rdr[2].ToString());
                     NewCondition.CName = rdr[3].ToString();
-                    NewCondition.DName = rdr[4].ToString();
+                    NewCondition.Devcon = Int32.Parse(rdr[4].ToString());
                     NewCondition.Devcat=Int32.Parse(rdr[5].ToString());
                     ConditionList.Add(NewCondition);
                 }
@@ -48,64 +48,41 @@ namespace ICT2106.Controllers
             }
         }   
 
-         public List<ICondition> GetSpecificCondition(string ConditionID){
+        public void DeleteCondition(string conditionID){
             try
             {
                 conn.Open();
-                string sql = "SELECT * FROM rule.condition WHERE CondID = " + ConditionID;
+                string sql = "DELETE FROM rule.condition WHERE CondID = " + conditionID;
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    ICondition NewCondition = new ConditionControl();
-                    NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.RuleID = Int32.Parse(rdr[1].ToString());
-                    NewCondition.DevID = Int32.Parse(rdr[2].ToString());
-                    NewCondition.CName = rdr[4].ToString();
-                    NewCondition.DName = rdr[5].ToString();
-                    NewCondition.Devcat=Int32.Parse(rdr[6].ToString());
-                    ConditionList.Add(NewCondition);
-                }
+                rdr.Read();
                 rdr.Close();
                 conn.Close();
-                return ConditionList;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                conn.Close();
-                return ConditionList;
-            }
-        }   
-
-        public List<ICondition> DeleteCondition(string deleteCondition){
-            try
-            {
-                conn.Open();
-                string sql = "DELETE FROM rule.condition WHERE CondID = " + deleteCondition;
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    ICondition NewCondition = new ConditionControl();
-                    NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.RuleID = Int32.Parse(rdr[1].ToString());
-                    NewCondition.DevID = Int32.Parse(rdr[2].ToString());
-                    NewCondition.CName = rdr[4].ToString();
-                    NewCondition.DName = rdr[5].ToString();
-                    ConditionList.Add(NewCondition);
-                }
-                rdr.Close();
-                conn.Close();
-                return ConditionList;
             }
             
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 conn.Close();
-                return ConditionList;
+            }
+        } 
+
+        public void EditCondition(string conID,string DevID,string MCName,string CID,string MDCID){
+            try
+            {
+                conn.Open();
+                string sql = "UPDATE rule.condition SET DevID = "+DevID+" , CondName = '"+MCName+"' , CatID = "+CID+" , DevCondID = "+MDCID+" WHERE CondID = "+conID;
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+                rdr.Read();
+                rdr.Close();
+                conn.Close();
+            }
+            
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                conn.Close();
             }
         } 
 
