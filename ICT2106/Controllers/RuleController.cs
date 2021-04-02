@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ICT2106.Models.RuleTableModule;
 using ICT2106.Models.ConditionTableModule;
-using ICT2106.Models.ActionTableModule;
 using ICT2106.Models.DevcatTableModule;
 using ICT2106.Models.DevcondTableModule;
 using ICT2106.Models.MotionDetailsModule;
@@ -23,15 +22,14 @@ namespace ICT2106.Controllers
     {
         private readonly ILogger<RuleController> _logger;
 
-        //lists
+        //lists ADD ACTION LIST HERE IF NEEDED
         private IList<IRule> rulelist = new List<IRule>();
         private IList<ICondition> conditionlist = new List<ICondition>();
-        private IList<ActionModel> actionlist = new List<ActionModel>();
         private IList<IDevcat> catlist = new List<IDevcat>();
         private IList<IDevcond> devlist = new List<IDevcond>();
         private IList<IMotionDetails> mdlist = new List<IMotionDetails>();
         private IList<ITimerDetails> tdlist = new List<ITimerDetails>();
-        //gateways
+        //gateways ADD ACTION GATEWAY HERE
         private RuleGateway rg = new RuleGateway();
         private ConditionGateway cg = new ConditionGateway();
         private devcatGateway dcat = new devcatGateway();
@@ -44,7 +42,7 @@ namespace ICT2106.Controllers
             _logger = logger;
         }
         /*
-        Still using a list of rules
+        Still using a list of rules ADD ACTION STUFF IN RULES,RULEADD,RULEEDIT,RULEDELETE
         */
         public IActionResult Rules()
         {
@@ -198,20 +196,3 @@ namespace ICT2106.Controllers
         }
     }
 }
-
-/*
-Temp data, passes data from one controller to another 
-public ActionResult Index()
-        {
-          TempData["data1"] = "I am from different action";
-          return RedirectToAction("Read");
-         
-        }
-
-        public string Read()
-        {
-            string str;
-            str = TempData["data1"].ToString();
-            return str;
-        }
-*/

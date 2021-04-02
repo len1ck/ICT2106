@@ -1,6 +1,5 @@
 using System;
 using ICT2106.Models.ConditionTableModule;
-using ICT2106.Models.ActionTableModule;
 
 namespace ICT2106.Models.RuleTableModule
 {
