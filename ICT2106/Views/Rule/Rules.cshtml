@@ -86,9 +86,9 @@ $(function () {
       <br/>
       <br/>
       <!--Condition from here-->
-      <div id="condition" data-toggle="collapse" href="#collapseCondition" class="btn btn-default border rounded" type="button">Condition</div>
+      <div id="condition" data-toggle="collapse" href="#collapseCondition@(i)" class="btn btn-default border rounded" type="button">Condition</div>
       <input id="ConIDEdit" type="hidden" name="conIDEdit" class="form-control" value="@viewDataRule[i].Condition.ConditionID" readonly/>
-      <div class="collapse" id="collapseCondition">
+      <div class="collapse" id="collapseCondition@(i)">
         <div class="card card-body">
             <section id="sel_ConCat">
                   <h1>Condition Details:</h1>
@@ -120,7 +120,7 @@ $(function () {
                           @if(@CondData[j].DevConID == @viewDataRule[i].Condition.Devcon){
                             @:<option value="@CondData[j].DevConID" selected>@CondData[j].DevCondition </option>  
                           }
-                          else{
+                          else if(@CondData[j].CatID == @viewDataRule[i].Condition.Devcat){
                             @:<option value="@CondData[j].DevConID">@CondData[j].DevCondition </option>
                           }
                         } 
@@ -154,7 +154,7 @@ $(function () {
                           @if(@CondData[j].DevConID == @viewDataRule[i].Condition.Devcon){
                             @:<option value="@CondData[j].DevConID" selected>@CondData[j].DevCondition </option>  
                           }
-                          else{
+                          else if(@CondData[j].CatID == @viewDataRule[i].Condition.Devcat){
                             @:<option value="@CondData[j].DevConID">@CondData[j].DevCondition </option>
                           }
                         } 
@@ -176,8 +176,8 @@ $(function () {
         <br/>
         <br/>
         <!--Action from here-->
-        <div id="action" class=" btn btn-default border rounded" data-toggle="collapse" href="#collapseAction"  type="button" >Action</div>
-        <div class="collapse" id="collapseAction">
+        <div id="action" class=" btn btn-default border rounded" data-toggle="collapse" href="#collapseAction@(i)"  type="button" >Action</div>
+        <div class="collapse" id="collapseAction@(i)">
           <div class="card card-body">
             Put Action stuff here
           </div>
