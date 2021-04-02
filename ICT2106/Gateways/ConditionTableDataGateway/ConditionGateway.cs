@@ -90,7 +90,6 @@ namespace ICT2106.Controllers
        public List<ICondition> addNewCond(int RID, int DID, String CName,String CatID, String DcID ){
             try
             {
-                System.Console.WriteLine(DID + " "+CName+" "+CatID+" "+DcID);
                 conn.Open();
                 string sql = $"INSERT INTO rule.condition (RuleID,DevID,CondName,DevCondID,CatID) VALUES({RID}, {DID},'{CName}',{DcID},{CatID});";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);

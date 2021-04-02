@@ -83,8 +83,8 @@ namespace ICT2106.Controllers
                     else if(MDCID =="2"){
                         DevID = 3;
                     }
-                    conditionlist= cg.addNewCond(ruleID,DevID,MCName,CID,MDCID);
-                    mdlist= md.InsertMotionDetails(MDCID,HP,PP);
+                    cg.addNewCond(ruleID,DevID,MCName,CID,MDCID);
+                    md.InsertMotionDetails(DevID.ToString(),HP,PP);
             }
             else if(CID == "2"){
                     if (TDCID =="3"){
@@ -94,7 +94,7 @@ namespace ICT2106.Controllers
                         DevID = 2;
                     }
                     conditionlist= cg.addNewCond(ruleID,DevID,TCName,CID,TDCID);
-                    tdlist= td.InsertTimerDetails(TDCID,tm);
+                    tdlist= td.InsertTimerDetails(DevID.ToString(),tm);
             }
             rulelist = rg.GetAllRules();
             conditionlist = cg.GetAllCondition();

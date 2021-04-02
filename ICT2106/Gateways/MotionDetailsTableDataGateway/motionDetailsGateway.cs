@@ -99,7 +99,7 @@ namespace ICT2106.Controllers
                     condi = Int32.Parse(rdr[0].ToString());
                 }
                 rdr.Close();
-                System.Console.WriteLine(cond);
+                System.Console.WriteLine(condi);
                 string sql = $"INSERT INTO motionDetails (DevCondID, HumanPresence, PetPresence,CondID) VALUES({dev},'{HP}','{PP}',{condi})";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
