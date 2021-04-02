@@ -87,25 +87,15 @@ namespace ICT2106.Controllers
         } 
 
         
-       public List<ICondition> addNewCond(int RID, int DID, String CName,String CatID, String DcID ){
+       public List<ICondition> addNewCond(String RID, String DID, String CName,String CatID, String DcID){
+           System.Console.WriteLine(RID.ToString()+" "+DID.ToString()+" "+CName+" "+CatID+" "+DcID);
             try
             {
                 conn.Open();
-                string sql = $"INSERT INTO rule.condition (RuleID,DevID,CondName,DevCondID,CatID) VALUES({RID}, {DID},'{CName}',{DcID},{CatID});";
+                string sql = $"INSERT INTO rule.condition (RuleID,DevID,CondName,DevCondID,CatID) VALUES({RID},{DID},'{CName}',{DcID},{CatID});";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    ICondition NewCondition = new ConditionControl();
-                    NewCondition.ConditionID = Int32.Parse(rdr[0].ToString());
-                    NewCondition.RuleID = Int32.Parse(rdr[1].ToString());
-                    NewCondition.DevID = Int32.Parse(rdr[2].ToString());
-                    NewCondition.CName = rdr[3].ToString();
-                    NewCondition.DName = rdr[4].ToString();
-                    NewCondition.CCat = rdr[5].ToString();
-                    ConditionList.Add(NewCondition);
-                }
+                rdr.Read();
                 rdr.Close();
                 conn.Close();
                 return ConditionList;

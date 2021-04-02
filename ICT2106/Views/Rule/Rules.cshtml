@@ -109,7 +109,8 @@
                             @:<label>Select Device:</label>
                             @:<input id="idev" type="hidden" class="form-control" name="MDCID" value="@viewDataRule[i].Condition.Devcon" readonly>
                             @:<select class="form-control" id="dev" disabled>
-                            if(@CondData != null){
+                            @:<option>--Please choose a device--</option>
+                            @if(@CondData != null){
                             @for (var j = 0; j < @CondData.Count; j++) 
                             {   
                               @if(@CondData[j].DevConID == @viewDataRule[i].Condition.Devcon){
@@ -122,7 +123,7 @@
                             }
                             @:</select>
                             @for(int k = 0; k<@MotionData.Count; k++){
-                              if(@MotionData[k].CondID == @viewDataRule[i].Condition.ConditionID){
+                              @if(@MotionData[k].CondID == @viewDataRule[i].Condition.ConditionID){
                                 @:<label for="HP">Human Presence:</label>
                                 @:<input type="text" class="form-control" id="HP" name="HP"  value="@MotionData[k].HumanPresence" readonly>
                                 @:<label for="PP">Pet Presence:</label>
@@ -143,6 +144,7 @@
                             @:<label for="cat_sel3">Select Device:</label>
                             @:<input id="idevT" type="hidden" class="form-control" name="TDCID" value="@viewDataRule[i].Condition.Devcon" readonly>
                             @:<select class="form-control" id="devT" disabled>
+                            @:<option>--Please choose a device--</option>
                             if(@CondData != null){
                             @for (var j = 0; j < @CondData.Count; j++) 
                             {   
@@ -214,6 +216,7 @@
                             <h1>Condition Details:</h1>
                                     <label for="cat_sel">Select Category:</label>
                                     <select id="catsel" class="form-control" name="category">
+                                      <option>--Please choose a category--</option>
                                         @if(CatData != null){
                                           @for (var i = 0; i < CatData.Count; i++) 
                                           {
@@ -221,7 +224,7 @@
                                           }
                                         }  
                                     </select>
-                        <input id="icid" type="text" class="form-control" name="CID" readonly>            
+                        <input id="icid" type="text" class="form-control" name="CID" value="1" readonly>            
                         @* Motion Details Form *@
                         <div id="Motion" style="display:none;"> 
                                     <div class="form-group">
@@ -229,7 +232,6 @@
                                     <input type="text" class="form-control" name="MCName" placeholder="Enter Condition Name...">
                                     </div>
                                     <div class="form-group">
-                                    <label>Category:</label>
                                     <label for="cat_sel2">Select Device:</label>
                                     <input id="idev" type="hidden" class="form-control" name="MDCID">
                                     <select class="form-control" id="dev">
@@ -258,7 +260,6 @@
                                     <input type="text" class="form-control" name="TCName" placeholder="Enter Condition Name...">
                                     </div>
                                     <div class="form-group">
-                                    <label>Category:</label>
                                     <label for="cat_sel3">Select Device:</label>
                                     @* This part the TDCID is empty *@
                                     <input id="idevT" type="hidden" class="form-control" name="TDCID">
