@@ -1,15 +1,16 @@
 @using ICT2106.Models.RuleTableModule
 @using ICT2106.Models.DevcatTableModule
 @using ICT2106.Models.DevcondTableModule
-@model (ICT2106.Models.RuleTableModule.IRule,ICT2106.Models.DevcatTableModule.IDevcat , ICT2106.Models.DevcondTableModule.IDevcond)
+@using ICT2106.Models.MotionDetailsModule
+@using ICT2106.Models.TimerDetailsModule
+@model (ICT2106.Models.RuleTableModule.IRule,ICT2106.Models.DevcatTableModule.IDevcat , ICT2106.Models.DevcondTableModule.IDevcond, ICT2106.Models.MotionDetailsModule.IMotionDetails, ICT2106.Models.TimerDetailsModule.ITimerDetails)
 @{
     ViewData["Title"] = "RuleCreation";
     var viewDataRule = ViewData["RuleData"] as IList<IRule>;
     var CatData = ViewData["CatData"] as IList<IDevcat>;
-    var CondData = ViewData["DeviceData"] as IList<IDevcond>;
-    var selectedRule = 0;
-    var MotionShow = "display:block";
-    var TimerShow = "display:none";
+    var CondData = ViewData["ConData"] as IList<IDevcond>;
+    var MotionData = ViewData["MotionData"] as IList<IMotionDetails>;
+    var TimerData = ViewData["TimerData"] as IList<ITimerDetails>;
 }
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
@@ -52,13 +53,21 @@ $(function () {
     });
 
       function editmode(rid){
-        $(rid).hide();
-        $(rid+"Form").show();
+        $("#delete"+rid).hide();
+        $("#edit"+rid).hide();
+        $("#save"+rid).show();
+        $("#cancel"+rid).show();
+        $("#Rule"+rid+" :input").attr("readonly", false);
+        $("#Rule"+rid).find("select").attr("disabled", false);
       }
 
       function viewmode(rid){
-        $(rid+"Form").hide();
-        $(rid).show();
+        $("#delete"+rid).show();
+        $("#edit"+rid).show();
+        $("#save"+rid).hide();
+        $("#cancel"+rid).hide();
+        $("#Rule"+rid+" :input").attr("readonly", true);
+        $("#Rule"+rid).find("select").attr("disabled", true);
       }
     </script>
     <h1>Rules</h1>
@@ -68,62 +77,123 @@ $(function () {
     <ul class="list-group">
     @for (var i = 0; i < viewDataRule.Count; i++) 
     {       
-            <li id="Rule@(i)" class="list-group-item">
-            <td><b><u>Rule ID:</u></b> @viewDataRule[i].RuleID</td> 
-            <br/>  
-            <td><b><u>Rule Name:</u></b> @viewDataRule[i].RuleName</td>
+      <!--Start of edit rule-->
+      <div id="Rule@(i)" class="border" style="padding:20px;">
+      <form method="post" method="get" action="/Rule/RuleEdit" style="margin:10px;">
+      <input id="RuleIDEdit" type="hidden" name="ruleIDEdit" class="form-control" value="@viewDataRule[i].RuleID" readonly/>
+      <label>Rule Name:</label><br/>
+      <input id="RuleNameEdit" type="text" name="ruleNameEdit" class="form-control" value="@viewDataRule[i].RuleName" readonly/>
+      <br/>
+      <br/>
+      <!--Condition from here-->
+      <div id="condition" data-toggle="collapse" href="#collapseCondition" class="btn btn-default border rounded" type="button">Condition</div>
+      <input id="ConIDEdit" type="hidden" name="conIDEdit" class="form-control" value="@viewDataRule[i].Condition.ConditionID" readonly/>
+      <div class="collapse" id="collapseCondition">
+        <div class="card card-body">
+            <section id="sel_ConCat">
+                  <h1>Condition Details:</h1>
+                  <label for="cat_sel">Category:</label>
+                      @if(CatData != null){
+                        @for (var n = 0; n < CatData.Count; n++) 
+                        {
+                          if(@CatData[n].CatID == @viewDataRule[i].Condition.Devcat){
+                            <h4>@CatData[n].CatName</h4>
+                          }
 
-            <br/>
-            <div id="condition" data-toggle="collapse" href='#collapseCondition@(i)' class="btn btn-default border rounded" type="button">View Condition</div>
-            <div class="collapse" id='collapseCondition@(i)'>
-              <div class="card card-body">
-                  <td  id="ConditionID" name="ConditionID"><b><u>Condition ID:</u></b> @viewDataRule[i].Condition.ConditionID</td><br/>
-  
-		              <td><b><u>Condition Name:</u></b> @viewDataRule[i].Condition.CName</td><br/>
-   
-                  <td><b><u>Device ID:</u></b> @viewDataRule[i].Condition.DevID</td><br/>
+                        }
+                      }  
+                  <input id="icid" type="hidden" class="form-control" name="CID" value="@viewDataRule[i].Condition.Devcat" readonly> 
+                  @if(@viewDataRule[i].Condition.Devcat == 1){
+                  @* Motion Details Form *@
+                  @:<div id="Motion"> 
+                        @:<div class="form-group">
+                        @:<label for="Cname">Condition Name:</label>
+                        @:<input type="text" class="form-control" name="MCName" value="@viewDataRule[i].Condition.CName" readonly>
+                        @:</div>
+                        @:<div class="form-group">
+                        @:<label>Select Device:</label>
+                        @:<input id="idev" type="hidden" class="form-control" name="MDCID" value="@viewDataRule[i].Condition.Devcon" readonly>
+                        @:<select class="form-control" id="dev" disabled>
+                        if(@CondData != null){
+                        @for (var j = 0; j < @CondData.Count; j++) 
+                        {   
+                          @if(@CondData[j].DevConID == @viewDataRule[i].Condition.Devcon){
+                            @:<option value="@CondData[j].DevConID" selected>@CondData[j].DevCondition </option>  
+                          }
+                          else{
+                            @:<option value="@CondData[j].DevConID">@CondData[j].DevCondition </option>
+                          }
+                        } 
+                        }
+                        @:</select>
+                        @for(int k = 0; k<@MotionData.Count; k++){
+                          if(@MotionData[k].CondID == @viewDataRule[i].Condition.ConditionID){
+                            @:<label for="HP">Human Presence:</label>
+                            @:<input type="text" class="form-control" id="HP" name="HP"  value="@MotionData[k].HumanPresence" readonly>
+                            @:<label for="PP">Pet Presence:</label>
+                            @:<input type="text" class="form-control" id="PP" name="PP"  value="@MotionData[k].PetPresence" readonly>
+                          }
+                        }
+                        @:</div>
+                  @:</div>
+                  }
+                  else if(@viewDataRule[i].Condition.Devcat == 2){
+                  @* Timer Details Form *@
+                  @:<div id="Timer">
+                        @:<div class="form-group">
+                        @:<label for="Cname">Condition Name:</label>
+                        @:<input type="text" class="form-control" name="TCName" value="@viewDataRule[i].Condition.CName" readonly>
+                        @:</div>
+                        @:<div class="form-group">
+                        @:<label for="cat_sel3">Select Device:</label>
+                        @:<input id="idevT" type="hidden" class="form-control" name="TDCID" value="@viewDataRule[i].Condition.Devcon" readonly>
+                        @:<select class="form-control" id="devT" disabled>
+                        if(@CondData != null){
+                        @for (var j = 0; j < @CondData.Count; j++) 
+                        {   
+                          @if(@CondData[j].DevConID == @viewDataRule[i].Condition.Devcon){
+                            @:<option value="@CondData[j].DevConID" selected>@CondData[j].DevCondition </option>  
+                          }
+                          else{
+                            @:<option value="@CondData[j].DevConID">@CondData[j].DevCondition </option>
+                          }
+                        } 
+                        }
+                        @:</select>
 
-                  <td><b><u>Device Name:</u></b> @viewDataRule[i].Condition.DName</td><br/>
-                 
-                  <td><b><u>Device Category:</u></b> @viewDataRule[i].Condition.Devcat</td>
-              </div>
-            </div>
-              <!-- Now the form works this way as seen below, the string input from the controller is through the name="deleteRule" the name has to match the one in the controller -->
-              <form method="post"  method="get" action="/Rule/RuleDelete">
-                <input id="RuleIDDel" type="hidden" name="deleteRule" class="btn btn-default border" value="@viewDataRule[i].RuleID"/>
-                <button  type="submit" style="float: right;" class="btn btn-labeled btn-danger">
-                <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
-              </form>
-                <button data-toggle="modal" data-target="#editModal" type="button" onclick="editmode('#Rule@(i)'); $('#editcatsel').val(@viewDataRule[i].Condition.Devcat); if(@viewDataRule[i].Condition.Devcat == 1){ $('#icid').val(2); $('#editTimer').hide();$('#editMotion').show()} else {$('#icid').val(2); $('#editTimer').show(); $('#editMotion').hide();}   " style="float: right;" class="btn btn-labeled btn-info mr-1">
-                        
-                <span class="btn-label">Edit Condition</span></button>
-            </li>
-      <div id="Rule@(i)Form" class="border" style="display:none; padding:30px;">
-      <form method="post" method="get" action="/Rule/RuleAdd">
-            <input id="RuleID" type="hidden" name="RuleID" class="btn btn-default border" value="@viewDataRule[i].RuleName"/>
-            <label>Rule Name:</label><br/>
-            <input id="RuleName" type="text" name="ruleName" class="btn btn-default border" value="@viewDataRule[i].RuleName"/>
-            <br/>
-            <br/>
-            <div id="condition" data-toggle="collapse" href="#collapseCondition" class="btn btn-default border rounded" type="button">Edit Condition</div>
-            <div class="collapse" id="collapseCondition">
-              <div class="card card-body">  
-                <!--Condition Stuff here-->
-              </div>
-            </div>
-            <br/>
-            <br/>
-            <div id="action" class=" btn btn-default border rounded" data-toggle="collapse" href="#collapseAction"  type="button" >Add Action</div><br/> 
-            <div class="collapse" id="collapseAction">
-              <div class="card card-body">
-               Put Action stuff here
-              </div>
-            </div>
-            <br/>
-            <br/>
-            <button  type="submit" class="btn btn-default">Submit</button><br/> 
-            <button type="button" class="btn btn-default" onclick="viewmode('#Rule@(i)')">Close</button>
+                        @for(int k = 0; k<@TimerData.Count; k++){
+                          if(@TimerData[k].CondID == @viewDataRule[i].Condition.ConditionID){
+                            @:<label for="tm">Time:</label>
+                            @:<input type="text" class="form-control" id="tm" name="tm"  value="@TimerData[k].Time" readonly>
+                          }
+                        }
+                        @:</div>
+                  @:</div>   
+                  }
+            </section>
+          </div>
+        </div>
+        <br/>
+        <br/>
+        <!--Action from here-->
+        <div id="action" class=" btn btn-default border rounded" data-toggle="collapse" href="#collapseAction"  type="button" >Action</div>
+        <div class="collapse" id="collapseAction">
+          <div class="card card-body">
+            Put Action stuff here
+          </div>
+        </div>
+        <br/>
+        <br/>
+        <button id="save@(i)" type="submit" class="btn btn-secondary" style="display:none;">save</button>
+        <button id="cancel@(i)" type="button" class="btn btn-secondary" onclick="viewmode(@(i))" style="display:none;">cancel</button>
       </form>
+      <form method="post" method="get" action="/Rule/RuleDelete" style="margin:10px;">
+        <input type="hidden" class="form-control" name="delcatid" value="@viewDataRule[i].Condition.Devcat" readonly> 
+        <input type="hidden" name="delrid" class="form-control" value="@viewDataRule[i].RuleID" readonly/>
+        <input type="hidden" name="delcid" class="form-control" value="@viewDataRule[i].Condition.ConditionID" readonly/>
+        <button id="edit@(i)" type="button" class="btn btn-secondary" onclick="editmode(@(i))">Edit</button>
+        <button id="delete@(i)" type="submit" class="btn btn-danger">Delete</button>
+        </form>
       </div>
     }
     </ul>
@@ -184,7 +254,6 @@ $(function () {
                                 <label for="PP">Pet Presence:</label>
                                 <input type="text" class="form-control" id="PP" name="PP"  placeholder="Enter Yes or No">
                                 </div>
-                                <button  type="submit" class="btn btn-primary btn-sm">Submit</button>
                     </div>
 
 
@@ -214,7 +283,6 @@ $(function () {
                                 <input type="text" class="form-control" id="tm" name="tm"  placeholder="Set Timing">
                                 </div>
                                 <br>
-                                <button  type="submit" class="btn btn-primary btn-sm">Save Condition</button>
                     </div>   
                     </section>
 
@@ -231,116 +299,9 @@ $(function () {
               </div>
             </div>
       </div>
-      <div class="modal-footer">
+      <br/>
         <button  type="submit" class="btn btn-default">Submit</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-      </form>
-    </div>
-
-  </div>
-</div>
-<div id="editModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <form method="post" method="get" action="/Rule/RuleAdd">
-        <div class="modal-body">
-            <label>Rule Name:</label><br/>
-            <input id="RuleNameIn" type="text" name="addRule" class="btn btn-default border"/>
-            <br/>
-            <br/>
-            <!--Condition from here-->
-            <div id="condition" data-toggle="collapse" href="#collapseCondition" class="btn btn-default border rounded" type="button">Edit Condition</div>
-            <div class="" id="collapseCondition">
-              <div class="card card-body">  
-                  <section id="sel_ConCat">
-                        <h1>Condition Details:</h1>
-                                <label for="cat_sel">Select Category:</label>
-                                <select id="editcatsel" value="1" class="form-control" name="category" onchange="this">
-                                    <option>--Please choose a category--</option>
-                                    @if(CatData != null){
-                                      @for (var i = 0; i < CatData.Count; i++) 
-                                      {
-                                        <option id="cat"value="@CatData[i].CatID">@CatData[i].CatName </option> 
-                                      }
-                                    }  
-                                </select>
-                    <input id="editicid" type="text" class="form-control" name="CID" value="1" readonly>            
-                    @* Motion Details Form *@
-                    <div id="editMotion" style="@MotionShow"> 
-                                <div class="form-group">
-                                <label for="Cname">Condition Name:</label>
-                                <input type="text" class="form-control" name="MCName" placeholder="Enter Condition Name...">
-                                </div>
-                                <div class="form-group">
-                                <label>Category:</label>
-                                <label for="cat_sel2">Select Device:</label>
-                                <input id="idev" type="hidden" class="form-control" name="MDCID">
-                                <select class="form-control" id="dev">
-                                <option>--Please choose a device--</option>
-                                if(@CondData != null){
-                                @for (var i = 0; i < CondData.Count; i++) 
-                                {   
-                                  if(@CondData[i].CatID == 1){
-                                    <option value="@CondData[i].DevConID">@CondData[i].DevCondition </option>  
-                                  }
-                                } 
-                                }
-                                </select>
-                                <label for="HP">Human Presence:</label>
-                                <input type="text" class="form-control" id="HP" name="HP"  placeholder="Enter Yes or No">
-                                <label for="PP">Pet Presence:</label>
-                                <input type="text" class="form-control" id="PP" name="PP"  placeholder="Enter Yes or No">
-                                </div>
-                                <button  type="submit" class="btn btn-primary btn-sm">Submit</button>
-                    </div>
-
-
-                    @* Timer Details Form *@
-                    <div id="editTimer" style="@TimerShow">
-                                <div class="form-group">
-                                <label for="Cname">Condition Name:</label>
-                                <input type="text" class="form-control" name="TCName" placeholder="Enter Condition Name...">
-                                </div>
-                                <div class="form-group">
-                                <label>Category:</label>
-                                <label for="cat_sel3">Select Device:</label>
-                                @* This part the TDCID is empty *@
-                                <input id="idevT" type="hidden" class="form-control" name="TDCID">
-                                <select class="form-control" id="devT">
-                                <option>--Please choose a device--</option>
-                                if(@CondData != null){
-                                @for (var i = 0; i < CondData.Count; i++) 
-                                {   
-                                  if(@CondData[i].CatID == 2){
-                                    <option value="@CondData[i].DevConID">@CondData[i].DevCondition </option>  
-                                  }
-                                } 
-                                }
-                                </select>
-                                <label for="tm">Time:</label>
-                                <input type="text" class="form-control" id="tm" name="tm"  placeholder="Set Timing">
-                                </div>
-                                <br>
-                                <button  type="submit" class="btn btn-primary btn-sm">Save Condition</button>
-                    </div>   
-                    </section>
-
-              </div>
-            </div>
-
-            <br/>
-            <br/>
-                </div>
-      <div class="modal-footer">
-        <button  type="submit" class="btn btn-default">Submit</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
       </form>
     </div>
 
