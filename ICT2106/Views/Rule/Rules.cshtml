@@ -7,6 +7,9 @@
     var viewDataRule = ViewData["RuleData"] as IList<IRule>;
     var CatData = ViewData["CatData"] as IList<IDevcat>;
     var CondData = ViewData["DeviceData"] as IList<IDevcond>;
+    var selectedRule = 0;
+    var MotionShow = "display:block";
+    var TimerShow = "display:none";
 }
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
@@ -24,7 +27,20 @@ $(function () {
                         $("#Timer").show();
                     }
           });
+ 
 
+          $("#editcatsel").change(function() {
+                    if(this.value == 1){
+                        $("#editicid").val(1);
+                        $("#editTimer").hide();
+                        $("#editMotion").show();
+                    }
+                    else if(this.value == 2){
+                        $("#editicid").val(2);
+                        $("#editMotion").hide();
+                        $("#editTimer").show();
+                    }
+          });
           $("#dev").change(function() {
                 $("#idev").val(this.value);
           });
@@ -78,8 +94,9 @@ $(function () {
                 <button  type="submit" style="float: right;" class="btn btn-labeled btn-danger">
                 <span class="btn-label"><i class="fas fa-trash-alt"></i></span></button>
               </form>
-                <button type="button" onclick="editmode('#Rule@(i)')" style="float: right;" class="btn btn-labeled btn-info mr-1">
-                <span class="btn-label">Edit</span></button>
+                <button data-toggle="modal" data-target="#editModal" type="button" onclick="editmode('#Rule@(i)'); $('#editcatsel').val(@viewDataRule[i].Condition.Devcat); if(@viewDataRule[i].Condition.Devcat == 1){ $('#icid').val(2); $('#editTimer').hide();$('#editMotion').show()} else {$('#icid').val(2); $('#editTimer').show(); $('#editMotion').hide();}   " style="float: right;" class="btn btn-labeled btn-info mr-1">
+                        
+                <span class="btn-label">Edit Condition</span></button>
             </li>
       <div id="Rule@(i)Form" class="border" style="display:none; padding:30px;">
       <form method="post" method="get" action="/Rule/RuleAdd">
@@ -214,6 +231,112 @@ $(function () {
               </div>
             </div>
       </div>
+      <div class="modal-footer">
+        <button  type="submit" class="btn btn-default">Submit</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+<div id="editModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form method="post" method="get" action="/Rule/RuleAdd">
+        <div class="modal-body">
+            <label>Rule Name:</label><br/>
+            <input id="RuleNameIn" type="text" name="addRule" class="btn btn-default border"/>
+            <br/>
+            <br/>
+            <!--Condition from here-->
+            <div id="condition" data-toggle="collapse" href="#collapseCondition" class="btn btn-default border rounded" type="button">Edit Condition</div>
+            <div class="" id="collapseCondition">
+              <div class="card card-body">  
+                  <section id="sel_ConCat">
+                        <h1>Condition Details:</h1>
+                                <label for="cat_sel">Select Category:</label>
+                                <select id="editcatsel" value="1" class="form-control" name="category" onchange="this">
+                                    <option>--Please choose a category--</option>
+                                    @if(CatData != null){
+                                      @for (var i = 0; i < CatData.Count; i++) 
+                                      {
+                                        <option id="cat"value="@CatData[i].CatID">@CatData[i].CatName </option> 
+                                      }
+                                    }  
+                                </select>
+                    <input id="editicid" type="text" class="form-control" name="CID" value="1" readonly>            
+                    @* Motion Details Form *@
+                    <div id="editMotion" style="@MotionShow"> 
+                                <div class="form-group">
+                                <label for="Cname">Condition Name:</label>
+                                <input type="text" class="form-control" name="MCName" placeholder="Enter Condition Name...">
+                                </div>
+                                <div class="form-group">
+                                <label>Category:</label>
+                                <label for="cat_sel2">Select Device:</label>
+                                <input id="idev" type="hidden" class="form-control" name="MDCID">
+                                <select class="form-control" id="dev">
+                                <option>--Please choose a device--</option>
+                                if(@CondData != null){
+                                @for (var i = 0; i < CondData.Count; i++) 
+                                {   
+                                  if(@CondData[i].CatID == 1){
+                                    <option value="@CondData[i].DevConID">@CondData[i].DevCondition </option>  
+                                  }
+                                } 
+                                }
+                                </select>
+                                <label for="HP">Human Presence:</label>
+                                <input type="text" class="form-control" id="HP" name="HP"  placeholder="Enter Yes or No">
+                                <label for="PP">Pet Presence:</label>
+                                <input type="text" class="form-control" id="PP" name="PP"  placeholder="Enter Yes or No">
+                                </div>
+                                <button  type="submit" class="btn btn-primary btn-sm">Submit</button>
+                    </div>
+
+
+                    @* Timer Details Form *@
+                    <div id="editTimer" style="@TimerShow">
+                                <div class="form-group">
+                                <label for="Cname">Condition Name:</label>
+                                <input type="text" class="form-control" name="TCName" placeholder="Enter Condition Name...">
+                                </div>
+                                <div class="form-group">
+                                <label>Category:</label>
+                                <label for="cat_sel3">Select Device:</label>
+                                @* This part the TDCID is empty *@
+                                <input id="idevT" type="hidden" class="form-control" name="TDCID">
+                                <select class="form-control" id="devT">
+                                <option>--Please choose a device--</option>
+                                if(@CondData != null){
+                                @for (var i = 0; i < CondData.Count; i++) 
+                                {   
+                                  if(@CondData[i].CatID == 2){
+                                    <option value="@CondData[i].DevConID">@CondData[i].DevCondition </option>  
+                                  }
+                                } 
+                                }
+                                </select>
+                                <label for="tm">Time:</label>
+                                <input type="text" class="form-control" id="tm" name="tm"  placeholder="Set Timing">
+                                </div>
+                                <br>
+                                <button  type="submit" class="btn btn-primary btn-sm">Save Condition</button>
+                    </div>   
+                    </section>
+
+              </div>
+            </div>
+
+            <br/>
+            <br/>
+                </div>
       <div class="modal-footer">
         <button  type="submit" class="btn btn-default">Submit</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
