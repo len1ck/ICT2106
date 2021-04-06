@@ -1,0 +1,162 @@
+﻿@{
+    var objList = ViewData["getAllDevices_Id_Name"] as List<object>;
+    var getAllDevices_Id_Name = objList[0] as List<String>;
+    var n = objList.Count;
+}
+
+<p>To use past configuration for this selected category of devices, please click <a href='@Url.Action("ActionQuickSelect", "Action", new { category = "Air Treatment" })'>here</a></p>
+<br />
+
+<!--
+    The Html Page for Air Treatment Create Forms
+-->
+
+<form method="post" asp-controller="CategoryForm" asp-action="CreateAir">
+    <div class="form-group">
+        <label for="actionName">Action Name</label>
+        <input type="text" class="form-control" id="actionName" name="actionName" placeholder="Enter Action Name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="deviceId">Choose a device</label>
+        <select class="form-control" id="deviceId" name="deviceId">
+            @foreach (String eachDevicePair in getAllDevices_Id_Name)
+            {
+                var deviceId = eachDevicePair.Split(",")[0];
+                var deviceName = eachDevicePair.Split(",")[1];
+                <option value=@deviceId>@deviceName</option>
+            }
+
+        </select>
+    </div>
+
+    @if (n == 2)
+    {
+        var quickSelectModel = objList[1] as ActionModel;
+
+        @if (quickSelectModel.ACTIONPROPERTYLIST[0] != null)
+        {
+            <div class="form-group">
+                <label for="airStatus">Air Treatment Status</label>
+                <select class="form-control" id="airStatus" name="airStatus">
+                    @if (quickSelectModel.ACTIONPROPERTYLIST[0] == "On")
+                    {
+                        <option value="On" selected>On</option>
+                        <option value="Off">Off</option>
+                    }
+                    else
+                    {
+                        <option value="On">On</option>
+                        <option value="Off" selected>Off</option>
+                    }
+                </select>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <label for="airStatus">Air Treatment Status</label>
+                <select class="form-control" id="airStatus" name="airStatus">
+                    <option value="On">On</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+        }
+
+        @if (quickSelectModel.ACTIONPROPERTYLIST[1] != null)
+        {
+            <div class="form-group">
+                <label for="airSpeed">Air Treatment Fan Speed</label>
+                <select class="form-control" id="airSpeed" name="airSpeed">
+                    @if (quickSelectModel.ACTIONPROPERTYLIST[1] == "Low")
+                    {
+                        <option value="Low" selected>Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    }
+                    else if (quickSelectModel.ACTIONPROPERTYLIST[1] == "Medium")
+                    {
+                        <option value="Low">Low</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="High">High</option>
+                    }
+                    else
+                    {
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High" selected>High</option>
+                    }
+                </select>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <label for="airSpeed">Air Treatment Fan Speed</label>
+                <select class="form-control" id="airSpeed" name="airSpeed">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+        }
+
+        @if (quickSelectModel.ACTIONPROPERTYLIST[2] != null)
+        {
+            <div class="form-group">
+                <label for="airPan">Air Treatment Auto Rotate</label>
+                <select class="form-control" id="airPan" name="airPan">
+                    @if (quickSelectModel.ACTIONPROPERTYLIST[2] == "On")
+                    {
+                        <option value="On" selected>On</option>
+                        <option value="Off">Off</option>
+                    }
+                    else
+                    {
+                        <option value="On">On</option>
+                        <option value="Off" selected>Off</option>
+                    }
+                </select>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <label for="airPan">Air Treatment Auto Rotate</label>
+                <select class="form-control" id="airPan" name="airPan">
+                    <option value="On">On</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="form-group">
+            <label for="airStatus">Air Treatment Status</label>
+            <select class="form-control" id="airStatus" name="airStatus">
+                <option value="On">On</option>
+                <option value="Off">Off</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="airSpeed">Air Treatment Fan Speed</label>
+            <select class="form-control" id="airSpeed" name="airSpeed">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="airPan">Air Treatment Auto Rotate</label>
+            <select class="form-control" id="airPan" name="airPan">
+                <option value="On">On</option>
+                <option value="Off">Off</option>
+            </select>
+        </div>
+    }
+
+    <button type="submit" onclick="return confirm('Are you sure you want to submit?');" class="btn btn-primary">Submit</button>
+</form>

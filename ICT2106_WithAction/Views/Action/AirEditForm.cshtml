@@ -1,0 +1,102 @@
+﻿@{
+    var oneAirActionModelObj = ViewData["oneAirActionModel"] as ActionModel;
+}
+<!--
+    The Html Page for Air Edit Forms
+-->
+@if (oneAirActionModelObj != null)
+{
+    var oneAirActionPropertiesList = oneAirActionModelObj.ACTIONPROPERTYLIST;
+
+<form method="post" asp-controller="Action" asp-action="SubmitAirEditForm">
+
+    <!--Id-->
+    <div class="form-group">
+        <input type="hidden" class="form-control" id="airId" name="airId"
+               value="@oneAirActionModelObj.ACTIONID" readonly>
+    </div>
+
+    <!--Action Name-->
+    <div class="form-group">
+        <label for="airName">Action Name</label>
+        <input type="text" class="form-control" id="airName" name="airName"
+               placeholder="Enter Action Name" value="@oneAirActionModelObj.ACTIONNAME">
+    </div>
+
+    <!--Air Status-->
+    <div class="form-group">
+        <label for="airStatus">Air Treatment Status</label>
+        <select class="form-control" id="airStatus" name="airStatus">
+            @if (oneAirActionPropertiesList[0] == "On")
+            {
+                <option value="On" selected>On</option>
+                <option value="Off">Off</option>
+            }
+            else
+            {
+                <option value="On">On</option>
+                <option value="Off" selected>Off</option>
+            }
+        </select>
+    </div>
+
+    <!--Air Speed-->
+    <div class="form-group">
+        <label for="airSpeed">Air Treatment Fan Speed</label>
+        <select class="form-control" id="airSpeed" name="airSpeed">
+            @if (oneAirActionPropertiesList[1] == "Low")
+            {
+                <option value="Low" selected>Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            }
+            else if (oneAirActionPropertiesList[1] == "Medium")
+            {
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+                <option value="High">High</option>
+            }
+            else
+            {
+                <option value="High" selected>High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            }
+
+        </select>
+    </div>
+
+    <!--Air Pan-->
+    <div class="form-group">
+        <label for="airPan">Air Treatment Auto Rotate</label>
+        <select class="form-control" id="airPan" name="airPan">
+            @if (oneAirActionPropertiesList[2] == "On")
+            {
+                <option value="On" selected>On</option>
+                <option value="Off">Off</option>
+            }
+            else
+            {
+                <option value="Off" selected>Off</option>
+                <option value="On">On</option>
+
+            }
+        </select>
+    </div>
+
+    <!--Submit Button-->
+    <button type="submit" onclick="submitConfirmDialog()" class="btn btn-primary" value="submitAirEditForm"
+            name="submitBtn">
+        Submit
+    </button>
+
+    <script>
+        function submitConfirmDialog() {
+            var r = confirm("Are you sure you want to submit? ")
+            if (r == true) {
+                //logic to submit
+            }
+        }
+    </script>
+</form>
+}

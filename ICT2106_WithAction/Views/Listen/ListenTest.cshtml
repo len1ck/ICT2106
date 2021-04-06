@@ -1,0 +1,29 @@
+@using ICT2106.Models.Listeners
+
+@{
+    //var AllTimer = @Model.BothThreadList.ATimer;
+    //var AllMotion = @Model.BothThreadList.AMotion;
+    /*if (@Model.BothThreadList.ATimer.Count() != 0){
+        DisplayTimers();
+    }
+    if (@Model.BothThreadList.AMotion.Count() != 0 ){
+        DisplayMotion();
+    }*/
+}
+
+@functions{
+    public void DisplayTimers(){
+        //html to display all Timers with stop timer button
+    }
+    public void DisplayMotion(){
+        //html to display all Motion and button to activate the motion and button to remove the motion
+    }
+}
+
+
+<form method="post" action="/Listen/TestApple">
+<button>Test</button>
+</form>
+<form method="post" action="/Listen/GetActions">
+<button>TestThread</button> 
+</form>

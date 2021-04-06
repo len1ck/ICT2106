@@ -1,0 +1,78 @@
+﻿@{
+    var oneCameraActionModelObj = ViewData["oneCameraActionModel"] as ActionModel;
+}
+
+<!--
+    The Partial Html Page for Camera Forms
+-->
+@if (oneCameraActionModelObj != null)
+{
+
+    var oneCameraActionPropertiesList = oneCameraActionModelObj.ACTIONPROPERTYLIST;
+
+
+<form method="post" asp-controller="Action" asp-action="SubmitCameraEditForm">
+
+    <!--Id-->
+    <div class="form-group">
+        <input type="hidden" class="form-control" id="cameraId" name="cameraId"
+               value="@oneCameraActionModelObj.ACTIONID" readonly>
+    </div>
+
+    <!--Action Name-->
+    <div class="form-group">
+        <label for="cameraName">Action Name</label>
+        <input type="text" class="form-control" id="cameraName" name="cameraName"
+               placeholder="Enter Action Name" value="@oneCameraActionModelObj.ACTIONNAME">
+    </div>
+
+
+    <!--Camera Status-->
+    <div class="form-group">
+        <label for="cameraStatus">Camera Device Status</label>
+        <select class="form-control" id="cameraStatus" name="cameraStatus">
+            @if (oneCameraActionPropertiesList[0] == "On")
+            {
+                <option value="On" selected>On</option>
+                <option value="Off">Off</option>
+            }
+            else
+            {
+                <option value="On">On</option>
+                <option value="Off" selected>Off</option>
+            }
+        </select>
+    </div>
+
+    <!--Camera Rotation Status-->
+    <div class="form-group">
+        <label for="cameraRotationStatus">Camera Rotation Status</label>
+        <select class="form-control" id="cameraRotationStatus" name="cameraRotationStatus">
+            @if (oneCameraActionPropertiesList[0] == "On")
+            {
+                <option value="On" selected>On</option>
+                <option value="Off">Off</option>
+            }
+            else
+            {
+                <option value="On">On</option>
+                <option value="Off" selected>Off</option>
+            }
+        </select>
+    </div>
+    <!--Submit Button-->
+    <button type="submit" onclick="submitConfirmDialog()" class="btn btn-primary"
+            value="submitCameraEditForm"
+            name="submitBtn">
+    Submit</button>
+
+    <script>
+        function submitConfirmDialog() {
+            var r = confirm("Are you sure you want to submit? ")
+            if (r == true) {
+                //logic to submit
+            }
+        }
+    </script>
+</form>
+}

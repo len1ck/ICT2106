@@ -1,0 +1,153 @@
+﻿@{
+    var oneSpeakerActionModelObj = ViewData["oneSpeakerActionModel"] as ActionModel;
+}
+
+<!--
+    The Html Page for Speaker Create Forms
+-->
+@if (oneSpeakerActionModelObj != null)
+{
+    var oneSpeakerActionPropertiesList = oneSpeakerActionModelObj.ACTIONPROPERTYLIST;
+
+<form method="post" asp-controller="Action" asp-action="SubmitSpeakerEditForm">
+
+    <!--Id-->
+    <div class="form-group">
+        <input type="hidden" class="form-control" id="speakerId" name="speakerId"
+               value="@oneSpeakerActionModelObj.ACTIONID" readonly>
+    </div>
+    <!--Action Name-->
+    <div class="form-group">
+        <label for="actionName">Action Name</label>
+        <input type="text" class="form-control" id="speakerName" name="speakerName"
+               placeholder="Enter Action Name" value="@oneSpeakerActionModelObj.ACTIONNAME">
+    </div>
+
+    <!--Speaker Status-->
+    <div class="form-group">
+        <label for="speakerStatus">Speaker Status</label>
+        <select class="form-control" id="speakerStatus" name="speakerStatus">
+            @if (oneSpeakerActionPropertiesList[0] == "On")
+            {
+                <option value="On" selected>On</option>
+                <option value="Off">Off</option>
+            }
+            else
+            {
+                <option value="On">On</option>
+                <option value="Off" selected>Off</option>
+            }
+        </select>
+    </div>
+
+    <!--Speaker Service-->
+    <div class="form-group">
+        <label for="speakerService">Speaker Music Service</label>
+        <select class="form-control" id="speakerService" name="speakerService">
+            @if (oneSpeakerActionPropertiesList[1] == "Spotify")
+            {
+                <option value="Spotify" selected>Spotify</option>
+                <option value="Apple Music">Apple Music</option>
+                <option value="Youtube Premium">Youtube Premium</option>
+            }
+            else if (oneSpeakerActionPropertiesList[1] == "Apple Music")
+            {
+                <option value="Apple Music" selected>Apple Music</option>
+                <option value="Youtube Premium">Youtube Premium</option>
+                <option value="Spotify">Spotify</option>
+            }
+            else
+            {
+                <option value="Youtube Premium" selected>Youtube Premium</option>
+                <option value="Spotify">Spotify</option>
+                <option value="Apple Music">Apple Music</option>
+            }
+        </select>
+    </div>
+
+    <!--Speaker Playlist-->
+    <div class="form-group">
+        <label for="speakerPlaylist">Play This Playlist</label>
+        <input type="text" class="form-control" id="speakerPlaylist" name="speakerPlaylist"
+               placeholder="Enter Playlist" value="@oneSpeakerActionPropertiesList[2]">
+    </div>
+
+    <!--Speaker Song-->
+    <div class="form-group">
+        <label for="speakerSong">Play This Song</label>
+        <input type="text" class="form-control" id="speakerSong" name="speakerSong"
+               placeholder="Enter Song" value="@oneSpeakerActionPropertiesList[3]">
+    </div>
+
+    <!--Speaker State-->
+    <div class="form-group">
+        <label for="speakerState">Speaker State</label>
+        <select class="form-control" id="speakerState" name="speakerState">
+            @if (oneSpeakerActionPropertiesList[4] == "Play")
+            {
+                <option value="Play" selected>Play</option>
+                <option value="Play -Repeat">Play -Repeat</option>
+                <option value="Play -Repeat All">Play -Repeat All</option>
+                <option value="Pause">Pause</option>
+                <option value="Mute">Mute</option>
+            }
+            else if (oneSpeakerActionPropertiesList[4] == "Play -Repeat")
+            {
+                <option value="Play">Play</option>
+                <option value="Play -Repeat" selected>Play -Repeat</option>
+                <option value="Play -Repeat All">Play -Repeat All</option>
+                <option value="Pause">Pause</option>
+                <option value="Mute">Mute</option>
+            }
+            else if (oneSpeakerActionPropertiesList[4] == "Play -Repeat All")
+            {
+                <option value="Play">Play</option>
+                <option value="Play -Repeat">Play -Repeat</option>
+                <option value="Play -Repeat All" selected>Play -Repeat All</option>
+                <option value="Pause">Pause</option>
+                <option value="Mute">Mute</option>
+            }
+            else if (oneSpeakerActionPropertiesList[4] == "Pause")
+            {
+                <option value="Play">Play</option>
+                <option value="Play -Repeat">Play -Repeat</option>
+                <option value="Play -Repeat All">Play -Repeat All</option>
+                <option value="Pause" selected>Pause</option>
+                <option value="Mute">Mute</option>
+            }
+            else if (oneSpeakerActionPropertiesList[4] == "Mute")
+            {
+                <option value="Play">Play</option>
+                <option value="Play -Repeat">Play -Repeat</option>
+                <option value="Play -Repeat All">Play -Repeat All</option>
+                <option value="Pause">Pause</option>
+                <option value="Mute" selected>Mute</option>
+            }
+            
+        </select>
+    </div>
+
+    <!--Speaker Volume-->
+    <div class="form-group">
+        <label for="speakerVolume">Speaker Volume</label>
+        <input type="number" class="form-control" id="speakerVolume" name="speakerVolume" min="0" max="100" 
+               placeholder="Enter Volume From 0 - 100" value="@oneSpeakerActionPropertiesList[5]">
+    </div>
+
+
+    <!--Submit Button-->
+    <button type="submit" onclick="submitConfirmDialog()" class="btn btn-primary" value="submitSpeakerEditForm"
+            name="submitBtn">
+        Submit
+    </button>
+
+    <script>
+        function submitConfirmDialog() {
+            var r = confirm("Are you sure you want to submit? ")
+            if (r == true) {
+                //logic to submit
+            }
+        }
+    </script>
+</form>
+}

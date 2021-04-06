@@ -1,0 +1,245 @@
+﻿@model ActionModel
+
+<h1>Test Output</h1>
+<br />
+<hr />
+<br />
+
+@if (ViewData["ACTION"] != null)
+{
+    var action = ViewData["ACTION"] as ActionModel;
+    @if (action.ACTIONCATEGORY == "Speaker")
+    {
+        <!--<form method="post" asp-controller="Action" asp-action="SubmitSpeakerCreateForm">-->
+        <form method="post" asp-controller="Action" asp-action="ActionDisplay">
+            <div class="form-group">
+                <label for="actionName">Action Name</label>
+                <input type="text" class="form-control" id="actionName" asp-for="@Model.ACTIONNAME" value="@action.ACTIONNAME" readonly />
+                <input type="text" class="form-control" id="actionID" asp-for="@Model.ACTIONID" value="@action.ACTIONID" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionCategory">Action Category</label>
+                <input type="text" class="form-control" id="actionCategory" asp-for="@Model.ACTIONCATEGORY" value="@action.ACTIONCATEGORY" readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionDevice">Action Device</label>
+                <input type="text" class="form-control" id="actionDevice" asp-for="@Model.DEVICENAME" value="@action.DEVICENAME" readonly />
+                <input type="text" class="form-control" id="actionDeviceID" asp-for="@Model.DEVICEID" value="@action.DEVICEID" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="speakerStatus">@action.ACTIONPROPERTYNAME[0]</label>
+                <input type="text" class="form-control" id="speakerStatus" asp-for="@Model.ACTIONPROPERTYLIST[0]" value="@action.ACTIONPROPERTYLIST[0]" readonly />
+                <input type="text" class="form-control" id="speakerStatusName" asp-for="@Model.ACTIONPROPERTYNAME[0]" value="@action.ACTIONPROPERTYNAME[0]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="speakerService">@action.ACTIONPROPERTYNAME[1]</label>
+                <input type="text" class="form-control" id="speakerService" asp-for="@Model.ACTIONPROPERTYLIST[1]" value="@action.ACTIONPROPERTYLIST[1]" readonly />
+                <input type="text" class="form-control" id="speakerServiceName" asp-for="@Model.ACTIONPROPERTYNAME[1]" value="@action.ACTIONPROPERTYNAME[1]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="speakerPlaylist">@action.ACTIONPROPERTYNAME[2]</label>
+                <input type="text" class="form-control" id="speakerPlaylist" asp-for="@Model.ACTIONPROPERTYLIST[2]" value="@action.ACTIONPROPERTYLIST[2]" readonly />
+                <input type="text" class="form-control" id="speakerPlaylistName" asp-for="@Model.ACTIONPROPERTYNAME[2]" value="@action.ACTIONPROPERTYNAME[2]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="speakerSong">@action.ACTIONPROPERTYNAME[3]</label>
+                <input type="text" class="form-control" id="speakerSong" asp-for="@Model.ACTIONPROPERTYLIST[3]" value="@action.ACTIONPROPERTYLIST[3]" readonly />
+                <input type="text" class="form-control" id="speakerSongName" asp-for="@Model.ACTIONPROPERTYNAME[3]" value="@action.ACTIONPROPERTYNAME[3]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="speakerState">@action.ACTIONPROPERTYNAME[4]</label>
+                <input type="text" class="form-control" id="speakerState" asp-for="@Model.ACTIONPROPERTYLIST[4]" value="@action.ACTIONPROPERTYLIST[4]" readonly />
+                <input type="text" class="form-control" id="speakerStateName" asp-for="@Model.ACTIONPROPERTYNAME[4]" value="@action.ACTIONPROPERTYNAME[4]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="speakerVolume">@action.ACTIONPROPERTYNAME[5]</label>
+                <input type="text" class="form-control" id="speakerVolume" asp-for="@Model.ACTIONPROPERTYLIST[5]" value="@action.ACTIONPROPERTYLIST[5]" readonly />
+                <input type="text" class="form-control" id="speakerVolumeName" asp-for="@Model.ACTIONPROPERTYNAME[5]" value="@action.ACTIONPROPERTYNAME[5]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" name="viewAction" value="Submit Speaker Action" />
+            </div>
+        </form>
+    }
+    else if (action.ACTIONCATEGORY == "Lighting")
+    {
+        //<form method="post" asp-controller="Action" asp-action="SubmitLightingCreateForm">
+        <form method="post" asp-controller="Action" asp-action="ActionDisplay">
+            <div class="form-group">
+                <label for="actionName">Action Name</label>
+                <input type="text" class="form-control" id="actionName" asp-for="@Model.ACTIONNAME" value="@action.ACTIONNAME" readonly />
+                <input type="text" class="form-control" id="actionID" asp-for="@Model.ACTIONID" value="@action.ACTIONID" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionCategory">Action Category</label>
+                <input type="text" class="form-control" id="actionCategory" asp-for="@Model.ACTIONCATEGORY" value="@action.ACTIONCATEGORY" readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionDevice">Action Device</label>
+                <input type="text" class="form-control" id="actionDevice" asp-for="@Model.DEVICENAME" value="@action.DEVICENAME" readonly />
+                <input type="text" class="form-control" id="actionDeviceID" asp-for="@Model.DEVICEID" value="@action.DEVICEID" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="lightingStatus">@action.ACTIONPROPERTYNAME[0]</label>
+                <input type="text" class="form-control" id="lightingStatus" asp-for="@Model.ACTIONPROPERTYLIST[0]" value="@action.ACTIONPROPERTYLIST[0]" readonly />
+                <input type="text" class="form-control" id="lightingStatusName" asp-for="@Model.ACTIONPROPERTYNAME[0]" value="@action.ACTIONPROPERTYNAME[0]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="lightingBrightness">@action.ACTIONPROPERTYNAME[1]</label>
+                <input type="text" class="form-control" id="lightingBrightness" asp-for="@Model.ACTIONPROPERTYLIST[1]" value="@action.ACTIONPROPERTYLIST[1]" readonly />
+                <input type="text" class="form-control" id="lightingBrightnessName" asp-for="@Model.ACTIONPROPERTYNAME[1]" value="@action.ACTIONPROPERTYNAME[1]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="lightingColor">@action.ACTIONPROPERTYNAME[2]</label>
+                <input type="text" class="form-control" id="lightingColor" asp-for="@Model.ACTIONPROPERTYLIST[2]" value="@action.ACTIONPROPERTYLIST[2]" readonly />
+                <input type="text" class="form-control" id="lightingColorName" asp-for="@Model.ACTIONPROPERTYNAME[2]" value="@action.ACTIONPROPERTYNAME[2]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" name="viewAction" value="Submit Lighting Action" />
+            </div>
+
+        </form>
+    }
+    else if (action.ACTIONCATEGORY == "Camera")
+    {
+        //<form method="post" asp-controller="Action" asp-action="SubmitCameraCreateForm">
+        <form method="post" asp-controller="Action" asp-action="ActionDisplay">
+            <div class="form-group">
+                <label for="actionName">Action Name</label>
+                <input type="text" class="form-control" id="actionName" asp-for="@Model.ACTIONNAME" value="@action.ACTIONNAME" readonly />
+                <input type="text" class="form-control" id="actionID" asp-for="@Model.ACTIONID" value="@action.ACTIONID" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionCategory">Action Category</label>
+                <input type="text" class="form-control" id="actionCategory" asp-for="@Model.ACTIONCATEGORY" value="@action.ACTIONCATEGORY" readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionDevice">Action Device</label>
+                <input type="text" class="form-control" id="actionDevice" asp-for="@Model.DEVICENAME" value="@action.DEVICENAME" readonly />
+                <input type="text" class="form-control" id="actionDeviceID" asp-for="@Model.DEVICEID" value="@action.DEVICEID" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="cameraStatus">@action.ACTIONPROPERTYNAME[0]</label>
+                <input type="text" class="form-control" id="cameraStatus" asp-for="@Model.ACTIONPROPERTYLIST[0]" value="@action.ACTIONPROPERTYLIST[0]" readonly />
+                <input type="text" class="form-control" id="cameraStatusName" asp-for="@Model.ACTIONPROPERTYNAME[0]" value="@action.ACTIONPROPERTYNAME[0]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="cameraAngle">@action.ACTIONPROPERTYNAME[1]</label>
+                <input type="text" class="form-control" id="cameraAngle" asp-for="@Model.ACTIONPROPERTYLIST[1]" value="@action.ACTIONPROPERTYLIST[1]" readonly />
+                <input type="text" class="form-control" id="cameraAngleName" asp-for="@Model.ACTIONPROPERTYNAME[1]" value="@action.ACTIONPROPERTYNAME[1]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="cameraRecord">@action.ACTIONPROPERTYNAME[2]</label>
+                <input type="text" class="form-control" id="cameraRecord" asp-for="@Model.ACTIONPROPERTYLIST[2]" value="@action.ACTIONPROPERTYLIST[2]" readonly />
+                <input type="text" class="form-control" id="cameraRecordName" asp-for="@Model.ACTIONPROPERTYNAME[2]" value="@action.ACTIONPROPERTYNAME[2]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="cameraSS">@action.ACTIONPROPERTYNAME[3]</label>
+                <input type="text" class="form-control" id="cameraSS" asp-for="@Model.ACTIONPROPERTYLIST[3]" value="@action.ACTIONPROPERTYLIST[3]" readonly />
+                <input type="text" class="form-control" id="cameraSSName" asp-for="@Model.ACTIONPROPERTYNAME[3]" value="@action.ACTIONPROPERTYNAME[3]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" name="viewAction" value="Submit Camera Action" />
+            </div>
+        </form>
+    }
+    else if (action.ACTIONCATEGORY == "Security")
+    {
+        //<form method="post" asp-controller="Action" asp-action="SubmitSecurityCreateForm">
+        <form method="post" asp-controller="Action" asp-action="ActionDisplay">
+            <div class="form-group">
+                <label for="actionName">Action Name</label>
+                <input type="text" class="form-control" id="actionName" asp-for="@Model.ACTIONNAME" value="@action.ACTIONNAME" readonly />
+                <input type="text" class="form-control" id="actionID" asp-for="@Model.ACTIONID" value="@action.ACTIONID" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionCategory">Action Category</label>
+                <input type="text" class="form-control" id="actionCategory" asp-for="@Model.ACTIONCATEGORY" value="@action.ACTIONCATEGORY" readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionDevice">Action Device</label>
+                <input type="text" class="form-control" id="actionDevice" asp-for="@Model.DEVICENAME" value="@action.DEVICENAME" readonly />
+                <input type="text" class="form-control" id="actionDeviceID" asp-for="@Model.DEVICEID" value="@action.DEVICEID" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="securityStatus">@action.ACTIONPROPERTYNAME[0]</label>
+                <input type="text" class="form-control" id="securityStatus" asp-for="@Model.ACTIONPROPERTYLIST[0]" value="@action.ACTIONPROPERTYLIST[0]" readonly />
+                <input type="text" class="form-control" id="securityStatusName" asp-for="@Model.ACTIONPROPERTYNAME[0]" value="@action.ACTIONPROPERTYNAME[0]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" name="viewAction" value="Submit Security Action" />
+            </div>
+        </form>
+    }
+    else if (action.ACTIONCATEGORY == "Air Treatment")
+    {
+        //<form method="post" asp-controller="Action" asp-action="SubmitAirCreateForm">
+        <form method="post" asp-controller="Action" asp-action="ActionDisplay">
+            <div class="form-group">
+                <label for="actionName">Action Name</label>
+                <input type="text" class="form-control" id="actionName" asp-for="@Model.ACTIONNAME" value="@action.ACTIONNAME" readonly />
+                <input type="text" class="form-control" id="actionID" asp-for="@Model.ACTIONID" value="@action.ACTIONID" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionCategory">Action Category</label>
+                <input type="text" class="form-control" id="actionCategory" asp-for="@Model.ACTIONCATEGORY" value="@action.ACTIONCATEGORY" readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="actionDevice">Action Device</label>
+                <input type="text" class="form-control" id="actionDevice" asp-for="@Model.DEVICENAME" value="@action.DEVICENAME" readonly />
+                <input type="text" class="form-control" id="actionDeviceID" asp-for="@Model.DEVICEID" value="@action.DEVICEID" hidden readonly />
+            </div>
+
+
+            <div class="form-group">
+                <label for="airStatus">@action.ACTIONPROPERTYNAME[0]</label>
+                <input type="text" class="form-control" id="airStatus" asp-for="@Model.ACTIONPROPERTYLIST[0]" value="@action.ACTIONPROPERTYLIST[0]" readonly />
+                <input type="text" class="form-control" id="airStatusName" asp-for="@Model.ACTIONPROPERTYNAME[0]" value="@action.ACTIONPROPERTYNAME[0]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="airSpeed">@action.ACTIONPROPERTYNAME[1]</label>
+                <input type="text" class="form-control" id="airSpeed" asp-for="@Model.ACTIONPROPERTYLIST[1]" value="@action.ACTIONPROPERTYLIST[1]" readonly />
+                <input type="text" class="form-control" id="airSpeedName" asp-for="@Model.ACTIONPROPERTYNAME[1]" value="@action.ACTIONPROPERTYNAME[1]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <label for="airPan">@action.ACTIONPROPERTYNAME[2]</label>
+                <input type="text" class="form-control" id="airPan" asp-for="@Model.ACTIONPROPERTYLIST[2]" value="@action.ACTIONPROPERTYLIST[2]" readonly />
+                <input type="text" class="form-control" id="airPanName" asp-for="@Model.ACTIONPROPERTYNAME[2]" value="@action.ACTIONPROPERTYNAME[2]" hidden readonly />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" name="viewAction" value="Submit Air Treatment Action" />
+            </div>
+        </form>
+    }
+}

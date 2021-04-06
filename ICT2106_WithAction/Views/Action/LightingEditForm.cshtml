@@ -1,0 +1,74 @@
+﻿@{
+    var oneLightingActionModelObj = ViewData["oneLightingActionModel"] as ActionModel;
+}
+<!--
+    The Html Page for Lighting Edit Forms
+-->
+@if (oneLightingActionModelObj != null)
+{
+    var oneLightingActionPropertiesList = oneLightingActionModelObj.ACTIONPROPERTYLIST;
+
+<form method="post" asp-controller="Action" asp-action="SubmitLightingEditForm">
+
+    <!--Id-->
+    <div class="form-group">
+        <input type="hidden" class="form-control" id="lightingId" name="lightingId"
+               value="@oneLightingActionModelObj.ACTIONID" readonly>
+    </div>
+
+    <!--Lighting Name-->
+    <div class="form-group">
+        <label for="lightingName">Action Name</label>
+        <input type="text" class="form-control" id="lightingName" name="lightingName"
+               placeholder="Enter Action Name" value="@oneLightingActionModelObj.ACTIONNAME">
+    </div>
+
+    <!--Lighting Status-->
+    <div class="form-group">
+        <label for="lightingStatus">Lighting Status</label>
+        <select class="form-control" id="lightingStatus" name="lightingStatus">
+            @if (oneLightingActionPropertiesList[0] == "On")
+            {
+                <option value="On" selected>On</option>
+                <option value="Off">Off</option>
+            }
+            else
+            {
+                <option value="On">On</option>
+                <option value="Off" selected>Off</option>
+            }
+        </select>
+    </div>
+
+
+    <!--Lighting Brightness-->
+    <div class="form-group">
+        <label for="lightingBrightness">Lighting Brightness</label>
+        <input type="number" class="form-control" id="lightingBrightness"
+               name="lightingBrightness" min="1" max="100" placeholder="Enter Brigtness From 1 - 100"
+               value="@int.Parse(@oneLightingActionPropertiesList[1])">
+    </div>
+
+    <!--Lighting Color-->
+    <div class="form-group">
+        <label for="lightingColor">Lighting Color</label>
+        <input type="text" class="form-control" id="lightingColor"
+               name="lightingColor" placeholder="Enter Light Color" value="@oneLightingActionPropertiesList[2]">
+    </div>
+
+    <!--Submit Button-->
+    <button type="submit" onclick="submitConfirmDialog()" class="btn btn-primary" value="submitLightingEditForm"
+            name="submitBtn">
+        Submit
+    </button>
+
+    <script>
+        function submitConfirmDialog() {
+            var r = confirm("Are you sure you want to submit? ")
+            if (r == true) {
+                //logic to submit
+            }
+        }
+    </script>
+</form>
+}

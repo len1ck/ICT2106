@@ -1,0 +1,58 @@
+﻿@{
+    var oneSecurityActionModel = ViewData["oneSecurityActionModel"] as ActionModel;
+}
+
+<!--
+    The Html Page for Security Forms
+-->
+@if (oneSecurityActionModel != null)
+{
+
+    var oneSecurityActionPropertiesList = oneSecurityActionModel.ACTIONPROPERTYLIST;
+
+
+<form method="post" asp-controller="Action" asp-action="SubmitSecurityEditForm">
+
+    <!--Security ID-->
+    <div class="form-group">
+        <input type="hidden" class="form-control" id="securityId" name="securityId" value="@oneSecurityActionModel.ACTIONID" readonly>
+    </div>
+
+    <!--Security Name-->
+    <div class="form-group">
+        <label for="securityName">Action Name</label>
+        <input type="text" class="form-control" id="securityName" name="securityName" placeholder="Enter Action Name" value="@oneSecurityActionModel.ACTIONNAME">
+    </div>
+
+    <!--Security Status-->
+    <div class="form-group">
+        <label for="securityStatus">Security Status</label>
+        <select class="form-control" id="securityStatus" name="securityStatus">
+            @if (oneSecurityActionPropertiesList[0] == "On")
+            {
+                <option value="On" selected>On</option>
+                <option value="Off">Off</option>
+            }
+            else
+            {
+                <option value="On">On</option>
+                <option value="Off" selected>Off</option>
+            }
+        </select>
+    </div>
+
+    <!--Subit Button-->
+    <button type="submit" onclick="return confirm('Are you sure you want to submit?');" class="btn btn-primary"
+            value="submitSecurityEditForm" name="submitBtn">
+        Submit
+    </button>
+    <script>
+        function submitConfirmDialog() {
+            var r = confirm("Are you sure you want to submit? ")
+            if (r == true) {
+                //logic to submit
+            }
+        }
+    </script>
+</form>
+}

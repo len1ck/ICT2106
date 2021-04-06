@@ -1,0 +1,119 @@
+﻿@{
+    var objList = ViewData["getAllDevices_Id_Name"] as List<object>;
+    var getAllDevices_Id_Name = objList[0] as List<String>;
+    var n = objList.Count;
+}
+
+<p>To use past configuration for this selected category of devices, please click <a href='@Url.Action("ActionQuickSelect", "Action", new { category = "Lighting" })'>here</a></p>
+<br />
+
+<!--
+    The Html Page for Lighting Create Forms
+-->
+<form method="post" asp-controller="CategoryForm" asp-action="CreateLighting">
+    <div class="form-group">
+        <label for="lightingName">Action Name</label>
+        <input type="text" class="form-control" id="lightingName" name="lightingName" placeholder="Enter Action Name">
+    </div>
+
+    <div class="form-group">
+        <label for="deviceId">Choose a device</label>
+        <select class="form-control" id="deviceId" name="deviceId">
+            @foreach (String eachDevicePair in getAllDevices_Id_Name)
+            {
+                var deviceId = eachDevicePair.Split(",")[0];
+                var deviceName = eachDevicePair.Split(",")[1];
+                <option value=@deviceId>@deviceName</option>
+            }
+        </select>
+    </div>
+
+    @if (n == 2)
+    {
+        var quickSelectModel = objList[1] as ActionModel;
+
+        @if (quickSelectModel.ACTIONPROPERTYLIST[0] != null)
+        {
+            <div class="form-group">
+                <label for="lightingStatus">Lighting Status</label>
+                <select class="form-control" id="lightingStatus" name="lightingStatus">
+                    @if (quickSelectModel.ACTIONPROPERTYLIST[0] == "On")
+                    {
+                        <option value="On" selected>On</option>
+                        <option value="Off">Off</option>
+                    }
+                    else
+                    {
+                        <option value="On">On</option>
+                        <option value="Off" selected>Off</option>
+                    }
+                </select>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <label for="lightingStatus">Lighting Status</label>
+                <select class="form-control" id="lightingStatus" name="lightingStatus">
+                    <option value="On">On</option>
+                    <option value="Off">Off</option>
+                </select>
+            </div>
+        }
+
+
+        @if (quickSelectModel.ACTIONPROPERTYLIST[1] != null)
+        {
+            <div class="form-group">
+                <label for="lightingBrightness">Lighting Brightness</label>
+                <input type="number" class="form-control" id="lightingBrightness" name="lightingBrightness" min="1" max="100" placeholder="Enter Brigtness From 1 - 100" value="@quickSelectModel.ACTIONPROPERTYLIST[1]">
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <label for="lightingBrightness">Lighting Brightness</label>
+                <input type="number" class="form-control" id="lightingBrightness" name="lightingBrightness" min="1" max="100" placeholder="Enter Brigtness From 1 - 100">
+            </div>
+        }
+
+        @if (quickSelectModel.ACTIONPROPERTYLIST[2] != null)
+        {
+            <div class="form-group">
+                <label for="lightingColor">Lighting Color</label>
+                <input type="text" class="form-control" id="lightingColor" name="lightingColor" placeholder="Enter Light Color" value="@quickSelectModel.ACTIONPROPERTYLIST[2]">
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <label for="lightingColor">Lighting Color</label>
+                <input type="text" class="form-control" id="lightingColor" name="lightingColor" placeholder="Enter Light Color">
+            </div>
+        }
+    }
+    else
+    {
+        <div class="form-group">
+            <label for="lightingStatus">Lighting Status</label>
+            <select class="form-control" id="lightingStatus" name="lightingStatus">
+                <option value="On">On</option>
+                <option value="Off">Off</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="lightingBrightness">Lighting Brightness</label>
+            <input type="number" class="form-control" id="lightingBrightness" name="lightingBrightness" min="1" max="100" placeholder="Enter Brigtness From 1 - 100">
+        </div>
+
+
+        <div class="form-group">
+            <label for="lightingColor">Lighting Color</label>
+            <input type="text" class="form-control" id="lightingColor" name="lightingColor" placeholder="Enter Light Color">
+        </div>
+    }
+
+    <button type="submit" onclick="return confirm('Are you sure you want to submit?');" class="btn btn-primary">Submit</button>
+</form>

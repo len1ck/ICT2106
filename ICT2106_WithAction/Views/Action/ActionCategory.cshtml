@@ -1,0 +1,155 @@
+﻿<!--
+        Create Action Page
+
+        In Charge of the dropdown list for list of category and also the creation of a new action
+    -->
+<h1>Create Action Page</h1>
+
+@if (ViewBag.selectedAction == null)
+{
+    <!--
+        This is the population of the dropdown list with the category item taken from the CategoryControl class as a ViewModel
+    -->
+    <section id="category_selection">
+        <form method="post" asp-action="ActionCategory">
+            <div class="form-group">
+                @if (ViewData["SELECTEDCATEGORY"] != null)
+                {
+                    var selectedCategory = ViewData["SELECTEDCATEGORY"] as string;
+
+                    <label for="category_list">List Of Available Category:</label>
+                    <select class="form-control" id="category_list" name="categoryList">
+                        <option value="@selectedCategory" selected disabled>@selectedCategory</option>
+                        @if (ViewData["CATEGORYTYPE"] != null)
+                        {
+                            var categoryType = ViewData["CATEGORYTYPE"] as List<string>;
+
+                            @foreach (var i in categoryType)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    </select>
+                }
+                else
+                {
+                    <label for="category_list">List Of Available Category:</label>
+                    <select class="form-control" id="category_list" name="categoryList">
+                        <option value="" selected disabled>Please select a category</option>
+                        @if (ViewData["CATEGORYTYPE"] != null)
+                        {
+                            var categoryType = ViewData["CATEGORYTYPE"] as List<string>;
+
+                            @foreach (var i in categoryType)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        }
+                    </select>
+                }
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success float-right" name="actionButtons" value="Confirm Category" />
+            </div>
+        </form>
+    </section>
+
+    <br />
+    <br />
+    <hr />
+    <br />
+
+    <!--
+        This will check if user have selected a category
+
+        Once user selected a category, it will invoke the html form known as PARTIAL VIEW
+            - A Partial View is basically a HTML page that can be invoked onto another Full HTML page
+            - This Partial View will have it's own HTTP POST request, does would not conflict with the main html page
+    -->
+
+    @if (ViewData["SELECTEDCATEGORY"] != null)
+    {
+        var selectedCategory = ViewData["SELECTEDCATEGORY"] as string;
+
+        @if (selectedCategory == "Lighting")
+        {
+            @await Html.PartialAsync("LightingForm", ViewData["getAllDevices_Id_Name"])
+        }
+        else if (selectedCategory == "Camera")
+        {
+            @await Html.PartialAsync("CameraForm", ViewData["getAllDevices_Id_Name"])
+        }
+        else if (selectedCategory == "Speaker")
+        {
+            @await Html.PartialAsync("SpeakerForm", ViewData["getAllDevices_Id_Name"])
+        }
+        else if (selectedCategory == "Security")
+        {
+            @await Html.PartialAsync("SecurityForm", ViewData["getAllDevices_Id_Name"])
+        }
+        else if (selectedCategory == "Air Treatment")
+        {
+            @await Html.PartialAsync("AirForm", ViewData["getAllDevices_Id_Name"])
+        }
+    }
+}
+
+
+
+else
+{
+    ActionModel selectedProperties = ViewBag.selectedAction;
+
+    <!--
+        This is the population of the dropdown list with the category item taken from the CategoryControl class as a ViewModel
+    -->
+    <section id="category_selection">
+        <form method="post" asp-action="ActionCategory">
+            <div class="form-group">
+                <label for="category_list">List Of Available Category:</label>
+                <select class="form-control" id="category_list" name="categoryList">
+                    <option value="@selectedProperties.ACTIONCATEGORY" selected>@selectedProperties.ACTIONCATEGORY</option>
+                    @if (ViewData["CATEGORYTYPE"] != null)
+                    {
+                        var categoryType = ViewData["CATEGORYTYPE"] as List<string>;
+
+                        @foreach (var i in categoryType)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success float-right" name="actionButtons" value="Confirm Category" />
+            </div>
+        </form>
+    </section>
+
+    <br />
+    <br />
+    <hr />
+    <br />
+
+    @if (selectedProperties.ACTIONCATEGORY == "Lighting")
+    {
+        @await Html.PartialAsync("LightingForm", ViewData["getAllDevices_Id_Name"])
+    }
+    else if (selectedProperties.ACTIONCATEGORY == "Camera")
+    {
+        @await Html.PartialAsync("CameraForm", ViewData["getAllDevices_Id_Name"])
+    }
+    else if (selectedProperties.ACTIONCATEGORY == "Speaker")
+    {
+        @await Html.PartialAsync("SpeakerForm", ViewData["getAllDevices_Id_Name"])
+    }
+    else if (selectedProperties.ACTIONCATEGORY == "Security")
+    {
+        @await Html.PartialAsync("SecurityForm", ViewData["getAllDevices_Id_Name"])
+    }
+    else if (selectedProperties.ACTIONCATEGORY == "Air Treatment")
+    {
+        @await Html.PartialAsync("AirForm", ViewData["getAllDevices_Id_Name"])
+    }
+}

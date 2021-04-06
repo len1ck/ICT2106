@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "View All Action";
+    List<ActionModel> getAllActionList = ViewBag.getAllActionList;
+}
+<table class="table">
+    <tr>
+        <th>Action Id</th>
+        <th>Action Name</th>
+        <th>Action Category</th>
+        <th>Action Properties</th>
+        <th>Device Id</th>
+        <th>Device Name</th>
+        <th>Remarks</th>
+
+    </tr>
+    @foreach (var item in getAllActionList)
+    {
+        <tr>
+            <td>
+                @item.ACTIONID
+            </td>
+            <td>
+                @item.ACTIONNAME
+            </td>
+            <td>
+                @item.ACTIONCATEGORY
+            </td>
+
+            <td>
+                <table style="border: none">
+                    @for (int i = 0; i < @item.ACTIONPROPERTYLIST.Count; i++)
+                    {
+                        <tr>
+                            <td>@item.ACTIONPROPERTYNAME[i]</td>
+                            <td>@item.ACTIONPROPERTYLIST[i]</td>
+                        </tr>
+
+                    }
+
+                </table>
+
+            </td>
+
+            <td>
+                @item.DEVICEID
+            </td>
+            <td>
+                @item.DEVICENAME
+            </td>
+            <td>
+
+                @if (item.ACTIONCATEGORY == "Lighting")
+                {
+                    <button onclick="location.href = '@Url.Action("LightingEditForm","Action", new { ACTIONID = item.ACTIONID })'" class="btn btn-success">Edit</button>
+                }
+                else if (item.ACTIONCATEGORY == "Security")
+                {
+                    <button onclick="location.href = '@Url.Action("SecurityEditForm","Action", new { ACTIONID = item.ACTIONID })'" class="btn btn-success">Edit</button>
+                }
+                else if (item.ACTIONCATEGORY == "Camera")
+                {
+                    <button onclick="location.href = '@Url.Action("CameraEditForm","Action", new { ACTIONID = item.ACTIONID })'" class="btn btn-success">Edit</button>
+                }
+                else if (item.ACTIONCATEGORY == "Air Treatment")
+                {
+                    <button onclick="location.href = '@Url.Action("AirEditForm","Action", new { ACTIONID = item.ACTIONID })'" class="btn btn-success">Edit</button>
+                }
+                else if (item.ACTIONCATEGORY == "Speaker")
+                {
+                    <button onclick="location.href = '@Url.Action("SpeakerEditForm","Action", new { ACTIONID = item.ACTIONID })'" class="btn btn-success">Edit</button>
+                }
+            </td>
+
+        </tr>
+    }
+</table>
