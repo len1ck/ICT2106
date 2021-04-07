@@ -115,8 +115,8 @@ namespace ICT2106.Controllers
                 {
                     DevID = 2;
                 }
-                RS.Conditionlist = cg.addNewCond(ruleID.ToString(), DevID.ToString(), TCName, CID, TDCID);
-                RS.Tdlist = td.InsertTimerDetails(TDCID, tm);
+                cg.addNewCond(ruleID.ToString(), DevID.ToString(), TCName, CID, TDCID);
+                td.InsertTimerDetails(TDCID, tm);
             }
 
             ActionModel newAction = (ActionModel)_action;
