@@ -1,14 +1,8 @@
 @using ICT2106.Models.Listeners
+@model (ICT2106.Models.Listeners.BothThreadList,ICT2106.Models.Listeners.StartAction,ICT2106.Models.Listeners.ThreadObj)
 
 @{
-    //var AllTimer = @Model.BothThreadList.ATimer;
-    //var AllMotion = @Model.BothThreadList.AMotion;
-    /*if (@Model.BothThreadList.ATimer.Count() != 0){
-        DisplayTimers();
-    }
-    if (@Model.BothThreadList.AMotion.Count() != 0 ){
-        DisplayMotion();
-    }*/
+    var dislist = ViewData["ForDisplay"] as BothThreadList;
 }
 
 @functions{
@@ -19,11 +13,17 @@
         //html to display all Motion and button to activate the motion and button to remove the motion
     }
 }
-
-
-<form method="post" action="/Listen/TestApple">
-<button>Test</button>
-</form>
+<ul>
+@if (dislist != null){
+    @for(var n = 0; n<dislist.ATimer.Count;n++){
+        <form method="post" action="/Listen/TerminateThread">
+        <input type="hidden" name="tid" value="@dislist.ATimer[n].ThreadID">
+        <li>@dislist.ATimer[n].ThreadID.ToString()</li>
+        <button type="submit">Terminate Thread</button>
+        </form>
+    }
+}
+</ul>
 <form method="post" action="/Listen/GetActions">
-<button>TestThread</button> 
+<button>Test Multiple Timer</button> 
 </form>
