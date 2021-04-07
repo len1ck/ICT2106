@@ -1,3 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using System.IO;
+using System.Text;
+using System.Web;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using ICT2106.Models.RuleTableModule;
+using ICT2106.Models.ConditionTableModule;
+using ICT2106.Models.DevcatTableModule;
+using ICT2106.Models.DevcondTableModule;
+using ICT2106.Models.MotionDetailsModule;
+using ICT2106.Models.TimerDetailsModule;
+using ICT2106.Models.RuleSingleton;
+using ICT2106.Models;
 
 namespace ICT2106.Models.RuleSingleton
 {

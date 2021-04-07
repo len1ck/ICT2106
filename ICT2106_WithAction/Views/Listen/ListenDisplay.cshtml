@@ -4,15 +4,6 @@
 @{
     var dislist = ViewData["ForDisplay"] as BothThreadList;
 }
-
-@functions{
-    public void DisplayTimers(){
-        //html to display all Timers with stop timer button
-    }
-    public void DisplayMotion(){
-        //html to display all Motion and button to activate the motion and button to remove the motion
-    }
-}
 <ul>
 @if (dislist != null){
     @for(var n = 0; n<dislist.ATimer.Count;n++){
