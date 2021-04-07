@@ -245,7 +245,7 @@ namespace ICT2106.Controllers
             else if (delcatid == "2")
             {
                 cg.DeleteCondition(delcid);
-                td.DeleteMotion(delcid);
+                td.DeleteTimer(delcid);
             }
 
             int no_of_affected_rows = _dao.deleteActionFromDB(int.Parse(delrid));
