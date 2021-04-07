@@ -30,6 +30,5 @@ namespace ICT2106.Models.RuleTableModule
             get{return condition;}
             set{condition = value;}
         }
-        //Add action stuff here
     }
 }

@@ -75,7 +75,7 @@
         {       
           <!--Start of edit rule-->
           <div id="Rule@(i)" class="border" style="padding:20px;">
-          <form method="post" method="get" action="/Rule/RuleEdit" style="margin:10px;">
+          <form method="post" method="get" action="/IRule/RuleEdit" style="margin:10px;">
           <input id="RuleIDEdit" type="hidden" name="ruleIDEdit" class="form-control" value="@viewDataRule[i].RuleID" readonly/>
           <label>Rule Name:</label><br/>
           <input id="RuleNameEdit" type="text" name="ruleNameEdit" class="form-control" value="@viewDataRule[i].RuleName" readonly/>
@@ -186,7 +186,7 @@
             <button id="save@(i)" type="submit" class="btn btn-secondary" style="display:none;">save</button>
             <button id="cancel@(i)" type="button" class="btn btn-secondary" onclick="viewmode(@(i))" style="display:none;">cancel</button>
           </form>
-          <form method="post" method="get" action="/Rule/RuleDelete" style="margin:10px;">
+          <form method="post" method="get" action="/IRule/RuleDelete" style="margin:10px;">
             <input type="hidden" class="form-control" name="delcatid" value="@viewDataRule[i].Condition.Devcat" readonly> 
             <input type="hidden" name="delrid" class="form-control" value="@viewDataRule[i].RuleID" readonly/>
             <input type="hidden" name="delcid" class="form-control" value="@viewDataRule[i].Condition.ConditionID" readonly/>

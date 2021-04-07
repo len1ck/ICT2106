@@ -14,6 +14,7 @@ using ICT2106.Models.DevcatTableModule;
 using ICT2106.Models.DevcondTableModule;
 using ICT2106.Models.MotionDetailsModule;
 using ICT2106.Models.TimerDetailsModule;
+using ICT2106.Models.RuleSingleton;
 using ICT2106.Models;
 using ICT2106.Interfaces;
 
@@ -25,13 +26,8 @@ namespace ICT2106.Controllers
         private IAction _action = new ActionModel();
         private ActionDAO _dao;
 
-        //lists ADD ACTION LIST HERE IF NEEDED
-        private IList<IRule> rulelist = new List<IRule>();
-        private IList<ICondition> conditionlist = new List<ICondition>();
-        private IList<IDevcat> catlist = new List<IDevcat>();
-        private IList<IDevcond> devlist = new List<IDevcond>();
-        private IList<IMotionDetails> mdlist = new List<IMotionDetails>();
-        private IList<ITimerDetails> tdlist = new List<ITimerDetails>();
+        //lists SINGLETON
+        private RuleSingleton RS = RuleSingleton.getInstance();
         //gateways ADD ACTION GATEWAY HERE
         private RuleGateway rg = new RuleGateway();
         private ConditionGateway cg = new ConditionGateway();
@@ -55,18 +51,18 @@ namespace ICT2106.Controllers
             _dao = HttpContext.RequestServices.GetService(typeof(ActionGateway)) as ActionGateway;
             List<ActionModel> actionList = new List<ActionModel>();
 
-            rulelist = rg.GetAllRules();
-            conditionlist = cg.GetAllCondition();
-            catlist = dcat.GetAllCat();
-            devlist = dcon.GetAllDev();
-            mdlist = md.GetAllMotion();
-            tdlist = td.GetAllTimer();
-            foreach (IRule rule in rulelist)
+            RS.Rulelist = rg.GetAllRules();
+            RS.Conditionlist = cg.GetAllCondition();
+            RS.Catlist = dcat.GetAllCat();
+            RS.Devlist = dcon.GetAllDev();
+            RS.Mdlist = md.GetAllMotion();
+            RS.Tdlist = td.GetAllTimer();
+            foreach (IRule rule in RS.Rulelist)
             {
                 _action = _dao.getAllActionFromDBUsingRuleID(rule.RuleID);
                 actionList.Add((ActionModel)_action);
 
-                foreach (ICondition condition in conditionlist)
+                foreach (ICondition condition in RS.Conditionlist)
                 {
                     if (rule.RuleID == condition.RuleID)
                     {
@@ -76,11 +72,11 @@ namespace ICT2106.Controllers
             }
 
             ViewData["ActionList"] = actionList;
-            ViewData["CatData"] = catlist;
-            ViewData["ConData"] = devlist;
-            ViewData["RuleData"] = rulelist;
-            ViewData["MotionData"] = mdlist;
-            ViewData["TimerData"] = tdlist;
+            ViewData["CatData"] = RS.Catlist;
+            ViewData["ConData"] = RS.Devlist;
+            ViewData["RuleData"] = RS.Rulelist;
+            ViewData["MotionData"] = RS.Mdlist;
+            ViewData["TimerData"] = RS.Tdlist;
             ViewData["ActionData"] = create;
             return View();
         }
@@ -89,6 +85,8 @@ namespace ICT2106.Controllers
         */
         public IActionResult RuleAdd(String addRule, String MCName, String CID, String MDCID, String HP, String PP, String TCName, String TDCID, String tm, List<string> actionDetails, List<string> actionProperties, List<string> actionPropertiesName)
         {
+            ActionModel create = _action.getActionInstance();
+            TryUpdateModelAsync(create); // This is the asynchronous call to try to take data from the url into the ActionModel variable
             _dao = HttpContext.RequestServices.GetService(typeof(ActionGateway)) as ActionGateway;
             List<ActionModel> actionList = new List<ActionModel>();
 
@@ -117,8 +115,8 @@ namespace ICT2106.Controllers
                 {
                     DevID = 2;
                 }
-                conditionlist = cg.addNewCond(ruleID.ToString(), DevID.ToString(), TCName, CID, TDCID);
-                tdlist = td.InsertTimerDetails(TDCID, tm);
+                RS.Conditionlist = cg.addNewCond(ruleID.ToString(), DevID.ToString(), TCName, CID, TDCID);
+                RS.Tdlist = td.InsertTimerDetails(TDCID, tm);
             }
 
             ActionModel newAction = (ActionModel)_action;
@@ -129,19 +127,18 @@ namespace ICT2106.Controllers
             newAction.ACTIONPROPERTYLIST = actionProperties;
             int no_of_affected_rows = _dao.saveActionToDB(newAction, ruleID);
 
-
-            rulelist = rg.GetAllRules();
-            conditionlist = cg.GetAllCondition();
-            catlist = dcat.GetAllCat();
-            devlist = dcon.GetAllDev();
-            mdlist = md.GetAllMotion();
-            tdlist = td.GetAllTimer();
-            foreach (IRule rule in rulelist)
+            RS.Rulelist = rg.GetAllRules();
+            RS.Conditionlist = cg.GetAllCondition();
+            RS.Catlist = dcat.GetAllCat();
+            RS.Devlist = dcon.GetAllDev();
+            RS.Mdlist = md.GetAllMotion();
+            RS.Tdlist = td.GetAllTimer();
+            foreach (IRule rule in RS.Rulelist)
             {
                 _action = _dao.getAllActionFromDBUsingRuleID(rule.RuleID);
                 actionList.Add((ActionModel)_action);
 
-                foreach (ICondition condition in conditionlist)
+                foreach (ICondition condition in RS.Conditionlist)
                 {
                     if (rule.RuleID == condition.RuleID)
                     {
@@ -151,11 +148,12 @@ namespace ICT2106.Controllers
             }
 
             ViewData["ActionList"] = actionList;
-            ViewData["CatData"] = catlist;
-            ViewData["ConData"] = devlist;
-            ViewData["RuleData"] = rulelist;
-            ViewData["MotionData"] = mdlist;
-            ViewData["TimerData"] = tdlist;
+            ViewData["CatData"] = RS.Catlist;
+            ViewData["ConData"] = RS.Devlist;
+            ViewData["RuleData"] = RS.Rulelist;
+            ViewData["MotionData"] = RS.Mdlist;
+            ViewData["TimerData"] = RS.Tdlist;
+            ViewData["ActionData"] = create;
             return View("Rules");
         }
 
@@ -203,18 +201,18 @@ namespace ICT2106.Controllers
 
 
 
-            rulelist = rg.GetAllRules();
-            conditionlist = cg.GetAllCondition();
-            catlist = dcat.GetAllCat();
-            devlist = dcon.GetAllDev();
-            mdlist = md.GetAllMotion();
-            tdlist = td.GetAllTimer();
-            foreach (IRule rule in rulelist)
+            RS.Rulelist = rg.GetAllRules();
+            RS.Conditionlist = cg.GetAllCondition();
+            RS.Catlist = dcat.GetAllCat();
+            RS.Devlist = dcon.GetAllDev();
+            RS.Mdlist = md.GetAllMotion();
+            RS.Tdlist = td.GetAllTimer();
+            foreach (IRule rule in RS.Rulelist)
             {
                 _action = _dao.getAllActionFromDBUsingRuleID(rule.RuleID);
                 actionList.Add((ActionModel)_action);
 
-                foreach (ICondition condition in conditionlist)
+                foreach (ICondition condition in RS.Conditionlist)
                 {
                     if (rule.RuleID == condition.RuleID)
                     {
@@ -222,13 +220,12 @@ namespace ICT2106.Controllers
                     }
                 }
             }
-
             ViewData["ActionList"] = actionList;
-            ViewData["CatData"] = catlist;
-            ViewData["ConData"] = devlist;
-            ViewData["RuleData"] = rulelist;
-            ViewData["MotionData"] = mdlist;
-            ViewData["TimerData"] = tdlist;
+            ViewData["CatData"] = RS.Catlist;
+            ViewData["ConData"] = RS.Devlist;
+            ViewData["RuleData"] = RS.Rulelist;
+            ViewData["MotionData"] = RS.Mdlist;
+            ViewData["TimerData"] = RS.Tdlist;
             return View("Rules");
         }
         /*
@@ -253,18 +250,18 @@ namespace ICT2106.Controllers
 
             int no_of_affected_rows = _dao.deleteActionFromDB(int.Parse(delrid));
 
-            rulelist = rg.GetAllRules();
-            conditionlist = cg.GetAllCondition();
-            catlist = dcat.GetAllCat();
-            devlist = dcon.GetAllDev();
-            mdlist = md.GetAllMotion();
-            tdlist = td.GetAllTimer();
-            foreach (IRule rule in rulelist)
+            RS.Rulelist = rg.GetAllRules();
+            RS.Conditionlist = cg.GetAllCondition();
+            RS.Catlist = dcat.GetAllCat();
+            RS.Devlist = dcon.GetAllDev();
+            RS.Mdlist = md.GetAllMotion();
+            RS.Tdlist = td.GetAllTimer();
+            foreach (IRule rule in RS.Rulelist)
             {
                 _action = _dao.getAllActionFromDBUsingRuleID(rule.RuleID);
                 actionList.Add((ActionModel)_action);
 
-                foreach (ICondition condition in conditionlist)
+                foreach (ICondition condition in RS.Conditionlist)
                 {
                     if (rule.RuleID == condition.RuleID)
                     {
@@ -273,13 +270,12 @@ namespace ICT2106.Controllers
                 }
             }
 
-
             ViewData["ActionList"] = actionList;
-            ViewData["CatData"] = catlist;
-            ViewData["ConData"] = devlist;
-            ViewData["RuleData"] = rulelist;
-            ViewData["MotionData"] = mdlist;
-            ViewData["TimerData"] = tdlist;
+            ViewData["CatData"] = RS.Catlist;
+            ViewData["ConData"] = RS.Devlist;
+            ViewData["RuleData"] = RS.Rulelist;
+            ViewData["MotionData"] = RS.Mdlist;
+            ViewData["TimerData"] = RS.Tdlist;
             return View("Rules");
         }
     }

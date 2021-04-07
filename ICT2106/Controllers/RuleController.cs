@@ -20,8 +20,6 @@ namespace ICT2106.Controllers
 {
     public class RuleController : Controller
     {
-        private readonly ILogger<RuleController> _logger;
-
         //lists ADD ACTION LIST HERE IF NEEDED
         private IList<IRule> rulelist = new List<IRule>();
         private IList<ICondition> conditionlist = new List<ICondition>();
@@ -36,11 +34,6 @@ namespace ICT2106.Controllers
         private devcondGateway dcon = new devcondGateway();
         private motionDetailsGateway md = new motionDetailsGateway();
         private timerDetailsGateway td = new timerDetailsGateway();
-
-        public RuleController(ILogger<RuleController> logger)
-        {
-            _logger = logger;
-        }
         /*
         Still using a list of rules ADD ACTION STUFF IN RULES,RULEADD,RULEEDIT,RULEDELETE
         */
@@ -172,7 +165,7 @@ namespace ICT2106.Controllers
             }
             else if(delcatid == "2"){
                     cg.DeleteCondition(delcid);
-                    td.DeleteMotion(delcid);
+                    td.DeleteTimer(delcid);
             }
             rulelist = rg.GetAllRules();
             conditionlist = cg.GetAllCondition();

@@ -76,7 +76,7 @@ namespace ICT2106.Controllers
             }
         } 
 
-        public void DeleteMotion(string conditionID){
+        public void DeleteTimer(string conditionID){
             try
             {
                 conn.Open();
