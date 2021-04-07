@@ -1,13 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using System.IO;
-using System.Text;
-using System.Web;
 using Microsoft.AspNetCore.Mvc;
-using ICT2106.Models;
 using ICT2106.Models.Listeners;
 using ICT2106.Models.ConditionTableModule;
 using System.Threading;
@@ -15,28 +7,13 @@ using System.Threading;
 namespace ICT2106.Controllers{
     public class listenController : Controller {
         
-        public IActionResult ListenTest()
+        public IActionResult ListenDisplay()
         {
             StartAction act = new StartAction();
             BothThreadList dList = new BothThreadList();
             dList = act.getDisplay();
             ViewData["ForDisplay"] = dList;   
-            return View("ListenTest");
-        }
-
-        public IActionResult TestApple()
-        {
-            StartAction act = new StartAction();
-
-            return View("ListenTest");
-        }
-
-        public IActionResult ForDisplay()
-        {
-            StartAction act = new StartAction();
-            var AllDisplay = act.getDisplay();
-
-            return View("ListenTest", AllDisplay);
+            return View("ListenDisplay");
         }
 
         public IActionResult TerminateThread(string tid)
@@ -49,7 +26,7 @@ namespace ICT2106.Controllers{
             ViewData["ForDisplay"] = dList;
             Console.WriteLine("Return View");
 
-            return View("ListenTest");
+            return View("ListenDisplay");
         }
         public IActionResult GetActions()
         {
@@ -66,7 +43,7 @@ namespace ICT2106.Controllers{
             dList = act.getDisplay();
             ViewData["ForDisplay"] = dList;
 
-            return View("ListenTest");
+            return View("ListenDisplay");
         }
 
     }

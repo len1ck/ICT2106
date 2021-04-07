@@ -3,43 +3,10 @@ using System.Threading;
 using System.Collections.Generic;
 using ICT2106.Models.ConditionTableModule;
 using ICT2106.Controllers;
-using ICT2106.Models.TimerDetailsModule;
-using ICT2106.Models.MotionDetailsModule;
 
 
 namespace ICT2106.Models.Listeners
-{
-    public class ThreadObj{
-        private int threadID;
-        private Thread threadOnly;
-
-        public Thread thisThread{
-            get {return threadOnly;}
-            set {threadOnly = value;}
-        }
-
-        public int ThreadID{
-            get {return threadID;}
-            set {threadID = value;}
-        }
-
-    }
-
-    public class BothThreadList{
-        private List<ThreadObj> TimerAll = new List<ThreadObj>();
-        private List<int> MotionAll = new List<int>();
-
-        public List<ThreadObj> ATimer{
-            get {return TimerAll;}
-            set {TimerAll = value;}
-        }
-        public List<int> AMotion{
-            get {return MotionAll;}
-            set {MotionAll = value;}
-        }
-    }
-
-    
+{    
     public class StartAction{
         //Start multithreading to track each condition
         public static List<ThreadObj> AllTimer = new List<ThreadObj>();
@@ -159,6 +126,7 @@ namespace ICT2106.Models.Listeners
                 foreach(var objt in AllTimer){
                     if (objt.ThreadID == conditionID){
                         Console.WriteLine("removed: " + conditionID);
+                        //Console.WriteLine(exception);
                         AllTimer.Remove(objt);
                         break;
                     }
@@ -167,14 +135,10 @@ namespace ICT2106.Models.Listeners
             }
             
         }
-        /** <TODO> for displaying**/
-        public List<ThreadObj> DisTimerCondition(){
-            return AllTimer;
-        }
 
 
         //Function for Motion
-        private static void MotionFunction(){
+        private static void MotionFunction(int CondID){
             /* <TODO> add codes to run Motion Update */
         }
 
