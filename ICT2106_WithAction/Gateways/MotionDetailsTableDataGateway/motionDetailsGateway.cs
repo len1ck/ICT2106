@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ICT2106.Models;
 using ICT2106.Models.MotionDetailsModule;
+using ICT2106.Models.RuleSingleton;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
@@ -15,11 +16,12 @@ namespace ICT2106.Controllers
 {
     public class motionDetailsGateway
     {
+        private RuleSingletonModel RS = RuleSingletonModel.getInstance();
         private static string connStr = "server=t2-6.cthtaqebwmpy.us-east-1.rds.amazonaws.com;user=root;database=rule;port=3306;password=qwerty123";
-        private List<IMotionDetails> motions = new List<IMotionDetails>();
         private MySqlConnection conn = new MySqlConnection(connStr);
 
-        public List<IMotionDetails> GetAllMotion(){
+        public void GetAllMotion(){
+            IList<IMotionDetails> motions = new List<IMotionDetails>();
             try
             {
                 conn.Open();
@@ -38,13 +40,12 @@ namespace ICT2106.Controllers
                 }
                 rdr.Close();
                 conn.Close();
-                return motions;
-            }
-            catch (Exception ex)
+                RS.Mdlist = motions;
+            }catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 conn.Close();
-                return motions;
+                RS.Mdlist =  motions;
             }
         }   
 
@@ -86,9 +87,8 @@ namespace ICT2106.Controllers
             }
         } 
 
-         public List<IMotionDetails> InsertMotionDetails(String dev,String HP, String PP){
-            try
-            {
+         public void InsertMotionDetails(String dev,String HP, String PP){
+            try{
                 conn.Open();
                 string cond = "SELECT MAX(CondID) FROM rule.condition";
                 MySqlCommand cmd = new MySqlCommand(cond, conn);
@@ -99,7 +99,6 @@ namespace ICT2106.Controllers
                     condi = Int32.Parse(rdr[0].ToString());
                 }
                 rdr.Close();
-                System.Console.WriteLine(condi);
                 string sql = $"INSERT INTO motionDetails (DevCondID, HumanPresence, PetPresence,CondID) VALUES({dev},'{HP}','{PP}',{condi})";
                 cmd = new MySqlCommand(sql, conn);
                 rdr = cmd.ExecuteReader();
@@ -112,17 +111,14 @@ namespace ICT2106.Controllers
                     motion.HumanPresence = rdr[2].ToString();
                     motion.PetPresence = rdr[3].ToString();
                     motion.CondID = Int32.Parse(rdr[4].ToString());
-                    motions.Add(motion);
                 }
                 rdr.Close();
                 conn.Close();
-                return motions;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 conn.Close();
-                return motions;
             }
         }   
     }

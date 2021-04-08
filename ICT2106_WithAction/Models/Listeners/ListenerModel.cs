@@ -1,13 +1,19 @@
 using System;
+using System.Data;
 using System.Threading;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using ICT2106.Models;
 using ICT2106.Models.ConditionTableModule;
+using ICT2106.Models.RuleSingleton;
 using ICT2106.Controllers;
 
 
 namespace ICT2106.Models.Listeners
 {    
-    public class StartAction{
+    public class ListenerModel{
+        private RuleSingletonModel RS = RuleSingletonModel.getInstance();
         //Start multithreading to track each condition
         public static List<ThreadObj> AllTimer = new List<ThreadObj>();
         public static List<int> AllMotion = new List<int>();
@@ -61,7 +67,8 @@ namespace ICT2106.Models.Listeners
                 //get all timer details from DB and find the details matching with ConditionID
                 
                 timerDetailsGateway tdg = new timerDetailsGateway();
-                var AllTimerList = tdg.GetAllTimer();
+                tdg.GetAllTimer();
+                var AllTimerList = RS.Tdlist;
                 String inpTime = "";
                 foreach (var i in AllTimerList){
                     //WriteLine(i.CondID + " == " + conditionID);
@@ -154,7 +161,5 @@ namespace ICT2106.Models.Listeners
         }
 
 
-    }
-
-    
+    } 
 }

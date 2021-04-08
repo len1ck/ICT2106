@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ICT2106.Models;
 using ICT2106.Models.RuleTableModule;
+using ICT2106.Models.RuleSingleton;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
@@ -15,11 +16,12 @@ namespace ICT2106.Controllers
 {
     public class RuleGateway
     {
+        private RuleSingletonModel RS = RuleSingletonModel.getInstance();
         private static string connStr = "server=t2-6.cthtaqebwmpy.us-east-1.rds.amazonaws.com;user=root;database=rule;port=3306;password=qwerty123";
-        private List<IRule> RuleList = new List<IRule>();
         private MySqlConnection conn = new MySqlConnection(connStr);
         
-        public List<IRule> GetAllRules(){
+        public void GetAllRules(){
+            IList<IRule> RuleList = new List<IRule>();
             try
             {
                 conn.Open();
@@ -35,13 +37,13 @@ namespace ICT2106.Controllers
                 }
                 rdr.Close();
                 conn.Close();
-                return RuleList;
+                RS.Rulelist =  RuleList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 conn.Close();
-                return RuleList;
+                RS.Rulelist = RuleList;
             }
         }   
 

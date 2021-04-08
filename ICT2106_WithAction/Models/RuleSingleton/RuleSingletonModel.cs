@@ -19,7 +19,7 @@ using ICT2106.Models;
 
 namespace ICT2106.Models.RuleSingleton
 {
-    public sealed class RuleSingleton
+    public sealed class RuleSingletonModel
     {
         //Lists
         private IList<IRule> rulelist;
@@ -31,7 +31,7 @@ namespace ICT2106.Models.RuleSingleton
 
         // The Singleton's constructor should always be private to prevent
         // direct construction calls with the `new` operator.
-        private RuleSingleton() { 
+        private RuleSingletonModel() { 
             rulelist = new List<IRule>();
             conditionlist = new List<ICondition>();
             catlist = new List<IDevcat>();
@@ -44,17 +44,17 @@ namespace ICT2106.Models.RuleSingleton
         // multiple ways to initialize this field, all of them have various pros
         // and cons. In this example we'll show the simplest of these ways,
         // which, however, doesn't work really well in multithreaded program.
-        private static RuleSingleton _instance;
+        private static RuleSingletonModel _instance;
 
         // This is the static method that controls the access to the singleton
         // instance. On the first run, it creates a singleton object and places
         // it into the static field. On subsequent runs, it returns the client
         // existing object stored in the static field.
-        public static RuleSingleton getInstance()
+        public static RuleSingletonModel getInstance()
         {
             if (_instance == null)
             {
-                _instance = new RuleSingleton();
+                _instance = new RuleSingletonModel();
             }
             return _instance;
         }

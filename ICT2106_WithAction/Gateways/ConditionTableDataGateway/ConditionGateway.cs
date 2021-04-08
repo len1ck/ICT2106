@@ -10,15 +10,19 @@ using ICT2106.Models.ConditionTableModule;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using ICT2106.Models.RuleSingleton;
 
 namespace ICT2106.Controllers
 {
     public class ConditionGateway
     {
+        //lists SINGLETON
+        private RuleSingletonModel RS = RuleSingletonModel.getInstance();
+        // SQL Server
         private static string connStr = "server=t2-6.cthtaqebwmpy.us-east-1.rds.amazonaws.com;user=root;database=rule;port=3306;password=qwerty123";
-        private List<ICondition> ConditionList = new List<ICondition>();
         private MySqlConnection conn = new MySqlConnection(connStr);
-        public List<ICondition> GetAllCondition(){
+        public void GetAllCondition(){
+            IList<ICondition> ConditionList = new List<ICondition>();
             try
             {
                 conn.Open();
@@ -38,13 +42,13 @@ namespace ICT2106.Controllers
                 }
                 rdr.Close();
                 conn.Close();
-                return ConditionList;
+                RS.Conditionlist = ConditionList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 conn.Close();
-                return ConditionList;
+                RS.Conditionlist = ConditionList;
             }
         }   
 
@@ -87,7 +91,7 @@ namespace ICT2106.Controllers
         } 
 
         
-       public List<ICondition> addNewCond(String RID, String DID, String CName,String CatID, String DcID){
+       public void addNewCond(String RID, String DID, String CName,String CatID, String DcID){
            System.Console.WriteLine(RID.ToString()+" "+DID.ToString()+" "+CName+" "+CatID+" "+DcID);
             try
             {
@@ -98,13 +102,11 @@ namespace ICT2106.Controllers
                 rdr.Read();
                 rdr.Close();
                 conn.Close();
-                return ConditionList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 conn.Close();
-                return ConditionList;
             }
         }
     }   

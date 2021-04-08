@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ICT2106.Models.DevcatTableModule;
+using ICT2106.Models.RuleSingleton;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
@@ -8,14 +9,14 @@ using System.Configuration;
 
 namespace ICT2106.Controllers
 {
-    public class devcatGateway
-    {
+    public class devcatGateway{
+    private RuleSingletonModel RS = RuleSingletonModel.getInstance();
     private static string connStr = "server=t2-6.cthtaqebwmpy.us-east-1.rds.amazonaws.com;user=root;database=rule;port=3306;password=qwerty123";
-    private List<IDevcat> CatList = new List<IDevcat>();
     private MySqlConnection conn = new MySqlConnection(connStr);
 
 
-    public List<IDevcat> GetAllCat(){
+    public void GetAllCat(){
+        List<IDevcat> CatList = new List<IDevcat>();
         try{
             conn.Open();
             string sql = "SELECT * FROM devcat";
@@ -30,16 +31,17 @@ namespace ICT2106.Controllers
             }
             rdr.Close();
             conn.Close();
-            return CatList;
+            RS.Catlist = CatList;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
                 conn.Close();
-                return CatList;
+                RS.Catlist = CatList;
             }
         }
-        public List<IDevcat> SelCat(String cats){
+        public IList<IDevcat> SelCat(String cats){
+        IList<IDevcat> CatList = new List<IDevcat>();
         try{
             conn.Open();
             string sql = "SELECT CatID FROM devcat WHERE CatID = "+cats;

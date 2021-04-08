@@ -9,7 +9,7 @@ namespace ICT2106.Controllers{
         
         public IActionResult ListenDisplay()
         {
-            StartAction act = new StartAction();
+            ListenerModel act = new ListenerModel();
             BothThreadList dList = new BothThreadList();
             dList = act.getDisplay();
             ViewData["ForDisplay"] = dList;   
@@ -18,7 +18,7 @@ namespace ICT2106.Controllers{
 
         public IActionResult TerminateThread(string tid)
         {
-            StartAction act = new StartAction();
+            ListenerModel act = new ListenerModel();
             act.AbortThread(Int32.Parse(tid));
             Thread.Sleep(300);
             BothThreadList dList = new BothThreadList();
@@ -30,7 +30,7 @@ namespace ICT2106.Controllers{
         }
         public IActionResult GetActions()
         {
-            StartAction act = new StartAction();
+            ListenerModel act = new ListenerModel();
             Condition con = new Condition();
             con.Devcat = 2;
             con.ConditionID = 34;

@@ -27,7 +27,7 @@ namespace ICT2106.Controllers
         private ActionDAO _dao;
 
         //lists SINGLETON
-        private RuleSingleton RS = RuleSingleton.getInstance();
+        private RuleSingletonModel RS = RuleSingletonModel.getInstance();
         //gateways ADD ACTION GATEWAY HERE
         private RuleGateway rg = new RuleGateway();
         private ConditionGateway cg = new ConditionGateway();
@@ -51,12 +51,12 @@ namespace ICT2106.Controllers
             _dao = HttpContext.RequestServices.GetService(typeof(ActionGateway)) as ActionGateway;
             List<ActionModel> actionList = new List<ActionModel>();
 
-            RS.Rulelist = rg.GetAllRules();
-            RS.Conditionlist = cg.GetAllCondition();
-            RS.Catlist = dcat.GetAllCat();
-            RS.Devlist = dcon.GetAllDev();
-            RS.Mdlist = md.GetAllMotion();
-            RS.Tdlist = td.GetAllTimer();
+            rg.GetAllRules();
+            cg.GetAllCondition();
+            dcat.GetAllCat();
+            dcon.GetAllDev();
+            md.GetAllMotion();
+            td.GetAllTimer();
             foreach (IRule rule in RS.Rulelist)
             {
                 _action = _dao.getAllActionFromDBUsingRuleID(rule.RuleID);
@@ -127,12 +127,12 @@ namespace ICT2106.Controllers
             newAction.ACTIONPROPERTYLIST = actionProperties;
             int no_of_affected_rows = _dao.saveActionToDB(newAction, ruleID);
 
-            RS.Rulelist = rg.GetAllRules();
-            RS.Conditionlist = cg.GetAllCondition();
-            RS.Catlist = dcat.GetAllCat();
-            RS.Devlist = dcon.GetAllDev();
-            RS.Mdlist = md.GetAllMotion();
-            RS.Tdlist = td.GetAllTimer();
+            rg.GetAllRules();
+            cg.GetAllCondition();
+            dcat.GetAllCat();
+            dcon.GetAllDev();
+            md.GetAllMotion();
+            td.GetAllTimer();
             foreach (IRule rule in RS.Rulelist)
             {
                 _action = _dao.getAllActionFromDBUsingRuleID(rule.RuleID);
@@ -201,12 +201,12 @@ namespace ICT2106.Controllers
 
 
 
-            RS.Rulelist = rg.GetAllRules();
-            RS.Conditionlist = cg.GetAllCondition();
-            RS.Catlist = dcat.GetAllCat();
-            RS.Devlist = dcon.GetAllDev();
-            RS.Mdlist = md.GetAllMotion();
-            RS.Tdlist = td.GetAllTimer();
+            rg.GetAllRules();
+            cg.GetAllCondition();
+            dcat.GetAllCat();
+            dcon.GetAllDev();
+            md.GetAllMotion();
+            td.GetAllTimer();
             foreach (IRule rule in RS.Rulelist)
             {
                 _action = _dao.getAllActionFromDBUsingRuleID(rule.RuleID);
@@ -250,12 +250,12 @@ namespace ICT2106.Controllers
 
             int no_of_affected_rows = _dao.deleteActionFromDB(int.Parse(delrid));
 
-            RS.Rulelist = rg.GetAllRules();
-            RS.Conditionlist = cg.GetAllCondition();
-            RS.Catlist = dcat.GetAllCat();
-            RS.Devlist = dcon.GetAllDev();
-            RS.Mdlist = md.GetAllMotion();
-            RS.Tdlist = td.GetAllTimer();
+            rg.GetAllRules();
+            cg.GetAllCondition();
+            dcat.GetAllCat();
+            dcon.GetAllDev();
+            md.GetAllMotion();
+            td.GetAllTimer();
             foreach (IRule rule in RS.Rulelist)
             {
                 _action = _dao.getAllActionFromDBUsingRuleID(rule.RuleID);
