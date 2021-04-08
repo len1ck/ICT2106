@@ -20,7 +20,7 @@ namespace ICT2106.Controllers{
         {
             ListenerModel act = new ListenerModel();
             act.AbortThread(Int32.Parse(tid));
-            Thread.Sleep(300);
+            Thread.Sleep(500);
             BothThreadList dList = new BothThreadList();
             dList = act.getDisplay();
             ViewData["ForDisplay"] = dList;

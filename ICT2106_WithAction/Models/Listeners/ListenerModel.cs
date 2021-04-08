@@ -99,28 +99,29 @@ namespace ICT2106.Models.Listeners
                 //convert rawtime to DateTime
                 DateTime DT = DateTime.Now;
                 DT = new DateTime(DT.Year, DT.Month, DT.Day, rawtime, 00, 00);
-
+                
                 //Compare with current time
                 DateTime CurTime = DateTime.Now;
-                Console.WriteLine(CurTime);
+                Console.WriteLine("Current Date Time: " + CurTime);
                 //int SecDiff = Convert.ToInt32((DT - CurTime).TotalSeconds);
                 int SecDiff = Convert.ToInt32((DT - CurTime).TotalHours); //Need to remember to change back to Total Seconds
-                Console.WriteLine("Before:" + SecDiff);
+                //Console.WriteLine("Before:" + SecDiff);
                 //If number is negative then it will activate on the next timing
                 if (SecDiff < 0){
                     DT = new DateTime(DT.Year, DT.Month, DT.Day+1, DT.Hour, DT.Minute, DT.Second);
-                    Console.WriteLine(DT);
+                    //Console.WriteLine("End Date Time: " + DT);
                     SecDiff = Convert.ToInt32((DT - CurTime).TotalHours); //Counting Hours for testing, remember to change to Seconds below
                     //SecDiff = Convert.ToInt32((DT - CurTime).TotalSeconds);
                 }
-                Console.WriteLine("Final:" + SecDiff);
+                Console.WriteLine("End Date Time: " + DT);
+                Console.WriteLine("Time remaining:" + SecDiff);
                 //Run Countdown until update
-                CountdownTimer(SecDiff);
+                CountdownTimer(SecDiff, conditionID);
                 /* <TODO> Run code to update database once time is up*/
                 //Remove ID from list of AllTimer
                 foreach(var objt in AllTimer){
                     if (objt.ThreadID == conditionID){
-                        Console.WriteLine("removed: " + conditionID);
+                        Console.WriteLine("removed condition: " + conditionID);
                         AllTimer.Remove(objt);
                         break;
                     }
@@ -132,13 +133,13 @@ namespace ICT2106.Models.Listeners
                 /** <TODO> Remove from ObjList **/
                 foreach(var objt in AllTimer){
                     if (objt.ThreadID == conditionID){
-                        Console.WriteLine("removed: " + conditionID);
+                        //Console.WriteLine("removed: " + conditionID);
                         //Console.WriteLine(exception);
                         AllTimer.Remove(objt);
                         break;
                     }
                 }
-                Console.WriteLine("Thread End");
+                Console.WriteLine(conditionID + " Thread End");
             }
             
         }
@@ -150,12 +151,12 @@ namespace ICT2106.Models.Listeners
         }
 
         //Countdown Timer function
-        private static void CountdownTimer(int time){
+        private static void CountdownTimer(int time, int conID){
             while (time > 0)
             {
                 System.Threading.Thread.Sleep(1000);
                 //System.Console.WriteLine("Time Left (seconds)..." + time);
-                System.Console.WriteLine("Time Left (Hours but run in Seconds)..." + time); //Remember to remove
+                System.Console.WriteLine(conID + ": Time Left (Hours but run in Seconds)..." + time); //Remember to remove
                 time--;
             }
         }
